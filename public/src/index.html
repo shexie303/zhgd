@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>天津市津房置业有限公司宝坻项目群管理平台</title>
     <link rel="stylesheet" href="./static/css/bootstrap.css">
     <style type="text/css">
@@ -38,8 +39,6 @@
             height: 266px;
             bottom: 0;
         }
-
-
         #page{
             width: 1920px;
             height: 1080px;
@@ -190,48 +189,125 @@
                 width: 15px;
                 height: 265px;
             }
+            .tower-monitor{
+                border: 2px solid #367d86;
+                width: 290px;
+                height: 110px;
+                margin: 12px 0 0 10px;
+            }
+            .elevator-monitor{
+                border: 2px solid #367d86;
+                width: 290px;
+                height: 110px;
+                margin: 12px 0 0 10px;
+            }
+            .img-model{
+                border-right: 2px solid #367d86;
+                float: left;
+                width: 172px;
+                height: 106px;
+            }
+            .arrow-left{
+                background: url("./static/img/arrow.png") no-repeat;
+                width: 50px;
+                height: 50px;
+            }
+            .tower-monitor .img-model{
+                background: url("./static/img/tower.png") no-repeat 30px bottom;
+            }
+            .elevator-monitor .img-model{
+                background: url("./static/img/elevator.png") no-repeat 75px bottom;
+            }
             .personnel-monitor{
                 width: 305px;
                 margin-top: 25px;
             }
             .personnel-monitor--content{
-                height: 254px;
+                position: relative;
+                height: 236px;
                 border-top: 1px solid #57a7aa;
                 border-bottom: 1px solid #57a7aa;
+                padding-top: 18px;
+                padding-left: 18px;
             }
             .personnel-monitor--content::before{
                 content: '';
                 position: absolute;
                 left: -28px;
+                top: 0;
                 background: url("./static/img/line_middle.png") no-repeat;
                 width: 15px;
                 height: 252px;
             }
             .curr-police{
-                width: 86px;
-                height: 86px;
+                float: left;
+                width: 90px;
+                height: 90px;
                 border: 2px solid #48707a;
                 background-color: #143c4b;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-flow: column nowrap;
+                color: #9fc1cb;
+            }
+            .police-details{
+                float: left;
+                background-color: #10313c;
+                margin-left: 10px;
+                width: 178px;
+                padding: 0;
+                height: 90px;
+                display: flex;
+                flex-flow: column nowrap;
+                justify-content: center;
+            }
+            .police-details li{
+                list-style-type: none;
+                font-size: 0.875rem;
+                color: #6f96a1;
+                padding-left: 8px;
+            }
+            .police-details .red{
+                margin-right: 3px;
+            }
+            .red{
+                color: #f92801;
             }
         </style>
         <div class="right-fix">
             <div class="towerElevator-monitor">
                 <div class="monitor--title larger">塔吊&升降机</div>
-                <div class="towerElevator-monitor--content"></div>
+                <div class="towerElevator-monitor--content">
+                    <div class="tower-monitor">
+                        <div class="img-model">
+                            <span class="arrow-left"></span>
+                        </div>
+                        <div class="equipment-info"></div>
+                    </div>
+                    <div class="elevator-monitor">
+                        <div class="img-model">
+                            <span class="arrow-left"></span>
+                        </div>
+                        <div class="equipment-info"></div>
+                    </div>
+                </div>
             </div>
             <div class="personnel-monitor">
                 <div class="monitor--title">人员信息</div>
                 <div class="personnel-monitor--content">
                     <div class="curr-police">
-                        <h3>12</h3>
+                        <h3><span class="red">12</span></h3>
                         <span>当前报警</span>
                     </div>
                     <ul class="police-details">
-                        <li>越界报警：5人</li>
-                        <li>掉线提示：4人</li>
-                        <li>低电提示：1人</li>
-                        <li>长时间静止：2人</li>
+                        <li>越界报警：<span class="red">5</span>人</li>
+                        <li>掉线提示：<span class="red">4</span>人</li>
+                        <li>低电提示：<span class="red">1</span>人</li>
+                        <li>长时间静止：<span class="red">2</span>人</li>
                     </ul>
+                    <div class="staff"></div>
+                    <div class="temp"></div>
                 </div>
             </div>
         </div>
