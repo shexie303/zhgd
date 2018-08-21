@@ -318,7 +318,6 @@
             };
             ws_user_info.onmessage = function(evt) {
                 var res = eval("("+evt.data+")");
-                console.log(res);
                 $('#user_info_diaoxian').html(res.data.diaoxian);
                 $('#user_info_didian').html(res.data.didian);
                 $('#user_info_stop').html(res.data.stop);
@@ -335,7 +334,6 @@
             };
             ws_env.onmessage = function(evt) {
                 var res = eval("("+evt.data+")");
-                console.log(res);
                 $('.env-item').each(function(index){
                     $(this).find('.num').html(res.data[index]);
                 })

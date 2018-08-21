@@ -85,7 +85,7 @@ class Events
                    $return['state'] = 'success';
                    //查询
                    $db = new \DB();
-                   $data = $db->table('site_env')->order('id desc')->limit('1')->select('tmp,hum,wind_sc,pm10');
+                   $data = $db->table('site_env')->order('id desc')->limit('1')->select('pm10,wind_sc,tmp,hum');
                    if ($data) {
                        $return['data'] = $data[0]; //发生视频报警事件
                    }
