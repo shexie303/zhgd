@@ -33,7 +33,7 @@ class DB{
         $link = $this->_db;
         if(!$link){
             $db = mysqli_connect($this->_configs['hostname'],$this->_configs['username'],$this->_configs['password'],$this->_configs['dbname']);
-            mysqli_query($db,"set names utf8");
+            mysqli_query($db,"set names utf8mb4");
             if(!$db){
                 $this->ShowException("错误信息".mysqli_connect_error());
             }

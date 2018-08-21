@@ -90,7 +90,7 @@ class Events
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
-					$exist = $db->table('site_error_report')->where('event_state = 1')->order('id desc')->limit('1')->select();
+					$exist = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->limit('1')->select('id');
 					$return['data']['report'] = 2; //没有视频报警事件
 					if ($exist) {
 						$return['data']['report'] = 1; //发生视频报警事件
