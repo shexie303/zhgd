@@ -1,0 +1,70 @@
+body {
+	background-color: #000
+}
+a:hover {
+	text-decoration: none;
+}
+ul, li {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+#page {
+	width: 1920px;
+	height: 1080px;
+	position: relative;
+	z-index: 100;
+}
+#building__canvas--box {
+	position: absolute;
+	width: 1920px;
+	height: 1080px;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	/*background: linear-gradient( #000101,#0c222b, #091c23, #000101);*/
+	background: url("../img/main_bg.jpg") no-repeat;
+	z-index: 1;
+}
+.main-header--box {
+	position: relative;
+	width: 1920px;
+	height: 123px;
+	background: url("../img/logo_decorate.png") no-repeat center bottom;
+	text-align: center;
+	z-index: 1010;
+}
+.main-header {
+	padding: 2rem 0;
+	line-height: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.logo {
+	font-size: 3rem;
+	color: #bbd9e0;
+}
+.main-cate-bg{
+	background: url("../img/cate_main_bg.png") no-repeat;
+}
+.main-menu-bg{
+	background: url("../img/menu_bg.png") no-repeat;
+}
+.red {
+	color: #f92801;
+}
+.sn-home-link{
+	position: absolute;
+	background: url("../img/home.png") no-repeat;
+	width: 35px;
+	height: 29px;
+}
+.sn-quick-menu{
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 90px;
+}
