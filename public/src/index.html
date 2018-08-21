@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>天津市津房置业有限公司宝坻项目群管理平台</title>
+    <link rel="stylesheet" href="./static/css/bootstrap.css">
+    <style type="text/css">
+        body{background-color: #000}
+        #building__canvas--box{
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            background: linear-gradient( #000101,#0c222b, #091c23, #000101);
+            z-index: 1;
+        }
+        #building__canvas--box::before,
+        #building__canvas--box::after {
+            position: absolute;
+            z-index: 99;
+            width: 1920px;
+            content: '';
+            left: 0;
+            right: 0;
+        }
+        #building__canvas--box::before{
+            background: url("./static/img/top.png") no-repeat;
+            height: 247px;
+            top: 0;
+        }
+        #building__canvas--box::after{
+            background: url("./static/img/bottom.png") no-repeat;
+            height: 266px;
+            bottom: 0;
+        }
+
+
+        #page{
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            z-index: 100;
+        }
+        .main-header--box{
+            width: 1920px;
+            height: 123px;
+            background: url("./static/img/logo_decorate.png") no-repeat center bottom;
+            text-align: center;
+        }
+        .main-header {
+            padding: 2rem 0;
+            line-height: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo{
+            font-size: 3rem;
+            color: #bbd9e0;
+        }
+
+        .electric-monitor--box{
+            position: absolute;
+            left: 40px;
+            top: 135px;
+            height: 460px;
+        }
+        .monitor--title{
+            background: url("./static/img/title_bg.png") no-repeat;
+            width: 132px;
+            height: 47px;
+            font-size: 1.25rem;
+            color: #8dd8ff;
+            text-align: center;
+            line-height: 48px;
+            margin-bottom: 12px;
+        }
+        .monitor--title.larger{
+            background: url("./static/img/title_bg_larger.png") no-repeat;
+            width: 168px;
+        }
+        .electric-monitor--content{
+            width: 300px;
+            height: 460px;
+            border-top: 1px solid #57a7aa;
+            border-bottom: 1px solid #57a7aa;
+        }
+        .electric-monitor--content::before{
+            content: '';
+            position: absolute;
+            left: -28px;
+            background: url("./static/img/line_big.png") no-repeat;
+            width: 15px;
+            height: 460px;
+        }
+        .electric-monitor--subTitle{
+            background: url("./static/img/subtitle_bg.png") no-repeat;
+            font-size: 1.125rem;
+            color: #73c0cb;
+            width: 107px;
+            height: 21px;
+            line-height: 20px;
+            padding-left: 22px;
+            margin-bottom: 11px;
+            margin-top: 20px;
+        }
+        .analysis-main{
+            background: url("./static/img/rulers_thumb.png") no-repeat;
+            width: 280px;
+            height: 34px
+        }
+        .switch-main {
+            background: url("./static/img/switch_bg.png") no-repeat;
+            width: 125px;
+            height: 40px
+        }
+        .short-monitor{
+            float: left;
+        }
+        .breaker-monitor{
+            float: left;
+            margin-left: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div id="page">
+        <div class="main-header--box">
+            <div class="main-header">
+                <div class="logo">天津市津房置业有限公司宝坻项目群管理平台</div>
+            </div>
+        </div>
+
+        <div class="electric-monitor--box">
+            <div class="monitor--title">电力监控</div>
+            <div class="electric-monitor--content">
+                <div class="current-monitor">
+                    <div class="electric-monitor--subTitle">电流</div>
+                    <div class="analysis-main"></div>
+                </div>
+                <div class="voltage-monitor">
+                    <div class="electric-monitor--subTitle">电压</div>
+                    <div class="analysis-main"></div>
+                </div>
+                <div class="active-monitor">
+                    <div class="electric-monitor--subTitle">有功功率</div>
+                    <div class="analysis-main"></div>
+                </div>
+                <div class="reactive-monitor">
+                    <div class="electric-monitor--subTitle">无功功率</div>
+                    <div class="analysis-main"></div>
+                </div>
+                <div class="second-col">
+                    <div class="short-monitor">
+                        <div class="electric-monitor--subTitle">短路</div>
+                        <div class="switch-main"></div>
+                    </div>
+                    <div class="breaker-monitor">
+                        <div class="electric-monitor--subTitle">断路</div>
+                        <div class="switch-main"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .right-fix{
+                position: absolute;
+                right: 20px;
+                top: 120px;
+            }
+            .towerElevator-monitor{
+                width: 305px;
+            }
+            .towerElevator-monitor--content{
+                height: 260px;
+                border-top: 1px solid #57a7aa;
+                border-bottom: 1px solid #57a7aa;
+            }
+            .towerElevator-monitor--content::before{
+                content: '';
+                position: absolute;
+                left: -28px;
+                background: url("./static/img/line_middle.png") no-repeat;
+                width: 15px;
+                height: 265px;
+            }
+            .personnel-monitor{
+                width: 305px;
+                margin-top: 25px;
+            }
+            .personnel-monitor--content{
+                height: 254px;
+                border-top: 1px solid #57a7aa;
+                border-bottom: 1px solid #57a7aa;
+            }
+            .personnel-monitor--content::before{
+                content: '';
+                position: absolute;
+                left: -28px;
+                background: url("./static/img/line_middle.png") no-repeat;
+                width: 15px;
+                height: 252px;
+            }
+            .curr-police{
+                width: 86px;
+                height: 86px;
+                border: 2px solid #48707a;
+                background-color: #143c4b;
+            }
+        </style>
+        <div class="right-fix">
+            <div class="towerElevator-monitor">
+                <div class="monitor--title larger">塔吊&升降机</div>
+                <div class="towerElevator-monitor--content"></div>
+            </div>
+            <div class="personnel-monitor">
+                <div class="monitor--title">人员信息</div>
+                <div class="personnel-monitor--content">
+                    <div class="curr-police">
+                        <h3>12</h3>
+                        <span>当前报警</span>
+                    </div>
+                    <ul class="police-details">
+                        <li>越界报警：5人</li>
+                        <li>掉线提示：4人</li>
+                        <li>低电提示：1人</li>
+                        <li>长时间静止：2人</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .bottom-fix{
+                position: absolute;
+                width: 1920px;
+                bottom: 20px;
+                left: 0;
+            }
+            .bottom-fix div[class$='-monitor']::before{
+                content: '';
+                background: url("./static/img/line_small.png") no-repeat;
+                width: 15px;
+                height: 209px;
+            }
+            .video-monitor{
+                width: 668px;
+                float: left;
+                margin-left: 40px;
+            }
+            .video-monitor--content{
+                height: 205px;
+                border-top: 1px solid #57a7aa;
+                border-bottom: 1px solid #57a7aa;
+            }
+            .door-monitor{
+                float: left;
+                width: 508px;
+                margin-left: 62px;
+            }
+            .door-monitor--content{
+                height: 205px;
+                border-top: 1px solid #57a7aa;
+                border-bottom: 1px solid #57a7aa;
+            }
+            .env-monitor{
+                float: left;
+                width: 534px;
+                margin-left: 73px;
+            }
+            .env-monitor--content{
+                height: 205px;
+                border-top: 1px solid #57a7aa;
+                border-bottom: 1px solid #57a7aa;
+            }
+        </style>
+        <div class="bottom-fix">
+            <div class="video-monitor">
+                <div class="monitor--title">视频监控</div>
+                <div class="video-monitor--content">
+                </div>
+            </div>
+            <div class="door-monitor">
+                <div class="monitor--title">门禁管控</div>
+                <div class="door-monitor--content">
+                </div>
+            </div>
+            <div class="env-monitor">
+                <div class="monitor--title">环境监控</div>
+                <div class="env-monitor--content">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="building__canvas--box"></div>
+    <script type="text/javascript" src="./static/js/three.min.js"></script>
+    <script type="text/javascript" src="./static/js/OrbitControls.js"></script>
+    <script type="text/javascript" src="./static/js/JDLoader.min.js"></script>
+    <script type="text/javascript">
+        var meshes = [], mixers = [], hemisphereLight, pointLight, camera, scene, renderer, controls;
+        var clock = new THREE.Clock;
+
+        // init();
+        // animate();
+
+        function init() {
+            container = document.getElementById('building__canvas--box');
+            document.body.appendChild(container);
+            scene = new THREE.Scene();
+
+            renderer = new THREE.WebGLRenderer({
+                // 在 css 中设置背景色透明显示渐变色
+                alpha: true,
+                // 开启抗锯齿，但这样会降低性能。
+                // 不过，由于我们的项目基于低多边形的，那还好 :)
+                // antialias: true
+            });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            container.appendChild(renderer.domElement);
+
+            window.addEventListener('resize', onWindowResize, false);
+
+            var loader = new THREE.JDLoader();
+            loader.load("./static/jd06.30.JD",
+                function (data) {
+                    console.info(data);
+                    //循环得到加载文件的所有模型，并针对每个模型进行处理
+                    for (var i = 0; i < data.objects.length; ++i) {
+                        //alert(data.objects[i].type);
+                        if (data.objects[i].type == "Mesh" || data.objects[i].type == "SkinnedMesh") {
+                            var mesh = null;
+                            var matArray = createWfjMaterials(data);
+                            if (data.objects[i].type == "SkinnedMesh") {
+                                mesh = new THREE.SkinnedMesh(data.objects[i].geometry, matArray);
+                            } else {    // Mesh
+                                mesh = new THREE.Mesh(data.objects[i].geometry, matArray);
+                            }
+                            scene.add(mesh);
+                            edges = new THREE.EdgesHelper( mesh, 0x4ee4f2 );//设置边框，可以旋转
+                            scene.add( edges );
+                            if (mesh && mesh.geometry.animations) {
+                                var mixer = new THREE.AnimationMixer(mesh);
+                                mixers.push(mixer);
+                                var action = mixer.clipAction( mesh.geometry.animations[0] );
+                                action.play();
+                            }
+                        } else if (data.objects[i].type == "Line") {
+                            var jd_color = data.objects[i].jd_object.color;
+                            var color1 = new THREE.Color( jd_color[0] / 255, jd_color[1] / 255, jd_color[2] / 255 );
+                            var material = new THREE.LineBasicMaterial({ color: color1}); //{ color: new THREE.Color( 0xff0000 ) }
+                            var line = new THREE.Line(data.objects[i].geometry, material);
+                            scene.add(line);
+
+                            if (line.geometry.animations) {
+                                var mixer = new THREE.AnimationMixer(line);
+                                mixers.push(mixer);
+                                var action = mixer.clipAction(line.geometry.animations[0]);
+                                action.play();
+                            }
+                        }
+                    }
+
+                    var near = 1, far = 10 * data.boundingSphere.radius;
+                    camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, near, far);
+                    camera.position.x = data.boundingSphere.center.x + 5 * data.boundingSphere.radius;
+                    camera.position.y = data.boundingSphere.center.y + 1 * data.boundingSphere.radius;
+                    camera.position.z = data.boundingSphere.center.z + 5 * data.boundingSphere.radius;
+                    camera.lookAt(data.boundingSphere.center);
+                    camera.add(new THREE.DirectionalLight(0xFFFFFF, 1));
+                    scene.add(camera);
+
+                    if (!controls)
+                        controls = new THREE.OrbitControls(camera, renderer.domElement);
+                    controls.target.copy(data.boundingSphere.center);
+                }
+            );
+        }
+
+        function createMaterials(data) {
+            var matArray = [];
+            for (var j = 0; j < data.materials.length; ++j) {
+                var mat = new THREE.MeshPhongMaterial({});
+                mat.copy(data.materials[j]);
+                matArray.push(mat);
+            }
+            return matArray;
+        }
+
+        function createWfjMaterials(data) {
+            var matArray = [];
+            for (var j =0; j < data.materials.length; ++j) {
+                var mat = new THREE.MeshBasicMaterial({
+                    color : 0x33ccff,
+                    wireframe : true, //以网格显示
+                    opacity: 0.35,
+                    transparent : true, //透明
+                });
+                matArray.push(mat);
+            }
+            return  matArray;
+        }
+
+        function animate() {
+            var delta = clock.getDelta();
+            for (var i = 0; i < mixers.length; ++i)
+                mixers[i].update(delta);
+
+            if (controls) controls.update();
+            if (camera)  renderer.render(scene, camera);
+
+            requestAnimationFrame(animate);
+        }
+
+        function onWindowResize() {
+            if (camera) {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+            }
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+    </script>
+</body>
+</html>
