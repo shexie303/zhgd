@@ -61,10 +61,30 @@ ul, li {
 	background: url("../img/home.png") no-repeat;
 	width: 35px;
 	height: 29px;
+	left: 22px;
+	top: 30px;
 }
 .sn-quick-menu{
 	position: absolute;
 	right: 0;
 	top: 0;
 	height: 90px;
+}
+.sn-quick-menu{}
+.sn-quick-menu li{}
+.sn-quick-menu li:hover .menu-bd{
+	display: block;
+}
+.sn-profile{
+	background: url("../img/profile.png") no-repeat center center;
+	width: 88px;
+	height: 88px;
+}
+.sn-menu{
+}
+
+.sn-menu .menu-hd{}
+.sn-menu{}
+.menu-bd{
+	display: none;
 }
