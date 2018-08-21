@@ -146,12 +146,13 @@ class Permission extends Model
     public static function mainModular()
     {
         return [
-            'electric' => ['电力', 0],
-            'tower_crane' => ['塔吊', 0],
-            'elevator' => ['升降机', 0],
-            'userinfo' => ['人员信息', 0],
+            'electric' => ['电力监控', 0],
             'video' => ['视频监控', 0],
             'door' => ['门禁管控', 0],
+            'env' => ['环境检测', 0],
+            'userinfo' => ['人员信息', 0],
+            'tower_crane' => ['塔吊', 0],
+            'elevator' => ['升降机', 0],
         ];
     }
 }
