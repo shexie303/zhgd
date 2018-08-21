@@ -151,8 +151,7 @@ class Permission extends Model
             'door' => ['门禁管控', 0],
             'env' => ['环境检测', 0],
             'userinfo' => ['人员信息', 0],
-            'tower_crane' => ['塔吊', 0],
-            'elevator' => ['升降机', 0],
+            'elevator' => ['塔吊&升降机', 0],
         ];
     }
 }

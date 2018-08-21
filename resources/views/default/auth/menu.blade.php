@@ -13,40 +13,65 @@
 	<div id="page" class="main-menu-bg">
 		<div class="main-header--box">
 			<div class="main-header">
-				<a href="javascript:void(0);" class="sn-home-link"></a>
 				<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-				<ul class="sn-quick-menu">
-					<li class="sn-bell"></li>
-					<li class="sn-profile">
-						<div class="sn-menu">
-							<div class="menu-hd"></div>
-							<div class="menu-bd">
-								<div class="menu-bd-panel">
-									<a href="javascript:void(0);">syh156254</a>
-									<a href="/auth/logout">退出</a>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
 			</div>
 		</div>
 		<div class="module-body">
 			@foreach($menu as $key => $val)
-			<div class="module-item J_Menu" data-url="/{{$key}}" data-allow="{{$val[1]}}">
+			<div class="module-item J_Menu {{$val[1] == 0 ? 'no-permission' : ''}}" title="{{$val[1] == 0 ? '没有相关权限，请联系管理员！' : ''}}" data-url="/{{$key}}" data-allow="{{$val[1]}}">
 				<div class="module-title">{{$val[0]}}</div>
-				<div class="module-item-con">
-					<div class="module-item-border">
+				@if($key == 'electric')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-electric"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">对电流、电压、有功功率、无功功率、断流进行监控</div>
+						</div>
 					</div>
-				</div>
+				@elseif($key == 'video')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-video"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">周界报警、人员定位越界报警、出入口图像对比报警；录像回放</div>
+						</div>
+					</div>
+				@elseif($key == 'door')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-door"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">控制出入口人员、录入人员信息、考勤统计</div>
+						</div>
+					</div>
+				@elseif($key == 'env')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-env"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">对实时监测风速、温度、湿度、PM10、  PM2.5等</div>
+						</div>
+					</div>
+				@elseif($key == 'userinfo')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-card"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">对电流自建2D地图、划定越界范围、提供人员越界报警</div>
+						</div>
+					</div>
+				@elseif($key == 'elevator')
+					<div class="module-item-con">
+						<div class="module-item-border">
+							<div class="module-sign icon-tower"></div>
+							<div class="module-separator"></div>
+							<div class="module-info">对塔吊和升降机进行承重量、风速、倾角、回转角度等监测报警</div>
+						</div>
+					</div>
+				@endif
 			</div>
 			@endforeach
 		</div>
-		{{--@include('default/common/header')--}}
-		{{--<p><a href="/auth/logout">退出</a></p>--}}
-		{{--@foreach($menu as $key => $val)--}}
-			{{--<p><a class="menu" href="javascript:///" data-url="/{{$key}}" data-allow="{{$val[1]}}">{{$val[0]}}</a></p>--}}
-		{{--@endforeach--}}
 		<script src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
 		<script type="text/javascript">
 			$(function () {

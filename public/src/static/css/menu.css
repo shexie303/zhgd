@@ -1,14 +1,17 @@
 .module-body{
+	margin-top: 65px;
 	overflow: hidden;
 }
 .module-item{
 	float: left;
-	background: url("../img/menu_border.png") no-repeat;
+	background-image: url("../img/menu_border.png");
+	background-repeat: no-repeat;
 	width: 520px;
 	height: 357px;
 	margin-left: 90px;
 	margin-bottom: 90px;
 	position: relative;
+	cursor: pointer;
 }
 .module-title{
 	position: absolute;
@@ -28,9 +31,106 @@
 	height: 220px;
 }
 .module-item-border{
+	background-color: rgba(11, 32, 39, .8);
 	border: 4px solid #03686c;
 	box-shadow: 0 0 4px #039aa1 inset;
 	border-radius: 4px;
-	background: rgba(11, 32, 39, .8);
 	height: 214px;
+	display: flex;
+	align-items: center;
+}
+.module-sign{
+	flex: 220px 0 0;
+	height: 130px;
+	transition: all .3s ease;
+}
+.module-separator{
+	background-image: url("../img/icon_line.png");
+	background-repeat: no-repeat;
+	width: 4px;
+	height: 110px;
+}
+.module-info{
+	padding: 0 35px;
+	font-size: 1.25rem;
+	color: #037e8d;
+}
+.icon-electric{
+	background-image: url("../img/icon_electric.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.icon-video{
+	background-image: url("../img/icon_video.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.icon-door{
+	background-image: url("../img/icon_door.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.icon-env{
+	background-image: url("../img/icon_env.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.icon-card{
+	background-image: url("../img/icon_card.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.icon-tower{
+	background-image: url("../img/icon_tower.png");
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+}
+.module-item:hover .module-sign{
+	transform: scale(1.05);
+}
+.no-permission{
+	background-image: url("../img/menu_border_nop.png");
+	cursor: not-allowed;
+}
+.no-permission .module-title{
+	color: #b3c6ca;
+}
+.no-permission .module-item-con{
+	border-color: #3d5a5b;
+}
+.no-permission .module-item-border{
+	border-color: #283c3f;
+	box-shadow: 0 0 4px #2f393a inset;
+}
+.no-permission .module-sign{
+}
+.no-permission .module-separator{
+	background-image: url("../img/icon_line_nop.png");
+}
+.no-permission .module-info{
+	color: #b3c6ca;
+}
+.no-permission .icon-electric{
+	background-image: url("../img/icon_electric_nop.png");
+	background-repeat: no-repeat;
+}
+.no-permission .icon-video{
+	background-image: url("../img/icon_video_nop.png");
+	background-repeat: no-repeat;
+}
+.no-permission .icon-door{
+	background-image: url("../img/icon_door_nop.png");
+	background-repeat: no-repeat;
+}
+.no-permission .icon-env{
+	background-image: url("../img/icon_env_nop.png");
+	background-repeat: no-repeat;
+}
+.no-permission .icon-card{
+	background-image: url("../img/icon_card_nop.png");
+	background-repeat: no-repeat;
+}
+.no-permission .icon-tower{
+	background-image: url("../img/icon_tower_nop.png");
+	background-repeat: no-repeat;
 }
