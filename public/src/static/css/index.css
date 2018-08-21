@@ -7,7 +7,7 @@
 }
 
 .monitor--title {
-	background: url("./src/static/img/title_bg.png") no-repeat;
+	background: url("../img/title_bg.png") no-repeat;
 	width: 132px;
 	height: 47px;
 	font-size: 1.25rem;
@@ -18,7 +18,7 @@
 }
 
 .monitor--title.larger {
-	background: url("./src/static/img/title_bg_larger.png") no-repeat;
+	background: url("../img/title_bg_larger.png") no-repeat;
 	width: 168px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .electric-monitor--subTitle {
-	background: url("./src/static/img/subtitle_bg.png") no-repeat;
+	background: url("../img/subtitle_bg.png") no-repeat;
 	font-size: 1.125rem;
 	color: #73c0cb;
 	width: 107px;
@@ -44,13 +44,13 @@
 
 .analysis-main {
 	position: relative;
-	background: url("./src/static/img/rulers.png") no-repeat;
+	background: url("../img/rulers.png") no-repeat;
 	width: 280px;
 	height: 34px
 }
 
 .switch-main {
-	background: url("./src/static/img/switch_bg.png") no-repeat;
+	background: url("../img/switch_bg.png") no-repeat;
 	width: 125px;
 	height: 40px;
 }
@@ -295,7 +295,7 @@
 	width: 172px;
 	height: 106px;
 	position: relative;
-	background: url("./src/static/img/arrow.png") no-repeat left top;
+	background: url("../img/arrow.png") no-repeat left top;
 	overflow: hidden;
 }
 
@@ -351,17 +351,17 @@
 }
 
 .vertical-line-large {
-	background: url("./src/static/img/line_big.png") no-repeat;
+	background: url("../img/line_big.png") no-repeat;
 	height: 460px;
 }
 
 .vertical-line-middle {
-	background: url("./src/static/img/line_middle.png") no-repeat;
+	background: url("../img/line_middle.png") no-repeat;
 	height: 252px;
 }
 
 .vertical-line-small {
-	background: url("./src/static/img/line_small.png") no-repeat;
+	background: url("../img/line_small.png") no-repeat;
 	height: 209px;
 }
 
@@ -572,7 +572,7 @@
 .monitor-item-main {
 	width: 128px;
 	height: 138px;
-	background-image: url("./src/static/img/monitor_normal.png");
+	background-image: url("../img/monitor_normal.png");
 	background-repeat: no-repeat;
 	position: relative;
 	margin-left: 12px;
@@ -581,7 +581,7 @@
 }
 
 .monitor-item-bell .monitor-item-main {
-	background-image: url("./src/static/img/monitor_red.png");
+	background-image: url("../img/monitor_red.png");
 }
 
 .monitor-item-bell .monitor-item-control {
@@ -619,7 +619,7 @@
 }
 
 .env-info {
-	background: url("./src/static/img/cycle.png") no-repeat;
+	background: url("../img/cycle.png") no-repeat;
 	width: 117px;
 	height: 117px;
 	display: flex;
@@ -727,7 +727,7 @@ div[class$="-monitor--content"]::after {
 	position: absolute;
 	width: 450px;
 	height: 167px;
-	background: url("./src/static/img/door.png") no-repeat;
+	background: url("../img/door.png") no-repeat;
 	left: 35px;
 	top: 25px;
 }
