@@ -23,7 +23,7 @@
 							</div>
 							<div class="menu-bd">
 								<div class="menu-bd-panel">
-									<a href="javascript:void(0);">syh156254</a>
+									<a href="javascript:void(0);">@include('default/common/header')</a>
 									<a href="/auth/logout">退出</a>
 								</div>
 							</div>
