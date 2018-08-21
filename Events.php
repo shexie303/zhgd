@@ -1,0 +1,133 @@
+<?php
+/**
+ * This file is part of workerman.
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the MIT-LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @author walkor<walkor@workerman.net>
+ * @copyright walkor<walkor@workerman.net>
+ * @link http://www.workerman.net/
+ * @license http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
+ * 用于检测业务代码死循环或者长时间阻塞等问题
+ * 如果发现业务卡死，可以将下面declare打开（去掉//注释），并执行php start.php reload
+ * 然后观察一段时间workerman.log看是否有process_timeout异常
+ */
+//declare(ticks=1);
+
+use \GatewayWorker\Lib\Gateway;
+use Workerman\Lib\Timer;
+
+/**
+ *
+ *路径，需要根据各自本地情况，重新设置。如果GatewayWorker和zhgd文件夹在同一级，则不需要设置。
+ *数据库，连接的具体配置需要，在Db.php根据各自情况配置，同zhgd/config/database.php一致
+ */
+require_once __DIR__.'/../../../zhgd/Db.php'; 
+/**
+ * 主逻辑
+ * 主要是处理 onConnect onMessage onClose 三个方法
+ * onConnect 和 onClose 如果不需要可以不用实现并删除
+ */
+class Events
+{
+    /**
+     * 当客户端连接时触发
+     * 如果业务不需此回调可以删除onConnect
+     * 
+     * @param int $client_id 连接id
+
+    public static function onConnect($client_id)
+    {
+        // 向当前client_id发送数据 
+        Gateway::sendToClient($client_id, "Hello $client_id\r\n");
+        // 向所有人发送
+        Gateway::sendToAll("$client_id login\r\n");
+    }*/
+    
+   /**
+    * 当客户端发来消息时触发
+    * @param int $client_id 连接id
+    * @param mixed $message 具体消息
+    */
+   public static function onMessage($client_id, $message)
+   {
+       $return['state'] = 'error';
+	   $return['msg'] = '';
+	   $return['data'] = '';
+	   
+	   if (empty($message)) { //如果没有参数，则报错。
+		   $return['message'] = 'Parameter can not be empty.';
+		   Gateway::sendToClient($client_id, json_encode($return));
+	   } else {
+		   $messageDecode = json_decode($message, true);
+		   //先暂定，按type字段，来区分是哪个模块的请求。具体怎么定，先过了明天再定！
+		   if ($messageDecode['type'] == 'say_to_one') { //@路超，电力部分。可以命名一个更规范些的
+			   // 向某客户端发送
+			   Timer::add(5, function($client_id) {
+				   $a = mt_rand(200,250);
+				   $res = [
+					   'electric' => [
+						   mt_rand(120,145),
+						   mt_rand(120,145),
+						   $a,
+						   270-$a
+					   ]
+				   ];
+				   Gateway::sendToClient($client_id,json_encode($res));
+			   },[$client_id],true);
+			   
+		   } elseif ($messageDecode['type'] == 'env') { //@路超，环境部分
+			   //...
+			   
+		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
+				
+				Timer::add(5, function($client_id) {
+					$return['state'] = 'success';
+					//查询
+					$db = new \DB();
+					$exist = $db->table('site_error_report')->where('event_state = 1')->order('id desc')->limit('1')->select();
+					$return['data']['report'] = 2; //没有视频报警事件
+					if ($exist) {
+						$return['data']['report'] = 1; //发生视频报警事件
+					}
+					// 向某客户端发送
+					Gateway::sendToClient($client_id, json_encode($return));
+			   }, [$client_id], true);
+			   
+		   } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，人员定位。
+				$return['state'] = 'success';
+			   // 向某客户端发送
+			   Timer::add(15, function($client_id) {
+				   $return['data']['yuejie'] = mt_rand(2,5); //越界
+				   $return['data']['diaoxian'] = mt_rand(1,4); //掉线
+				   $return['data']['didian'] = mt_rand(2,9); //低电
+				   $return['data']['stop'] = mt_rand(1,7); //长时间静止
+				   
+				   $return['data']['sum'] = $return['data']['yuejie']+$return['data']['diaoxian']+$return['data']['didian']+$return['data']['stop']; //汇总
+				   Gateway::sendToClient($client_id, json_encode($return));
+			   }, [$client_id], true);
+			   
+		   } else {
+				$return['message'] = 'unsure type';
+				Gateway::sendToClient($client_id, json_encode($return));
+		   }
+	   }
+	   
+   }
+   
+   /**
+    * 当用户断开连接时触发
+    * @param int $client_id 连接id
+    */
+   public static function onClose($client_id)
+   {
+       // 向所有人发送 
+//       GateWay::sendToAll("$client_id logout\r\n");
+       echo "$client_id logout\r\n";
+   }
+}
