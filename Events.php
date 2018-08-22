@@ -27,7 +27,7 @@ use Workerman\Lib\Timer;
  *路径，需要根据各自本地情况，重新设置。如果GatewayWorker和zhgd文件夹在同一级，则不需要设置。
  *数据库，连接的具体配置需要，在Db.php根据各自情况配置，同zhgd/config/database.php一致
  */
-require_once __DIR__.'/../../../zhgd/Db.php'; 
+require_once __DIR__.'/../../../zxgd/Db.php';
 /**
  * 主逻辑
  * 主要是处理 onConnect onMessage onClose 三个方法
@@ -66,27 +66,35 @@ class Events
 	   } else {
 		   $messageDecode = json_decode($message, true);
 		   //先暂定，按type字段，来区分是哪个模块的请求。具体怎么定，先过了明天再定！
-		   if ($messageDecode['type'] == 'say_to_one') { //@路超，电力部分。可以命名一个更规范些的
+		   if ($messageDecode['type'] == 'electric') { //@路超，电力部分。可以命名一个更规范些的
 			   // 向某客户端发送
 			   Timer::add(5, function($client_id) {
-				   $a = mt_rand(200,250);
-				   $res = [
-					   'electric' => [
-						   mt_rand(120,145),
-						   mt_rand(120,145),
-						   $a,
-						   270-$a
-					   ]
+                   $return['state'] = 'success';
+                   $a = mt_rand(200,250);
+                   $return['data'] = [
+                       mt_rand(120,145),
+                       mt_rand(120,145),
+                       $a,
+                       270-$a
 				   ];
-				   Gateway::sendToClient($client_id,json_encode($res));
+				   Gateway::sendToClient($client_id,json_encode($return));
 			   },[$client_id],true);
 			   
 		   } elseif ($messageDecode['type'] == 'env') { //@路超，环境部分
-			   //...
-			   
+               Timer::add(60, function($client_id) {
+                   $return['state'] = 'success';
+                   //查询
+                   $db = new \DB();
+                   $data = $db->table('site_env')->order('id desc')->limit('1')->select('pm10,wind_sc,tmp,hum');
+                   if ($data) {
+                       $return['data'] = $data[0]; //发生视频报警事件
+                   }
+                   // 向某客户端发送
+                   Gateway::sendToClient($client_id, json_encode($return));
+               }, [$client_id], true);
 		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
 				
-				Timer::add(5, function($client_id) {
+				Timer::add(300, function($client_id) {
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();

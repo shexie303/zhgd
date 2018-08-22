@@ -146,14 +146,14 @@
 				<div class="personnel-monitor--content">
 					<div class="vertical-line vertical-line-middle"></div>
 					<div class="curr-police">
-						<h3><span class="red">12</span></h3>
+						<h3><span class="red" id="user_info_sum">12</span></h3>
 						<span>当前报警</span>
 					</div>
 					<div class="police-details">
-						<p>越界报警：<span class="red">5</span>人</p>
-						<p>掉线提示：<span class="red">4</span>人</p>
-						<p>低电提示：<span class="red">1</span>人</p>
-						<p>长时间静止：<span class="red">2</span>人</p>
+						<p>越界报警：<span class="red" id="user_info_yuejie" >5</span>人</p>
+						<p>掉线提示：<span class="red" id="user_info_diaoxian" >4</span>人</p>
+						<p>低电提示：<span class="red" id="user_info_didian" >1</span>人</p>
+						<p>长时间静止：<span class="red" id="user_info_stop">2</span>人</p>
 					</div>
 					<div class="personnel-item staff">
 						<div class="t">上岗人员</div>
@@ -197,7 +197,7 @@
 							<span class="equip-no">01</span>
 						</div>
 					</div>
-					<div class="monitor-item monitor-item-bell">
+					<div class="monitor-item">
 						<div class="monitor-item-control">
 							<span>生活区域</span>
 						</div>
@@ -256,12 +256,12 @@
 						</div>
 					</div>
 					<div class="env-item">
-						<div class="env-info env-info-lg">
+						<div class="env-info">
 							<span class="num">50</span>
-							<span class="unit">分贝</span>
+							<span class="unit">级</span>
 						</div>
 						<div class="env-type">
-							<span class="">噪声</span>
+							<span class="">风力</span>
 						</div>
 					</div>
 					<div class="env-item">
@@ -291,27 +291,66 @@
     <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
     <script type="text/javascript">
         if("WebSocket" in window){
-            var ws = new WebSocket('ws://118.190.137.205:8282');
-            ws.onopen = function(evt) {
-                //初始连接要传的参数 先传一个工地的id吧
-                var msg = {"type":"say_to_one","to_client_id":100,"content":"hello"};
-                ws.send(JSON.stringify(msg));
+            var ws_video = new WebSocket('ws://118.190.137.205:8282');
+            ws_video.onopen = function(evt) {
+                //初始连接要传的参数
+                var msg = {"type":"video"};
+                ws_video.send(JSON.stringify(msg));
             };
-
-            ws.onmessage = function(e) {
-                var data = eval("("+e.data+")");
-                console.log(data);
-                $('.current-monitor').find('.progress-bg').css('width',data.electric[0]);
-                $('.voltage-monitor').find('.progress-bg').css('width',data.electric[1]);
-                $('.active-monitor').find('.progress-bg').css('width',data.electric[2]);
-                $('.reactive-monitor').find('.progress-bg').css('width',data.electric[3]);
+            ws_video.onmessage = function(evt) {
+                var res = eval("("+evt.data+")");
+                if(res.data.report == 1){
+                    $('.monitor-item:eq(2)').addClass('monitor-item-bell');
+                }else{
+                    $('.monitor-item:eq(2)').removeClass('monitor-item-bell');
+                }
             };
+            ws_video.onclose = function(evt) {};
 
-            ws.onclose = function(evt) {
-                console.log("Connection closed.");
+            var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+            ws_electric.onopen = function(evt) {
+                //初始连接要传的参数
+                var msg = {"type":"electric"};
+                ws_electric.send(JSON.stringify(msg));
             };
-        }else{
+            ws_electric.onmessage = function(evt) {
+                var res = eval("("+evt.data+")");
+                $('.current-monitor').find('.progress-bg').css('width',res.data[0]);
+                $('.voltage-monitor').find('.progress-bg').css('width',res.data[1]);
+                $('.active-monitor').find('.progress-bg').css('width',res.data[2]);
+                $('.reactive-monitor').find('.progress-bg').css('width',res.data[3]);
+            };
+            ws_electric.onclose = function(evt) {};
 
+            var ws_user_info = new WebSocket('ws://118.190.137.205:8282');
+            ws_user_info.onopen = function(evt) {
+                //初始连接要传的参数
+                var msg = {"type":"user_info"};
+                ws_user_info.send(JSON.stringify(msg));
+            };
+            ws_user_info.onmessage = function(evt) {
+                var res = eval("("+evt.data+")");
+                $('#user_info_diaoxian').html(res.data.diaoxian);
+                $('#user_info_didian').html(res.data.didian);
+                $('#user_info_stop').html(res.data.stop);
+                $('#user_info_sum').html(res.data.sum);
+                $('#user_info_yuejie').html(res.data.yuejie);
+            };
+            ws_user_info.onclose = function(evt) {};
+
+            var ws_env = new WebSocket('ws://118.190.137.205:8282');
+            ws_env.onopen = function(evt) {
+                //初始连接要传的参数
+                var msg = {"type":"env"};
+                ws_env.send(JSON.stringify(msg));
+            };
+            ws_env.onmessage = function(evt) {
+                var res = eval("("+evt.data+")");
+                $('.env-item').each(function(index){
+                    $(this).find('.num').html(res.data[index]);
+                })
+            };
+            ws_env.onclose = function(evt) {};
         }
     </script>
 <script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>
