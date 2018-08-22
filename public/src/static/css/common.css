@@ -120,3 +120,9 @@ ul, li {
 	left: -10px;
 	top: 8px;
 }
+.message-item.bell p{
+	color: #f92801;
+}
+.message-item.bell p::before{
+	background-color: #f92801;
+}
