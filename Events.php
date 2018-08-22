@@ -94,7 +94,7 @@ class Events
                }, [$client_id], true);
 		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
 				
-				Timer::add(30, function($client_id) {
+				Timer::add(300, function($client_id) {
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
