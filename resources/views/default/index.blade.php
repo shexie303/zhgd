@@ -52,7 +52,7 @@
 					<div class="analysis-main">
 						<div class="progress-outer">
 							<div class="progress-inner">
-								<div class="progress-bg progress-bg2"></div>
+								<div class="progress-bg"></div>
 							</div>
 						</div>
 					</div>
@@ -62,7 +62,7 @@
 					<div class="analysis-main">
 						<div class="progress-outer">
 							<div class="progress-inner">
-								<div class="progress-bg progress-bg3"></div>
+								<div class="progress-bg"></div>
 							</div>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 					<div class="analysis-main">
 						<div class="progress-outer">
 							<div class="progress-inner">
-								<div class="progress-bg progress-bg4"></div>
+								<div class="progress-bg"></div>
 							</div>
 						</div>
 					</div>
@@ -292,11 +292,13 @@
 		ws_video.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
 			if (res.data.report == 1) {
-				var messageInfo = '<p>' + res.data.report_msg + '</p>';
-				var messageItem = '<div class="message-item">' + messageInfo + '</div>';
+				if (res.data.report_msg) {
+					var messageInfo = '<p>' + res.data.report_msg + '</p>';
+					var messageItem = '<div class="message-item bell">' + messageInfo + '</div>';
+					$('.message-box .message-list').append(messageItem);
+					$('.message-box').show();
+				}
 				$('.monitor-item:eq(2)').addClass('monitor-item-bell');
-				$('.message-box .message-list').append(messageItem);
-				$('.message-box').show();
 			} else {
 				$('.monitor-item:eq(2)').removeClass('monitor-item-bell');
 			}
