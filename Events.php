@@ -94,7 +94,7 @@ class Events
                }, [$client_id], true);
 		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
 				
-				Timer::add(300, function($client_id) {
+				Timer::add(5, function($client_id) {
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
@@ -103,7 +103,7 @@ class Events
 					$return['data']['report_msg'] = ''; 
 					if ($report) {
 						$return['data']['report'] = 1; //发生视频报警事件
-						$return['data']['report_msg'] = trim($report[0]['event_name'], ':'); //报警事件描述
+						$return['data']['report_msg'] = trim($report[0][1], ':'); //报警事件描述
 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
