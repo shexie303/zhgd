@@ -91,14 +91,6 @@
 	</div>
 	<div class="message-box">
 		<div class="message-list">
-			<div class="message-item">
-				<p>塔吊设备连接正常</p>
-				<p>升降机设备连接正常</p>
-			</div>
-			<div class="message-item bell">
-				<p>2号塔吊异常</p>
-				<p>生活区2号监控离线</p>
-			</div>
 		</div>
 	</div>
 	<div class="right-fix">
@@ -150,9 +142,9 @@
 						<span>当前报警</span>
 					</div>
 					<div class="police-details">
-						<p>越界报警：<span class="red" id="user_info_yuejie" >5</span>人</p>
-						<p>掉线提示：<span class="red" id="user_info_diaoxian" >4</span>人</p>
-						<p>低电提示：<span class="red" id="user_info_didian" >1</span>人</p>
+						<p>越界报警：<span class="red" id="user_info_yuejie">5</span>人</p>
+						<p>掉线提示：<span class="red" id="user_info_diaoxian">4</span>人</p>
+						<p>低电提示：<span class="red" id="user_info_didian">1</span>人</p>
 						<p>长时间静止：<span class="red" id="user_info_stop">2</span>人</p>
 					</div>
 					<div class="personnel-item staff">
@@ -288,71 +280,79 @@
 	</div>
 	<div id="building__canvas--box"></div>
 </div>
-    <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
-    <script type="text/javascript">
-        if("WebSocket" in window){
-            var ws_video = new WebSocket('ws://118.190.137.205:8282');
-            ws_video.onopen = function(evt) {
-                //初始连接要传的参数
-                var msg = {"type":"video"};
-                ws_video.send(JSON.stringify(msg));
-            };
-            ws_video.onmessage = function(evt) {
-                var res = eval("("+evt.data+")");
-                if(res.data.report == 1){
-                    $('.monitor-item:eq(2)').addClass('monitor-item-bell');
-                }else{
-                    $('.monitor-item:eq(2)').removeClass('monitor-item-bell');
-                }
-            };
-            ws_video.onclose = function(evt) {};
+<script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
+<script type="text/javascript">
+	if ("WebSocket" in window) {
+		var ws_video = new WebSocket('ws://118.190.137.205:8282');
+		ws_video.onopen = function (evt) {
+			//初始连接要传的参数
+			var msg = {"type": "video"};
+			ws_video.send(JSON.stringify(msg));
+		};
+		ws_video.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			if (res.data.report == 1) {
+				var messageInfo = '<p>' + res.data.report_msg + '</p>';
+				var messageItem = '<div class="message-item">' + messageInfo + '</div>';
+				$('.monitor-item:eq(2)').addClass('monitor-item-bell');
+				$('.message-box .message-list').append(messageItem);
+				$('.message-box').show();
+			} else {
+				$('.monitor-item:eq(2)').removeClass('monitor-item-bell');
+			}
+		};
+		ws_video.onclose = function (evt) {
+		};
 
-            var ws_electric = new WebSocket('ws://118.190.137.205:8282');
-            ws_electric.onopen = function(evt) {
-                //初始连接要传的参数
-                var msg = {"type":"electric"};
-                ws_electric.send(JSON.stringify(msg));
-            };
-            ws_electric.onmessage = function(evt) {
-                var res = eval("("+evt.data+")");
-                $('.current-monitor').find('.progress-bg').css('width',res.data[0]);
-                $('.voltage-monitor').find('.progress-bg').css('width',res.data[1]);
-                $('.active-monitor').find('.progress-bg').css('width',res.data[2]);
-                $('.reactive-monitor').find('.progress-bg').css('width',res.data[3]);
-            };
-            ws_electric.onclose = function(evt) {};
+		var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+		ws_electric.onopen = function (evt) {
+			//初始连接要传的参数
+			var msg = {"type": "electric"};
+			ws_electric.send(JSON.stringify(msg));
+		};
+		ws_electric.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			$('.current-monitor').find('.progress-bg').css('width', res.data[0]);
+			$('.voltage-monitor').find('.progress-bg').css('width', res.data[1]);
+			$('.active-monitor').find('.progress-bg').css('width', res.data[2]);
+			$('.reactive-monitor').find('.progress-bg').css('width', res.data[3]);
+		};
+		ws_electric.onclose = function (evt) {
+		};
 
-            var ws_user_info = new WebSocket('ws://118.190.137.205:8282');
-            ws_user_info.onopen = function(evt) {
-                //初始连接要传的参数
-                var msg = {"type":"user_info"};
-                ws_user_info.send(JSON.stringify(msg));
-            };
-            ws_user_info.onmessage = function(evt) {
-                var res = eval("("+evt.data+")");
-                $('#user_info_diaoxian').html(res.data.diaoxian);
-                $('#user_info_didian').html(res.data.didian);
-                $('#user_info_stop').html(res.data.stop);
-                $('#user_info_sum').html(res.data.sum);
-                $('#user_info_yuejie').html(res.data.yuejie);
-            };
-            ws_user_info.onclose = function(evt) {};
+		var ws_user_info = new WebSocket('ws://118.190.137.205:8282');
+		ws_user_info.onopen = function (evt) {
+			//初始连接要传的参数
+			var msg = {"type": "user_info"};
+			ws_user_info.send(JSON.stringify(msg));
+		};
+		ws_user_info.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			$('#user_info_diaoxian').html(res.data.diaoxian);
+			$('#user_info_didian').html(res.data.didian);
+			$('#user_info_stop').html(res.data.stop);
+			$('#user_info_sum').html(res.data.sum);
+			$('#user_info_yuejie').html(res.data.yuejie);
+		};
+		ws_user_info.onclose = function (evt) {
+		};
 
-            var ws_env = new WebSocket('ws://118.190.137.205:8282');
-            ws_env.onopen = function(evt) {
-                //初始连接要传的参数
-                var msg = {"type":"env"};
-                ws_env.send(JSON.stringify(msg));
-            };
-            ws_env.onmessage = function(evt) {
-                var res = eval("("+evt.data+")");
-                $('.env-item').each(function(index){
-                    $(this).find('.num').html(res.data[index]);
-                })
-            };
-            ws_env.onclose = function(evt) {};
-        }
-    </script>
+		var ws_env = new WebSocket('ws://118.190.137.205:8282');
+		ws_env.onopen = function (evt) {
+			//初始连接要传的参数
+			var msg = {"type": "env"};
+			ws_env.send(JSON.stringify(msg));
+		};
+		ws_env.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			$('.env-item').each(function (index) {
+				$(this).find('.num').html(res.data[index]);
+			})
+		};
+		ws_env.onclose = function (evt) {
+		};
+	}
+</script>
 <script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('src/static/js/OrbitControls.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('src/static/js/JDLoader.min.js') }}"></script>
