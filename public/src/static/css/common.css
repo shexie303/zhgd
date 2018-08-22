@@ -103,6 +103,60 @@ ul, li {
 	background-color: rgba(2, 18, 25, .9);
 	padding: 15px 0 15px 35px;
 	margin-bottom: 12px;
+	position: relative;
+}
+.message-item .decorate-line{
+	position: absolute;
+	background: url("../img/flow_line.png");
+	width: 127px;
+	height: 1px;
+	left: 0;
+	top: -1px;
+	animation: animated_line 5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite
+}
+@-webkit-keyframes animated_line{
+	0%		{left:0px;}
+	25%		{left:0px;}
+	50%		{left:116px;}
+	55%		{left:116px;}
+	70%		{left:116px;}
+	100%	{left:0px;}
+}
+
+@keyframes animated_line{
+	0%		{left:0px;}
+	25%		{left:0px;}
+	50%		{left:116px;}
+	55%		{left:116px;}
+	70%		{left:116px;}
+	100%	{left:0px;}
+}
+.message-item span{
+	position: absolute;
+	width: 12px;
+	height: 18px;
+	background-image: url("../img/decorate.png");
+	background-repeat: no-repeat;
+}
+.message-item .tria-tl{
+	background-position: 0 0;
+	top: -4px;
+	left: -4px;
+}
+.message-item .tria-tr{
+	background-position: -14px 0;
+	right: -4px;
+	top: -4px;
+}
+.message-item .tria-br{
+	background-position: -14px -75px;
+	right: -4px;
+	bottom: -4px;
+}
+.message-item .tria-bl{
+	background-position: 0 -75px;
+	left: -4px;
+	bottom: -4px;
 }
 .message-item p{
 	position: relative;

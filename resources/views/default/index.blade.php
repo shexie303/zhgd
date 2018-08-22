@@ -91,6 +91,13 @@
 	</div>
 	<div class="message-box">
 		<div class="message-list">
+			<div class="message-item bell">
+				<div class="decorate-line"></div>
+				<span class="tria-tl"></span>
+				<span class="tria-tr"></span>
+				<span class="tria-br"></span>
+				<span class="tria-bl"></span>
+			</div>
 		</div>
 	</div>
 	<div class="right-fix">
@@ -292,12 +299,11 @@
 		ws_video.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
 			if (res.data.report == 1) {
-				if (res.data.report_msg) {
+				// if (res.data.report_msg) {
 					var messageInfo = '<p>' + res.data.report_msg + '</p>';
-					var messageItem = '<div class="message-item bell">' + messageInfo + '</div>';
-					$('.message-box .message-list').append(messageItem);
+					$('.message-box .message-item').append(messageInfo);
 					$('.message-box').show();
-				}
+				// }
 				$('.monitor-item:eq(2)').addClass('monitor-item-bell');
 			} else {
 				$('.monitor-item:eq(2)').removeClass('monitor-item-bell');
