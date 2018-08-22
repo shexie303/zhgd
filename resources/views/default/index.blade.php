@@ -89,6 +89,18 @@
 			</div>
 		</a>
 	</div>
+	<div class="message-box">
+		<div class="message-list">
+			<div class="message-item">
+				<p>塔吊设备连接正常</p>
+				<p>升降机设备连接正常</p>
+			</div>
+			<div class="message-item bell">
+				<p>2号塔吊异常</p>
+				<p>生活区2号监控离线</p>
+			</div>
+		</div>
+	</div>
 	<div class="right-fix">
 		<div class="towerElevator-monitor">
 			<div class="monitor--title larger">塔吊&升降机</div>

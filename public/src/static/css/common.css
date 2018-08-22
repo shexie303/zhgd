@@ -88,3 +88,35 @@ ul, li {
 .menu-bd{
 	display: none;
 }
+
+.message-box{
+	position: absolute;
+	width: 244px;
+	left: 370px;
+	top: 198px;
+	z-index: 999;
+}
+.message-list{}
+.message-item{
+	border: 1px solid rgba(19, 57, 71, .9);
+	background-color: rgba(2, 18, 25, .9);
+	padding: 15px 0 15px 35px;
+	margin-bottom: 12px;
+}
+.message-item p{
+	position: relative;
+	color: #08c055;
+	font-size: 1rem;
+	line-height: 20px;
+	margin-bottom: 5px;
+	list-style-type: square;
+}
+.message-item p::before{
+	position: absolute;
+	content: '';
+	width: 4px;
+	height: 4px;
+	background-color: #08c055;
+	left: -10px;
+	top: 8px;
+}
