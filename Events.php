@@ -98,10 +98,12 @@ class Events
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
-					$exist = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->limit('1')->select('id');
+					$report = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->limit('1')->select('id, event_name');
 					$return['data']['report'] = 2; //没有视频报警事件
-					if ($exist) {
+					$return['data']['report_msg'] = ''; 
+					if ($report) {
 						$return['data']['report'] = 1; //发生视频报警事件
+						$return['data']['report_msg'] = trim($report[0]['event_name'], ':'); //报警事件描述
 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
