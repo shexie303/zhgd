@@ -95,6 +95,7 @@ ul, li {
 	left: 370px;
 	top: 198px;
 	z-index: 999;
+	display: none;
 }
 .message-list{}
 .message-item{
