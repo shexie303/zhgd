@@ -10,26 +10,7 @@
 </head>
 <body>
 	<div id="page" class="main-cate-bg">
-		<div class="main-header--box">
-																	 <div class="main-header">
-																	 <div class="sn-home-link"></div>
-																	 <div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-																	 <ul class="sn-quick-menu">
-																	 <li class="sn-bell"></li>
-																	 <li class="sn-profile">
-																	 <div class="sn-menu">
-																	 <div class="menu-hd"></div>
-																	 <div class="menu-bd">
-																	 <div class="menu-bd-panel">
-																	 <a href="javascript:void(0);">syh156254</a>
-																	 <a href="/auth/logout">退出</a>
-																	 </div>
-																	 </div>
-																	 </div>
-																	 </li>
-																	 </ul>
-																	 </div>
-																	 </div>
+        @include('default/common/header')
 		<div class="main-grid-table">
 			<div class="monitor-con">
 				<div class="monitor-inner-con">
@@ -49,124 +30,54 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
+									<td>吴工</td>
+									<td>0001</td>
+									<td>后端工程师</td>
+									<td>技术部</td>
 									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
+									<td>河北</td>
+									<td>2018-08-27 13:30:00</td>
+									<td>-</td>
 								</tr>
 								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
+									<td>陈工</td>
+									<td>0002</td>
+									<td>后端工程师</td>
+									<td>技术部</td>
 									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
+									<td>河北</td>
+                                    <td>2018-08-27 13:30:00</td>
+                                    <td>-</td>
 								</tr>
 								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
+									<td>路工</td>
+									<td>0003</td>
+									<td>后端工程师</td>
+									<td>技术部</td>
 									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
+									<td>河北</td>
+                                    <td>2018-08-27 13:30:00</td>
+                                    <td>-</td>
 								</tr>
 								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
+									<td>刘工</td>
+									<td>0004</td>
+									<td>前端工程师</td>
+									<td>技术部</td>
 									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
+									<td>河北</td>
+                                    <td>2018-08-27 13:30:00</td>
+                                    <td>-</td>
 								</tr>
 								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
-								</tr>
-								<tr>
-									<td>解放军将</td>
-									<td>0068</td>
-									<td>安全员</td>
-									<td>电力一班</td>
-									<td>男</td>
-									<td>乌鲁木齐</td>
-									<td>2018-06-26 12:24:12</td>
-									<td>2018-06-26 18:12:45</td>
+									<td>赵工</td>
+									<td>0005</td>
+									<td>首席设计师</td>
+									<td>技术部</td>
+									<td>女</td>
+									<td>河北</td>
+                                    <td>2018-08-27 13:30:00</td>
+                                    <td>-</td>
 								</tr>
 							</tbody>
 						</table>

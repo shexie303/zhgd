@@ -66,7 +66,7 @@ class Events
 	   } else {
 		   $messageDecode = json_decode($message, true);
 		   //先暂定，按type字段，来区分是哪个模块的请求。具体怎么定，先过了明天再定！
-		   if ($messageDecode['type'] == 'electric') { //@路超，电力部分。可以命名一个更规范些的
+		   if ($messageDecode['type'] == 'electric') { //@路超，电力部分。
 			   // 向某客户端发送
 			   Timer::add(5, function($client_id) {
                    $return['state'] = 'success';
@@ -80,7 +80,20 @@ class Events
 				   Gateway::sendToClient($client_id,json_encode($return));
 			   },[$client_id],true);
 			   
-		   } elseif ($messageDecode['type'] == 'env') { //@路超，环境部分
+		   } elseif ($messageDecode['type'] == 'electric_second') {
+               // 向某客户端发送
+               Timer::add(30, function($client_id) {
+                   $return['state'] = 'success';
+                   $return['data'] = [
+                       ['工作区设备1',mt_rand(399,415)+ mt_rand(0,9)/10,0,0,0],
+                       ['工作区设备2',0,0,0,0],
+                       ['工作区设备3',mt_rand(399,415)+ mt_rand(0,9)/10,0,0,0],
+                       ['工作区设备4',0,0,0,0],
+                       ['生活区设备1',0,0,0,0]
+                   ];
+                   Gateway::sendToClient($client_id,json_encode($return));
+               },[$client_id],true);
+           } elseif ($messageDecode['type'] == 'env') { //@路超，环境部分
                Timer::add(60, function($client_id) {
                    $return['state'] = 'success';
                    //查询
@@ -122,7 +135,10 @@ class Events
 				   Gateway::sendToClient($client_id, json_encode($return));
 			   }, [$client_id], true);
 			   
-		   } else {
+		   } elseif ($messageDecode['type'] == 'user_info_second') { //@陈振华，人员定位二级。
+
+
+           } else {
 				$return['message'] = 'unsure type';
 				Gateway::sendToClient($client_id, json_encode($return));
 		   }
@@ -138,6 +154,6 @@ class Events
    {
        // 向所有人发送 
 //       GateWay::sendToAll("$client_id logout\r\n");
-       echo "$client_id logout\r\n";
+//       echo "$client_id logout\r\n";
    }
 }

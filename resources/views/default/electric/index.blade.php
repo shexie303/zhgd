@@ -9,27 +9,8 @@
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/common.css') }}">
 </head>
 <body>
-	<div id="page" class="main-cate-bg">
-		<div class="main-header--box">
-			<div class="main-header">
-				<div class="sn-home-link"></div>
-				<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-				<ul class="sn-quick-menu">
-					<li class="sn-bell"></li>
-					<li class="sn-profile">
-						<div class="sn-menu">
-							<div class="menu-hd"></div>
-							<div class="menu-bd">
-								<div class="menu-bd-panel">
-									<a href="javascript:void(0);">syh156254</a>
-									<a href="/auth/logout">退出</a>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
+    <div>
+        @include('default/common/header')
 		<div class="main-grid-table">
 			<div class="monitor-con">
 				<div class="monitor-inner-con">
@@ -47,191 +28,44 @@
 									<th>电流</th>
 									<th>有功功率</th>
 									<th>无功功率</th>
-									<th>电?</th>
-									<th>实时功率</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
+								<tr class="electric_second">
+									<td>工作区设备1</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
+								<tr class="electric_second">
+									<td>工作区设备2</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
+								<tr class="electric_second">
+									<td>工作区设备3</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
+								<tr class="electric_second">
+									<td>工作区设备4</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
-								<tr>
-									<td>第2号站第4号闸</td>
-									<td>200V</td>
-									<td>50A</td>
-									<td>300W</td>
-									<td>200Var</td>
-									<td>200V</td>
-									<td>200W</td>
-								</tr>
+                                <tr class="electric_second">
+                                    <td>生活区设备1</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
 							</tbody>
 						</table>
 					</div>
@@ -239,5 +73,28 @@
 			</div>
 		</div>
 	</div>
+    <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
+    <script type="text/javascript">
+        var unit = ['','V','A','W','W'];
+        if ("WebSocket" in window) {
+            var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+            ws_electric.onopen = function (evt) {
+                //初始连接要传的参数
+                var msg = {"type": "electric_second"};
+                ws_electric.send(JSON.stringify(msg));
+            };
+            ws_electric.onmessage = function (evt) {
+                var res = eval("(" + evt.data + ")");
+                console.log(res);
+                $('.electric_second').each(function(index){
+                    $(this).find('td').each(function(i){
+                        $(this).html(res.data[index][i]+unit[i]);
+                    });
+                });
+            };
+            ws_electric.onclose = function (evt) {
+            };
+        }
+    </script>
 </body>
 </html>
