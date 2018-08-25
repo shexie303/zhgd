@@ -9,20 +9,20 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *&#64;ÊÂ¼şÁª¶¯ÏûÏ¢½á¹¹Ìå
+ *&#64;äº‹ä»¶è”åŠ¨æ¶ˆæ¯ç»“æ„ä½“
  *
  * Generated from protobuf message <code>event.CommEventTrig</code>
  */
 class CommEventTrig extends \Google\Protobuf\Internal\Message
 {
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òåblg.proto
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      */
     private $trigger_type = 0;
     /**
-     *Áª¶¯ÄÚÈİ£º²Î¼ÓÁª¶¯¸ñÊ½¶¨Òåblg.proto
+     *è”åŠ¨å†…å®¹ï¼šå‚åŠ è”åŠ¨æ ¼å¼å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>bytes trigger_info = 2;</code>
      */
@@ -35,9 +35,9 @@ class CommEventTrig extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $trigger_type
-     *          Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òåblg.proto
+     *          è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰blg.proto
      *     @type string $trigger_info
-     *          Áª¶¯ÄÚÈİ£º²Î¼ÓÁª¶¯¸ñÊ½¶¨Òåblg.proto
+     *          è”åŠ¨å†…å®¹ï¼šå‚åŠ è”åŠ¨æ ¼å¼å®šä¹‰blg.proto
      * }
      */
     public function __construct($data = NULL) {
@@ -46,7 +46,7 @@ class CommEventTrig extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òåblg.proto
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      * @return int
@@ -57,7 +57,7 @@ class CommEventTrig extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òåblg.proto
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      * @param int $var
@@ -72,7 +72,7 @@ class CommEventTrig extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÄÚÈİ£º²Î¼ÓÁª¶¯¸ñÊ½¶¨Òåblg.proto
+     *è”åŠ¨å†…å®¹ï¼šå‚åŠ è”åŠ¨æ ¼å¼å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>bytes trigger_info = 2;</code>
      * @return string
@@ -83,7 +83,7 @@ class CommEventTrig extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÄÚÈİ£º²Î¼ÓÁª¶¯¸ñÊ½¶¨Òåblg.proto
+     *è”åŠ¨å†…å®¹ï¼šå‚åŠ è”åŠ¨æ ¼å¼å®šä¹‰blg.proto
      *
      * Generated from protobuf field <code>bytes trigger_info = 2;</code>
      * @param string $var

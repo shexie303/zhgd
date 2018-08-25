@@ -9,39 +9,39 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- *&#64;ÊÂ¼ş´¦Àí½á¹ûÏûÏ¢½á¹¹Ìå
+ *&#64;äº‹ä»¶å¤„ç†ç»“æœæ¶ˆæ¯ç»“æ„ä½“
  *
  * Generated from protobuf message <code>event.TriggerResult</code>
  */
 class TriggerResult extends \Google\Protobuf\Internal\Message
 {
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òå
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      */
     private $trigger_type = 0;
     /**
-     *Áª¶¯½á¹û
+     *è”åŠ¨ç»“æœ
      *
      * Generated from protobuf field <code>int32 trigger_ret = 2;</code>
      */
     private $trigger_ret = 0;
     /**
-     *Áª¶¯Ö´ĞĞÊ±¼ä(È·ÈÏÊ±ÎªÈ·ÈÏÊ±¼ä)
+     *è”åŠ¨æ‰§è¡Œæ—¶é—´(ç¡®è®¤æ—¶ä¸ºç¡®è®¤æ—¶é—´)
      *
      * Generated from protobuf field <code>string trigger_time = 3;</code>
      */
     private $trigger_time = '';
     /**
-     *Áª¶¯ÏêÇé£¬Â¼Ïñ¸ñÊ½£º¼à¿ØµãÃû³Æ,Â¼Ïñ¼Æ»®Id,Â¼ÏñÀàĞÍ,¼à¿Øµã±àºÅ;
+     *è”åŠ¨è¯¦æƒ…ï¼Œå½•åƒæ ¼å¼ï¼šç›‘æ§ç‚¹åç§°,å½•åƒè®¡åˆ’Id,å½•åƒç±»å‹,ç›‘æ§ç‚¹ç¼–å·;
      *
      * Generated from protobuf field <code>string trigger_info = 33;</code>
      */
     private $trigger_info = '';
     /**
-     *Í¼Æ¬Áª¶¯ ¼à¿ØµãÃû³Æ,Áª¶¯url,¸ñÊ½£ºcam1,url1;cam2,url2;
-     *¿Í»§¶ËÈ·ÈÏĞÅÏ¢:user_name;confirm_desc;user_ip;
+     *å›¾ç‰‡è”åŠ¨ ç›‘æ§ç‚¹åç§°,è”åŠ¨url,æ ¼å¼ï¼šcam1,url1;cam2,url2;
+     *å®¢æˆ·ç«¯ç¡®è®¤ä¿¡æ¯:user_name;confirm_desc;user_ip;
      *
      * Generated from protobuf field <code>string err_msg = 34;</code>
      */
@@ -54,16 +54,16 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type int $trigger_type
-     *          Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òå
+     *          è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰
      *     @type int $trigger_ret
-     *          Áª¶¯½á¹û
+     *          è”åŠ¨ç»“æœ
      *     @type string $trigger_time
-     *          Áª¶¯Ö´ĞĞÊ±¼ä(È·ÈÏÊ±ÎªÈ·ÈÏÊ±¼ä)
+     *          è”åŠ¨æ‰§è¡Œæ—¶é—´(ç¡®è®¤æ—¶ä¸ºç¡®è®¤æ—¶é—´)
      *     @type string $trigger_info
-     *          Áª¶¯ÏêÇé£¬Â¼Ïñ¸ñÊ½£º¼à¿ØµãÃû³Æ,Â¼Ïñ¼Æ»®Id,Â¼ÏñÀàĞÍ,¼à¿Øµã±àºÅ;
+     *          è”åŠ¨è¯¦æƒ…ï¼Œå½•åƒæ ¼å¼ï¼šç›‘æ§ç‚¹åç§°,å½•åƒè®¡åˆ’Id,å½•åƒç±»å‹,ç›‘æ§ç‚¹ç¼–å·;
      *     @type string $err_msg
-     *          Í¼Æ¬Áª¶¯ ¼à¿ØµãÃû³Æ,Áª¶¯url,¸ñÊ½£ºcam1,url1;cam2,url2;
-     *          ¿Í»§¶ËÈ·ÈÏĞÅÏ¢:user_name;confirm_desc;user_ip;
+     *          å›¾ç‰‡è”åŠ¨ ç›‘æ§ç‚¹åç§°,è”åŠ¨url,æ ¼å¼ï¼šcam1,url1;cam2,url2;
+     *          å®¢æˆ·ç«¯ç¡®è®¤ä¿¡æ¯:user_name;confirm_desc;user_ip;
      * }
      */
     public function __construct($data = NULL) {
@@ -72,7 +72,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òå
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      * @return int
@@ -83,7 +83,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÀàĞÍ: ²Î¼ûÁª¶¯ÀàĞÍ¶¨Òå
+     *è”åŠ¨ç±»å‹: å‚è§è”åŠ¨ç±»å‹å®šä¹‰
      *
      * Generated from protobuf field <code>int32 trigger_type = 1;</code>
      * @param int $var
@@ -98,7 +98,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯½á¹û
+     *è”åŠ¨ç»“æœ
      *
      * Generated from protobuf field <code>int32 trigger_ret = 2;</code>
      * @return int
@@ -109,7 +109,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯½á¹û
+     *è”åŠ¨ç»“æœ
      *
      * Generated from protobuf field <code>int32 trigger_ret = 2;</code>
      * @param int $var
@@ -124,7 +124,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯Ö´ĞĞÊ±¼ä(È·ÈÏÊ±ÎªÈ·ÈÏÊ±¼ä)
+     *è”åŠ¨æ‰§è¡Œæ—¶é—´(ç¡®è®¤æ—¶ä¸ºç¡®è®¤æ—¶é—´)
      *
      * Generated from protobuf field <code>string trigger_time = 3;</code>
      * @return string
@@ -135,7 +135,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯Ö´ĞĞÊ±¼ä(È·ÈÏÊ±ÎªÈ·ÈÏÊ±¼ä)
+     *è”åŠ¨æ‰§è¡Œæ—¶é—´(ç¡®è®¤æ—¶ä¸ºç¡®è®¤æ—¶é—´)
      *
      * Generated from protobuf field <code>string trigger_time = 3;</code>
      * @param string $var
@@ -150,7 +150,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÏêÇé£¬Â¼Ïñ¸ñÊ½£º¼à¿ØµãÃû³Æ,Â¼Ïñ¼Æ»®Id,Â¼ÏñÀàĞÍ,¼à¿Øµã±àºÅ;
+     *è”åŠ¨è¯¦æƒ…ï¼Œå½•åƒæ ¼å¼ï¼šç›‘æ§ç‚¹åç§°,å½•åƒè®¡åˆ’Id,å½•åƒç±»å‹,ç›‘æ§ç‚¹ç¼–å·;
      *
      * Generated from protobuf field <code>string trigger_info = 33;</code>
      * @return string
@@ -161,7 +161,7 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Áª¶¯ÏêÇé£¬Â¼Ïñ¸ñÊ½£º¼à¿ØµãÃû³Æ,Â¼Ïñ¼Æ»®Id,Â¼ÏñÀàĞÍ,¼à¿Øµã±àºÅ;
+     *è”åŠ¨è¯¦æƒ…ï¼Œå½•åƒæ ¼å¼ï¼šç›‘æ§ç‚¹åç§°,å½•åƒè®¡åˆ’Id,å½•åƒç±»å‹,ç›‘æ§ç‚¹ç¼–å·;
      *
      * Generated from protobuf field <code>string trigger_info = 33;</code>
      * @param string $var
@@ -176,8 +176,8 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Í¼Æ¬Áª¶¯ ¼à¿ØµãÃû³Æ,Áª¶¯url,¸ñÊ½£ºcam1,url1;cam2,url2;
-     *¿Í»§¶ËÈ·ÈÏĞÅÏ¢:user_name;confirm_desc;user_ip;
+     *å›¾ç‰‡è”åŠ¨ ç›‘æ§ç‚¹åç§°,è”åŠ¨url,æ ¼å¼ï¼šcam1,url1;cam2,url2;
+     *å®¢æˆ·ç«¯ç¡®è®¤ä¿¡æ¯:user_name;confirm_desc;user_ip;
      *
      * Generated from protobuf field <code>string err_msg = 34;</code>
      * @return string
@@ -188,8 +188,8 @@ class TriggerResult extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     *Í¼Æ¬Áª¶¯ ¼à¿ØµãÃû³Æ,Áª¶¯url,¸ñÊ½£ºcam1,url1;cam2,url2;
-     *¿Í»§¶ËÈ·ÈÏĞÅÏ¢:user_name;confirm_desc;user_ip;
+     *å›¾ç‰‡è”åŠ¨ ç›‘æ§ç‚¹åç§°,è”åŠ¨url,æ ¼å¼ï¼šcam1,url1;cam2,url2;
+     *å®¢æˆ·ç«¯ç¡®è®¤ä¿¡æ¯:user_name;confirm_desc;user_ip;
      *
      * Generated from protobuf field <code>string err_msg = 34;</code>
      * @param string $var

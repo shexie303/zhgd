@@ -5,7 +5,7 @@
 namespace Event;
 
 /**
- *&#64;ÓëÊÂ¼ş·Ö·¢·şÎñÍ¨ĞÅµÄÃüÁîÂë¶¨Òå
+ *&#64;ä¸äº‹ä»¶åˆ†å‘æœåŠ¡é€šä¿¡çš„å‘½ä»¤ç å®šä¹‰
  *
  * Protobuf type <code>event.MsgCmdType</code>
  */
@@ -22,13 +22,13 @@ class MsgCmdType
      */
     const MSG_CMD_TYPE_MASK = 65280;
     /**
-     *ÊÖ¶¯ÊÂ¼şÃüÁîÂë
+     *æ‰‹åŠ¨äº‹ä»¶å‘½ä»¤ç 
      *
      * Generated from protobuf enum <code>MSG_CMD_MANUAL_EVENT = 257;</code>
      */
     const MSG_CMD_MANUAL_EVENT = 257;
     /**
-     *±¨¾¯È·ÈÏÃüÁîÂë
+     *æŠ¥è­¦ç¡®è®¤å‘½ä»¤ç 
      *
      * Generated from protobuf enum <code>MSG_CMD_CONFIRM_EVENT = 258;</code>
      */
@@ -40,7 +40,7 @@ class MsgCmdType
      */
     const MSG_CMD_REPORT_EVENT = 513;
     /**
-     *¶©ÔÄÊÂ¼şÃüÁîÂë
+     *è®¢é˜…äº‹ä»¶å‘½ä»¤ç 
      *
      * Generated from protobuf enum <code>MSG_CMD_SUBRECV_EVENT = 514;</code>
      */
@@ -52,7 +52,7 @@ class MsgCmdType
      */
     const MSG_CMD_EVENT_NOTIFY_REQ = 769;
     /**
-     *ÊÂ¼ş·Ö·¢·şÎñÄÚ²¿ÊÂ¼şÍ¨ÖªÏìÓ¦
+     *äº‹ä»¶åˆ†å‘æœåŠ¡å†…éƒ¨äº‹ä»¶é€šçŸ¥å“åº”
      *
      * Generated from protobuf enum <code>MSG_CMD_EVENT_NOTIFY_RSP = 770;</code>
      */

@@ -5,38 +5,38 @@
 namespace Event;
 
 /**
- *&#64;ÊÂ¼ş×´Ì¬¶¨Òå
+ *&#64;äº‹ä»¶çŠ¶æ€å®šä¹‰
  *
  * Protobuf type <code>event.EventState</code>
  */
 class EventState
 {
     /**
-     *Ë²Ê±ÊÂ¼ş£¬±£´æ
+     *ç¬æ—¶äº‹ä»¶ï¼Œä¿å­˜
      *
      * Generated from protobuf enum <code>EVENT_STATE_INSTANT = 0;</code>
      */
     const EVENT_STATE_INSTANT = 0;
     /**
-     *ÊÂ¼ş¿ªÊ¼£¬±£´æ
+     *äº‹ä»¶å¼€å§‹ï¼Œä¿å­˜
      *
      * Generated from protobuf enum <code>EVENT_STATE_START = 1;</code>
      */
     const EVENT_STATE_START = 1;
     /**
-     *ÊÂ¼ş½áÊø£¬¸üĞÂ½áÊøÊ±¼ä
+     *äº‹ä»¶ç»“æŸï¼Œæ›´æ–°ç»“æŸæ—¶é—´
      *
      * Generated from protobuf enum <code>EVENT_STATE_STOP = 2;</code>
      */
     const EVENT_STATE_STOP = 2;
     /**
-     *ÊÂ¼şÂö³å£¬¿Í»§¶ËºÍ·şÎñÆ÷Ê¹ÓÃ£¬CMS²»ÓÃ
+     *äº‹ä»¶è„‰å†²ï¼Œå®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨ä½¿ç”¨ï¼ŒCMSä¸ç”¨
      *
      * Generated from protobuf enum <code>EVENT_STATE_PULSE = 3;</code>
      */
     const EVENT_STATE_PULSE = 3;
     /**
-     *ÊÂ¼ş¸üĞÂ£¬Áª¶¯½á¹û¸üĞÂ
+     *äº‹ä»¶æ›´æ–°ï¼Œè”åŠ¨ç»“æœæ›´æ–°
      *
      * Generated from protobuf enum <code>EVENT_STATE_UPDATE = 4;</code>
      */
