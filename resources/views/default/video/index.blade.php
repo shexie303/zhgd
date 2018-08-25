@@ -169,54 +169,49 @@
 			<div class="video-monitor-con">
 				<div class="videoMonitor-inner-con">
 					<div class="videoMonitor-border">
-						<pre>
-							1
-							1
-							1
-
-							1
-							1
-
-							1
-							1
-							1
-							1
-
-							1
-							1
-							1
-
-							1
-							1
-							1
-							1
-							1
-							1
-
-							1
-							1
-							1
-							1
-
-							1
-							1
-							1
-							1
-							1
-							1
-
-							1
-							1
-							1
-							1
-							1
-							1
-							1
-
-							1
-							1
-							1
-						</pre>
+						<div class="main-video-list">
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+								</a>
+							</div>
+							<div class="video-item">
+								<a href="javascript:void(0);">
+									<img src="{{ URL::asset('src/static/img/video1.png') }}" alt="">
+									<div class="video-item-title">热成像-温度报警</div>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
