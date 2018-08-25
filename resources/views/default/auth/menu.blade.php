@@ -95,8 +95,6 @@
 					var allow = $(this).data('allow');
 					if (allow == 1) {
 						window.location.href = $(this).data('url');
-					} else {
-						alert('no permission');
 					}
 				});
 			});

@@ -33,38 +33,38 @@
 							<tbody>
 								<tr class="electric_second">
 									<td>工作区设备1</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>406V</td>
+									<td>0A</td>
+									<td>0W</td>
+									<td>0W</td>
 								</tr>
 								<tr class="electric_second">
 									<td>工作区设备2</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>0V</td>
+                                    <td>0A</td>
+                                    <td>0W</td>
+                                    <td>0W</td>
 								</tr>
 								<tr class="electric_second">
 									<td>工作区设备3</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>413.9V</td>
+                                    <td>0A</td>
+                                    <td>0W</td>
+                                    <td>0W</td>
 								</tr>
 								<tr class="electric_second">
 									<td>工作区设备4</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
-									<td>0</td>
+									<td>0V</td>
+                                    <td>0A</td>
+                                    <td>0W</td>
+                                    <td>0W</td>
 								</tr>
                                 <tr class="electric_second">
                                     <td>生活区设备1</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>0</td>
+                                    <td>0V</td>
+                                    <td>0A</td>
+                                    <td>0W</td>
+                                    <td>0W</td>
                                 </tr>
 							</tbody>
 						</table>
