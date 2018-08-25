@@ -113,6 +113,7 @@ ul, li {
 	left: 0;
 	top: -1px;
 	animation: animated_line 5s cubic-bezier(0.22, 0.61, 0.36, 1) infinite
+	/*animated_line 5s cubic-bezier(0, 0, 0.2, 1) 1s infinite alternate*/
 }
 @-webkit-keyframes animated_line{
 	0%		{left:0px;}
@@ -121,6 +122,10 @@ ul, li {
 	55%		{left:116px;}
 	70%		{left:116px;}
 	100%	{left:0px;}
+
+	/*0%		{left:0px;}*/
+	/*50%		{left:116px;}*/
+	/*100%	{left:0px;}*/
 }
 
 @keyframes animated_line{
@@ -130,6 +135,10 @@ ul, li {
 	55%		{left:116px;}
 	70%		{left:116px;}
 	100%	{left:0px;}
+
+	/*0%		{left:0px;}*/
+	/*50%		{left:116px;}*/
+	/*100%	{left:0px;}*/
 }
 .message-item span{
 	position: absolute;
@@ -180,4 +189,100 @@ ul, li {
 }
 .message-item.bell p::before{
 	background-color: #f92801;
+}
+
+.monitor-con{
+	width: 1672px;
+	height: 860px;
+	background: url("../img/border_bg_larger.png") no-repeat;
+	overflow: hidden;
+}
+.monitor-inner-con{
+	border: 2px solid #038f95;
+	border-radius: 6px;
+	width: 1585px;
+	height: 685px;
+	margin: 90px 0 0 40px;
+	padding: 1px;
+}
+.monitor-border{
+	border: 4px solid #03686c;
+	box-shadow: 0 0 4px #039aa1 inset;
+	border-radius: 4px;
+	width: 1579px;
+	height: 679px;
+	overflow-y: auto
+}
+.monitor-border::-webkit-scrollbar {/*滚动条整体样式*/
+	width: 12px;     /*高宽分别对应横竖滚动条的尺寸*/
+	height: 1px;
+}
+.monitor-border::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+	border-radius: 10px;
+	background: linear-gradient(to right, #04676c, #0c2935);
+}
+.monitor-border::-webkit-scrollbar-track {/*滚动条里面轨道*/
+	box-shadow: 0 0 4px rgba(27, 81, 91, .75);
+	background: #0c2028;
+	border-radius: 2px;
+	width: 16px;
+}
+
+.monitor-info-table{
+	width: 100%;
+	border-collapse: collapse;
+}
+.monitor-info-table .clip-path{
+	/*border-top: 70px solid transparent;*/
+	/*width: 0px;*/
+	/*height: 0px;*/
+	/*border-left: 300px solid transparent;*/
+	/*position: relative;*/
+	position: relative;
+	width: 300px;
+	height: 70px;
+}
+.monitor-info-table .clip-path::before{
+	width: 1px;
+	height: 311px;
+	background-color: #115056;
+	content: "";
+	position: absolute;
+	transform: rotate(-76.7deg);
+	transform-origin: top;
+	left: -2px;
+	top: -1px;
+}
+.monitor-info-table .clip-path b{
+	position: absolute;
+	font-weight: normal;
+	top: 5px;
+	right: 25px;
+}
+.monitor-info-table .clip-path em{
+	position: absolute;
+	font-style: normal;
+	bottom: 5px;
+	left: 25px;
+}
+.monitor-info-table th, .monitor-info-table td{
+	text-align: center;
+	color: #65d9df;
+	font-size: 1.75rem;
+	border-right: 1px solid #115056;
+	font-weight: normal;
+}
+.monitor-info-table th{
+	background-color: rgba(6, 159, 166, .8);
+	color: #0d222c;
+	height: 70px;
+}
+.monitor-info-table td{
+	height: 60px;
+}
+.monitor-info-table tr:nth-child(odd) td{
+	background-color: rgba(11, 61, 77, .8);
+}
+.monitor-info-table tr:nth-child(even) td{
+	background-color: rgba(9, 45, 55, .8);
 }
