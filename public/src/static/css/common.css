@@ -280,6 +280,9 @@ ul, li {
 .monitor-info-table td{
 	height: 60px;
 }
+.monitor-info-table td:last-child{
+	border: 0 none;
+}
 .monitor-info-table tr:nth-child(odd) td{
 	background-color: rgba(11, 61, 77, .8);
 }
