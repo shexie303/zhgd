@@ -13,10 +13,10 @@
 	<div id="page" class="main-cate-bg">
 		@include('default/common/header')
 		<div class="area-monitor-list">
-			<a href="javascript:void(0);">周界区域报警：<span class="red">5</span>个</a>
-			<a href="javascript:void(0);">加工区域报警：<span class="red">8</span>个</a>
-			<a href="javascript:void(0);">生活区域报警：<span class="red">12</span>个</a>
-			<a href="javascript:void(0);">出入区域报警：<span class="red">2</span>个</a>
+			<a href="javascript:void(0);">周界区域报警：<span class="red">0</span>个</a>
+			<a href="javascript:void(0);">加工区域报警：<span class="red">0</span>个</a>
+			<a href="javascript:void(0);">生活区域报警：<span class="red">0</span>个</a>
+			<a href="javascript:void(0);">出入区域报警：<span class="red">0</span>个</a>
 		</div>
 		<div class="category-tab-content">
 			<ul class="normal-nav">
@@ -43,6 +43,7 @@
 				<div class="videoMonitor-inner-con">
 					<div class="videoMonitor-border">
 						<div class="main-video-list">
+							<div class="no-video">没有相关报警信息</div>
 						</div>
 					</div>
 				</div>
@@ -59,11 +60,12 @@
 			};
 			ws_video.onmessage = function (evt) {
 				var res = eval("(" + evt.data + ")");
-				// console.log(res);
-				if (res.state === 'success') {
-					var $video_list = res.data.report_list;
+				if (res.state === 'success' && res.data.report_sum > 0) {
+					var $video_list = res.data.report_list,
+						$video_num = res.data.report_sum;
 					var $html;
 					$('.main-video-list').empty();
+					$('.area-monitor-list').find('.red').text($video_num);
 					$.each($video_list, function (k, v) {
 						$html = '<div class="video-item">'
 											+ '<img src="' + v["pic_url"] + '" alt="">'
@@ -71,6 +73,10 @@
 							'</div>'
 						$('.main-video-list').append($html);
 					});
+				} else {
+					$('.area-monitor-list').find('.red').text(0);
+					$html = '<div class="no-video">没有相关报警信息！</div>';
+					$('.main-video-list').append($html)
 				}
 			}
 			ws_video.onclose = function () {
