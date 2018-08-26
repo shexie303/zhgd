@@ -107,7 +107,7 @@ class Events
                }, [$client_id], true);
 		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
 				
-				Timer::add(300, function($client_id) {
+				Timer::add(10, function($client_id) {
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
@@ -117,6 +117,45 @@ class Events
 					if ($report) {
 						$return['data']['report'] = 1; //发生视频报警事件
 						$return['data']['report_msg'] = trim($report[0][1], ':'); //报警事件描述
+					}
+					// 向某客户端发送
+					Gateway::sendToClient($client_id, json_encode($return));
+			   }, [$client_id], true);
+			   
+		   } elseif ($messageDecode['type'] == 'video_list') { //@陈振华，视频报警列表页。
+				
+				Timer::add(10, function($client_id) {
+					$return['state'] = 'success';
+					//查询
+					$db = new \DB();
+					$report = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->select('id, event_name, ext_info');
+					$return['data']['report_sum'] = 0; //没有视频报警事件
+					$return['data']['report_list'] = array();
+					if ($report) {
+						$return['data']['report_sum'] = count($report); //发生视频报警事件总数
+						foreach ($report as $key => $value) {
+						    //报警事件描述
+						    $temp['name'] =  trim($value[1], ':');
+						    //报警图片
+						    $extInfo = unserialize($value[2]);
+						    if ($extInfo['ext_info']) { //解析XML
+						        $xmlString = $extInfo['ext_info'];
+						        $parser = xml_parser_create();
+                                xml_parse_into_struct($parser, $xmlString, $vals, $keys);
+                                xml_parser_free($parser);
+                                $picUrl = $vals[$keys['PICURL'][0]]['value'];
+                                $picUrlArray = explode(';', $picUrl);
+                                if (is_array($picUrlArray)) {
+                                    foreach ($picUrlArray as $k => $v) {
+                                        $temp['pic_url'] = 'http://120.27.31.232:6025'.$v; //只取一张
+                                    }
+                                }
+						    } else {
+						        $temp['pic_url'] = '';
+						    }
+						    
+						    $return['data']['report_list'][$key] = $temp;
+						}
 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
