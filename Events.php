@@ -128,7 +128,8 @@ class Events
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
-					$report = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->select('id, event_name, ext_info');
+					$where = "event_state = 1 and event_type = 'video' and created_at > ".date('Y-m-d 00:00:00');
+					$report = $db->table('site_error_report')->where()->order('id desc')->select('id, event_name, ext_info');
 					$return['data']['report_sum'] = 0; //没有视频报警事件
 					$return['data']['report_list'] = array();
 					if ($report) {
