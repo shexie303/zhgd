@@ -11,27 +11,7 @@
 </head>
 <body>
 	<div id="page" class="main-menu-bg">
-		<div class="main-header--box">
-			<div class="main-header">
-				<a href="javascript:void(0);" class="sn-home-link"></a>
-				<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-				<ul class="sn-quick-menu">
-					<li class="sn-bell"></li>
-					<li class="sn-profile">
-						<div class="sn-menu">
-							<div class="menu-hd">
-							</div>
-							<div class="menu-bd">
-								<div class="menu-bd-panel">
-									<a href="javascript:void(0);">@include('default/common/header')</a>
-									<a href="/auth/logout">退出</a>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
+		@include('default/common/header')
 		<div class="module-body">
 			@foreach($menu as $key => $val)
 			<div class="module-item J_Menu {{$val[1] == 0 ? 'no-permission' : ''}}" title="{{$val[1] == 0 ? '没有相关权限，请联系管理员！' : ''}}" data-url="/{{$key}}" data-allow="{{$val[1]}}">

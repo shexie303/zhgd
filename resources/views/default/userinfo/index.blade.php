@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div id="page" class="main-cate-bg">
-        @include('default/common/header')
+		@include('default/common/header')
 		<div class="main-grid-table">
 			<div class="monitor-con">
 				<div class="monitor-inner-con">
@@ -46,8 +46,8 @@
 									<td>技术部</td>
 									<td>男</td>
 									<td>河北</td>
-                                    <td>2018-08-27 13:30:00</td>
-                                    <td>-</td>
+									<td>2018-08-27 13:30:00</td>
+									<td>-</td>
 								</tr>
 								<tr>
 									<td>路工</td>
@@ -56,8 +56,8 @@
 									<td>技术部</td>
 									<td>男</td>
 									<td>河北</td>
-                                    <td>2018-08-27 13:30:00</td>
-                                    <td>-</td>
+									<td>2018-08-27 13:30:00</td>
+									<td>-</td>
 								</tr>
 								<tr>
 									<td>刘工</td>
@@ -66,8 +66,8 @@
 									<td>技术部</td>
 									<td>男</td>
 									<td>河北</td>
-                                    <td>2018-08-27 13:30:00</td>
-                                    <td>-</td>
+									<td>2018-08-27 13:30:00</td>
+									<td>-</td>
 								</tr>
 								<tr>
 									<td>赵工</td>
@@ -76,8 +76,8 @@
 									<td>技术部</td>
 									<td>女</td>
 									<td>河北</td>
-                                    <td>2018-08-27 13:30:00</td>
-                                    <td>-</td>
+									<td>2018-08-27 13:30:00</td>
+									<td>-</td>
 								</tr>
 							</tbody>
 						</table>

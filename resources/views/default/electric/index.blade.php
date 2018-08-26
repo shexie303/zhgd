@@ -9,8 +9,8 @@
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/common.css') }}">
 </head>
 <body>
-    <div>
-        @include('default/common/header')
+	<div id="page" class="main-cate-bg">
+		@include('default/common/header')
 		<div class="main-grid-table">
 			<div class="monitor-con">
 				<div class="monitor-inner-con">
@@ -73,28 +73,28 @@
 			</div>
 		</div>
 	</div>
-    <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
-    <script type="text/javascript">
-        var unit = ['','V','A','W','W'];
-        if ("WebSocket" in window) {
-            var ws_electric = new WebSocket('ws://118.190.137.205:8282');
-            ws_electric.onopen = function (evt) {
-                //初始连接要传的参数
-                var msg = {"type": "electric_second"};
-                ws_electric.send(JSON.stringify(msg));
-            };
-            ws_electric.onmessage = function (evt) {
-                var res = eval("(" + evt.data + ")");
-                console.log(res);
-                $('.electric_second').each(function(index){
-                    $(this).find('td').each(function(i){
-                        $(this).html(res.data[index][i]+unit[i]);
-                    });
-                });
-            };
-            ws_electric.onclose = function (evt) {
-            };
-        }
-    </script>
+	<script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
+	<script type="text/javascript">
+		var unit = ['','V','A','W','W'];
+		if ("WebSocket" in window) {
+			var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+			ws_electric.onopen = function (evt) {
+				//初始连接要传的参数
+				var msg = {"type": "electric_second"};
+				ws_electric.send(JSON.stringify(msg));
+			};
+			ws_electric.onmessage = function (evt) {
+				var res = eval("(" + evt.data + ")");
+				// console.log(res);
+				$('.electric_second').each(function(index){
+					$(this).find('td').each(function(i){
+						$(this).html(res.data[index][i]+unit[i]);
+					});
+				});
+			};
+			ws_electric.onclose = function (evt) {
+			};
+		}
+	</script>
 </body>
 </html>
