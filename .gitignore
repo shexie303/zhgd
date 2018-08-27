@@ -16,3 +16,4 @@ mix-manifest.json
 /.project
 .settings
 /activemq_event/vendor
+.DS_Store
