@@ -15,7 +15,7 @@
 			<div class="monitor-con">
 				<div class="monitor-inner-con">
 					<div class="monitor-border">
-						<img src="http://120.27.31.232:6036/hg/uploadImages/1535249268296.png" alt="" width="1579">
+						<iframe src="http://120.27.31.232:6036/hg/getMonitor.do?username=data&password=123456" width="1579" height="100%"></iframe>
 					</div>
 				</div>
 			</div>
