@@ -290,37 +290,3 @@ ul, li {
 .monitor-info-table tr:nth-child(even) td{
 	background-color: rgba(9, 45, 55, .8);
 }
-.main-video-list{
-	margin: 15px 0 15px 20px;
-	overflow: hidden;
-}
-.video-item{
-	position: relative;
-	float: left;
-	width: 340px;
-	height: 255px;
-	margin-left: 4px;
-	margin-bottom: 4px;
-	overflow: hidden;
-}
-.video-item img{
-	width: 340px;
-	height: 255px;
-	transition: all .4s ease;
-	object-fit: cover;
-}
-.video-item:hover img{
-	transform: scale(1.05);
-}
-.video-item-title{
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	height: 42px;
-	background: linear-gradient(to top,rgba(0,0,0,.5) 0,rgba(0,0,0,0) 100%);
-	font-size: 1.25rem;
-	color: #fff;
-	line-height: 42px;
-	padding-left: 15px;
-}
