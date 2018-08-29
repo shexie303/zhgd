@@ -35,5 +35,7 @@ Route::group(['namespace' => 'Home'], function () {
         //环境
         Route::get('/env', 'EnvController@index');
     });
+
+    Route::post('/api/tower_crane', 'ApiController@towerCrane');
 });
 
