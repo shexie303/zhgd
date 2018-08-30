@@ -6,7 +6,7 @@ use App\Models\SiteErrorReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ReportController extends Controller
+class ReportController extends HomeController
 {
     public function index(Request $request)
     {
@@ -29,8 +29,7 @@ class ReportController extends Controller
                 $temp['created_at'] = $value->created_at->toDateTimeString();
                 $data[$key] = $temp;
             }
-            echo '模板文件，default/report/index';
-            //return view('default/report/index');
+            return view('default/report/index');
         }
     }
 }
