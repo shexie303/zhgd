@@ -36,6 +36,7 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/env', 'EnvController@index');
     });
 
+    Route::get('/api/tower_crane', 'ApiController@towerCrane');
     Route::post('/api/tower_crane', 'ApiController@towerCrane');
 });
 
