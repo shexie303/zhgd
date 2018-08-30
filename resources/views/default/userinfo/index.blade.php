@@ -12,10 +12,10 @@
 	<div id="page" class="main-cate-bg">
 		@include('default/common/header')
 		<div class="main-grid-table">
-			<div class="monitor-con">
+			<div class="monitor-con-squar">
 				<div class="monitor-inner-con">
 					<div class="monitor-border">
-						<iframe src="http://120.27.31.232:6036/hg/getMonitor.do?username=data&password=123456" width="1579" height="100%"></iframe>
+						<iframe src="http://120.27.31.232:6036/hg/getMonitor.do?username=data&password=123456" width="1280" height="800"></iframe>
 					</div>
 				</div>
 			</div>
