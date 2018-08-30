@@ -75,6 +75,61 @@ class ApiController extends Controller
         return response()->json($return);
     }
 
+    public function elevator(Request $request)
+    {
+        $return = [
+            'code' => 0
+        ];
+        if($request->method() == 'POST'){
+            $validator = Validator::make($input = $request->all(),[
+                'signature' => 'required',
+                'device_id' => 'required',
+                'height' => 'required',
+                'height_warning' => 'required',
+                'weight' => 'required',
+                'weight_warning' => 'required',
+                'wind_speed' => 'required',
+                'wind_speed_warning' => 'required',
+                'speed' => 'required',
+                'speed_warning' => 'required',
+                'nonce' => 'required',
+            ]);
+            if($validator->fails()){
+                $return['code'] = 1003;
+                return response()->json($return);
+            }
+            if(!$this->checkSignature($input)){
+                $return['code'] = 1001;
+                return response()->json($return);
+            }
+            $data = [
+                'device_id' => $input['device_id'],
+                'type' => 2,
+                'height' => $input['height'],
+                'height_warning' => (int) $input['height_warning'],
+                'weight' => $input['weight'],
+                'weight_warning' => (int) $input['weight_warning'],
+                'speed' => $input['speed'],
+                'speed_warning' => (int) $input['speed_warning'],
+                'wind_speed' => $input['wind_speed'],
+                'wind_speed_warning' => (int) $input['wind_speed_warning']
+            ];
+            Log::error('elevator',$request->all());
+            $elevator = new SiteElevatorLogs;
+            foreach($data as $k => $v){
+                $elevator->$k = $v;
+            }
+            try{
+                $elevator->save();
+            }catch (\Exception $e){
+                $return['code'] = 1000;
+            }
+        }else{
+            $return['code'] = 1002;
+        }
+        return response()->json($return);
+    }
+
     protected function checkSignature($params)
     {
         if(!is_array($params)){
