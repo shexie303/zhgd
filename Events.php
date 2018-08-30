@@ -162,6 +162,36 @@ class Events
 					Gateway::sendToClient($client_id, json_encode($return));
 			   }, [$client_id], true);
 			   
+		   } elseif ($messageDecode['type'] == 'report_all') { //@陈振华，获取首页报警信息。
+		       Timer::add(5, function($client_id) {
+		           $return['state'] = 'success';
+		           
+		           //事件类型名称
+		           $eventName = array(
+		               'video'     => '视频监控',
+		               'electric'  => '电力监控',
+		               'tower'     => '塔吊&升降机',
+		               'door'      => '门禁',
+		               'userinfo'  => '人员定位'
+		           );
+		           //查询
+		           $db = new \DB();
+		           $where = "event_state = 1";
+		           $report = $db->table('site_error_report')->where($where)->order('id desc')->limit('100')->select('id, event_name, event_type');
+		           $return['data']['report_sum'] = 0; //没有报警事件
+		           $return['data']['report_list'] = array();
+		           if ($report) {
+		               $return['data']['report_sum'] = count($report); //发生报警事件总数
+		               foreach ($report as $key => $value) {
+		                   //报警事件描述
+		                   $temp['name'] = $eventName[$value[2]].'：'.$value[1];
+		                   $return['data']['report_list'][$key] = $temp;
+		               }
+		           }
+		           // 向某客户端发送
+		           Gateway::sendToClient($client_id, json_encode($return));
+		       }, [$client_id], true);
+			   
 		   } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，人员定位。
 				$return['state'] = 'success';
 			   // 向某客户端发送

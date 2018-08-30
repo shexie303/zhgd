@@ -11,6 +11,7 @@ include 'Event/MsgCmdType.php';
 include 'GPBMetadata/EventDis.php';
 include 'GPBMetadata/Comm.php';
 
+ini_set('date.timezone', 'Asia/Shanghai');
 try {
   $url = 'tcp://120.27.31.232:6008'; //地址
   $stomp = new Stomp($url, 'admin', '1234567');
@@ -29,6 +30,8 @@ try {
                   echo ++$count." yes reviced message.\n";
                   //解析事件内容
                   decode_pd_msg($frame->body);
+                  
+                  //$stomp->ack($frame);
               } else {
                   var_dump($frame);
                   echo "Unexpected frame.\n";
@@ -97,7 +100,8 @@ function decode_pd_msg($body) {
 //保存报警事件
 function save_to_database($data = null) {
     if ($data) {
-        $insertData['event_name'] = $data['event_type_name'].':'.$data['event_name'];
+        $insertData['event_level'] = 1; //报警级别
+        $insertData['event_msg'] = $data['event_type_name'];
         $insertData['event_type'] = 'video'; //视频事件
         $insertData['event_state'] = 1; //默认未处理
         $insertData['event_log_id'] = $data['log_id'];
