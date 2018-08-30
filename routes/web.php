@@ -35,8 +35,11 @@ Route::group(['namespace' => 'Home'], function () {
         //环境
         Route::get('/env', 'EnvController@index');
     });
-
+    //塔吊 api
     Route::get('/api/tower_crane', 'ApiController@towerCrane');
     Route::post('/api/tower_crane', 'ApiController@towerCrane');
+    //升降机 api
+    Route::get('/api/elevator', 'ApiController@elevator');
+    Route::post('/api/elevator', 'ApiController@elevator');
 });
 
