@@ -44,5 +44,7 @@ Route::group(['namespace' => 'Home'], function () {
     //塔吊&升降机设备掉线通知
     Route::get('/api/te_offline', 'ApiController@teOffline');
     Route::post('/api/te_offline', 'ApiController@teOffline');
+    //消息中心
+    Route::get('/report', 'ReportController@index');
 });
 
