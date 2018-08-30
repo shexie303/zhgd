@@ -41,5 +41,8 @@ Route::group(['namespace' => 'Home'], function () {
     //升降机 api
     Route::get('/api/elevator', 'ApiController@elevator');
     Route::post('/api/elevator', 'ApiController@elevator');
+    //塔吊&升降机设备掉线通知
+    Route::get('/api/te_offline', 'ApiController@teOffline');
+    Route::post('/api/te_offline', 'ApiController@teOffline');
 });
 

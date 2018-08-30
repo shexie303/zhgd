@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
+    /**
+     * 塔吊数据接口
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function towerCrane(Request $request)
     {
         $return = [
@@ -61,8 +66,14 @@ class ApiController extends Controller
             ];
             Log::error('towerCrane',$request->all());
             $tower_crane = new SiteElevatorLogs;
+            $warning = [];
             foreach($data as $k => $v){
                 $tower_crane->$k = $v;
+//                if(is_int($v) && $v == 1){
+//                    $warning[] = [
+//
+//                    ];
+//                }
             }
             try{
                 $tower_crane->save();
@@ -75,6 +86,11 @@ class ApiController extends Controller
         return response()->json($return);
     }
 
+    /**
+     * 升降机数据接口
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function elevator(Request $request)
     {
         $return = [
@@ -124,6 +140,51 @@ class ApiController extends Controller
             }catch (\Exception $e){
                 $return['code'] = 1000;
             }
+        }else{
+            $return['code'] = 1002;
+        }
+        return response()->json($return);
+    }
+
+    /**
+     * 塔吊&&升降机设备检测是否在线
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function teOffline(Request $request)
+    {
+        $return = [
+            'code' => 0
+        ];
+        if($request->method() == 'POST'){
+            $validator = Validator::make($input = $request->all(),[
+                'signature' => 'required',
+                'device_id' => 'required',
+                'device_type' => 'required', //1-塔吊 2-升降机
+                'nonce' => 'required',
+            ]);
+            if($validator->fails()){
+                $return['code'] = 1003;
+                return response()->json($return);
+            }
+            if(!$this->checkSignature($input)){
+                $return['code'] = 1001;
+                return response()->json($return);
+            }
+            $data = [
+                'device_id' => $input['device_id'],
+                'device_type' => 2,
+            ];
+            Log::error('teOffline',$request->all());
+//            $elevator = new SiteElevatorLogs;
+//            foreach($data as $k => $v){
+//                $elevator->$k = $v;
+//            }
+//            try{
+//                $elevator->save();
+//            }catch (\Exception $e){
+//                $return['code'] = 1000;
+//            }
         }else{
             $return['code'] = 1002;
         }
