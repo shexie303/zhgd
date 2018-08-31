@@ -3,7 +3,9 @@
 		<div class="sn-home-link"></div>
 		<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
 		<ul class="sn-quick-menu">
-			<li class="sn-bell"></li>
+			<li class="sn-bell">
+				<a href="javascript:void(0);">5</a>
+			</li>
 			<li class="sn-profile">
 				<div class="sn-menu">
 					<div class="menu-hd"></div>

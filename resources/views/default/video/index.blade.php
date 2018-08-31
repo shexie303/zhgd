@@ -43,7 +43,7 @@
 				<div class="videoMonitor-inner-con">
 					<div class="videoMonitor-border">
 						<div class="main-video-list">
-							<div class="no-video">没有相关报警信息</div>
+							<div class="no-video">没有相关报警信息！</div>
 						</div>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 				} else {
 					$('.area-monitor-list').find('.red').text(0);
 					$html = '<div class="no-video">没有相关报警信息！</div>';
-					$('.main-video-list').append($html)
+					$('.main-video-list').html($html)
 				}
 			}
 			ws_video.onclose = function () {

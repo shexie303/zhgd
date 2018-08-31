@@ -9,35 +9,142 @@
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/common.css') }}">
 </head>
 <body>
-	<div id="page">
-		<div class="main-header--box">
-			<div class="main-header">
-				<div class="sn-home-link"></div>
-				<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-				<ul class="sn-quick-menu">
-					<li class="sn-bell"></li>
-					<li class="sn-profile">
-						<div class="sn-menu">
-							<div class="menu-hd"></div>
-							<div class="menu-bd">
-								<div class="menu-bd-panel">
-									<a href="javascript:void(0);">syh156254</a>
-									<a href="/auth/logout">退出</a>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
+	<div id="page" class="main-simple-bg">
+		@include('default/common/header')
+		<div class="aside-content left-side">
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>高度m（Height）</h3>
+				</div>
+				<div class="cell-body">
+					<p class="red">36</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>幅度m（Range）</h3>
+				</div>
+				<div class="cell-body">
+					<p>28</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>力矩%（Moment）</h3>
+				</div>
+				<div class="cell-body">
+					<p>0.0</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>承重量t（Weight）</h3>
+				</div>
+				<div class="cell-body">
+					<p>0.0</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>风速m/s（Wind）</h3>
+				</div>
+				<div class="cell-body">
+					<p>0.3</p>
+				</div>
 			</div>
 		</div>
-		<div class="area-monitor-list">
-			<a href="javascript:void(0);">周界区域报警：<span class="red">5</span>个</a>
-			<a href="javascript:void(0);">加工区域报警：<span class="red">8</span>个</a>
-			<a href="javascript:void(0);">生活区域报警：<span class="red">12</span>个</a>
-			<a href="javascript:void(0);">出入区域报警：<span class="red">2</span>个</a>
+		<div class="message-box tower-message">
+			<div class="message-list">
+				<div class="message-item bell">
+					<div class="decorate-line"></div>
+					<span class="tria-tl"></span>
+					<span class="tria-tr"></span>
+					<span class="tria-br"></span>
+					<span class="tria-bl"></span>
+				</div>
+			</div>
+		</div>
+		<div class="aside-content right-side">
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>回转角度 °（Rotation）</h3>
+				</div>
+				<div class="cell-body">
+					<img src="{{ URL::asset('src/static/img/rotation.png') }}" alt="" class="roll-img">
+					<p class="roll-text">347.4</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>倾角 °（Dip）</h3>
+				</div>
+				<div class="cell-body">
+					<p>77.6</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>是否在线（Online or not ）</h3>
+				</div>
+				<div class="cell-body">
+					<p>在线</p>
+				</div>
+			</div>
+		</div>
+		<div class="slide-content">
+			<div class="slide-controls left-controls"></div>
+			<div class="slide-controls right-controls"></div>
+			<div class="slide-panel">
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">1号塔</div>
+				</div>
+				<div class="slide-item current">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">2号塔</div>
+				</div>
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">3号塔</div>
+				</div>
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">4号塔</div>
+				</div>
+				<div class="slide-item red">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">5号塔</div>
+				</div>
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">6号塔</div>
+				</div>
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">7号塔</div>
+				</div>
+				<div class="slide-item">
+				<div class="dt-line"></div>
+				<div class="slideItem-text">8号塔</div>
+			</div>
+			</div>
+			<div class="slide-panel" style="display: none">
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">9号塔</div>
+				</div>
+				<div class="slide-item">
+					<div class="dt-line"></div>
+					<div class="slideItem-text">10号塔</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	@include('default/common/header')
-	<p><a href="/auth/logout">退出</a></p>
+	<script src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
+	<script src="{{ URL::asset('src/static/js/bootstrap.js') }}"></script>
+	<script>
+		$(function () {
+		})
+	</script>
 </body>
 </html>
