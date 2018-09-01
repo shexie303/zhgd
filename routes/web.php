@@ -22,9 +22,7 @@ Route::group(['namespace' => 'Home'], function () {
         Route::get('/', 'IndexController@index');
         //电力控制
         Route::get('/electric', 'ElectricController@index');
-        //塔吊
-        Route::get('/tower_crane', 'TowerCraneController@index');
-        //升降机
+        //塔吊&升降机
         Route::get('/elevator', 'ElevatorController@index');
         //人员信息
         Route::get('/userinfo', 'UserInfoController@index');

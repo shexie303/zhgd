@@ -233,6 +233,7 @@ class ApiController extends Controller
                 $obj = new SiteElevatorLogs;
                 $obj->number = $data['number'];
                 $obj->type = $data['type'];
+                $obj->online = 2;
                 $obj->save();
                 $warning = [
                     'event_level' => 3,

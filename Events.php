@@ -98,7 +98,7 @@ class Events
                    $return['state'] = 'success';
                    //查询
                    $db = new \DB();
-                   $data = $db->table('site_env')->order('id desc')->limit('1')->select('pm10,wind_sc,tmp,hum');
+                   $data = $db->table('site_env')->order('id desc')->limit(1)->select('pm10,wind_sc,tmp,hum');
                    if ($data) {
                        $return['data'] = $data[0]; //发生视频报警事件
                    }
@@ -209,6 +209,19 @@ class Events
 		   } elseif ($messageDecode['type'] == 'user_info_second') { //@陈振华，人员定位二级。
 
 
+           } elseif ($messageDecode['type'] == 'elevator_second') { //@路超，塔吊&升降机二级。
+               $where = 'number = '.$messageDecode['number'].' and type ='.$messageDecode['type'];
+               Timer::add(5, function($client_id, $where) {
+                   $return['state'] = 'success';
+                   //查询
+                   $db = new \DB();
+                   $data = $db->table('site_elevator_logs')->where($where)->order('id desc')->limit(1)->select();
+                   if ($data) {
+                       $return['data'] = $data[0];
+                   }
+                   // 向某客户端发送
+                   Gateway::sendToClient($client_id, json_encode($return));
+               }, [$client_id, $where], true);
            } else {
 				$return['message'] = 'unsure type';
 				Gateway::sendToClient($client_id, json_encode($return));
