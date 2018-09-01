@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Home;
 
+use App\Models\SiteDevices;
 use App\Models\SiteElevatorLogs;
+use App\Models\SiteErrorReport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -48,7 +50,7 @@ class ApiController extends Controller
                 return response()->json($return);
             }
             $data = [
-                'device_id' => $input['device_id'],
+                'number' => $input['device_id'],
                 'height' => $input['height'],
                 'height_warning' => (int) $input['height_warning'],
                 'range' => $input['range'],
@@ -65,18 +67,36 @@ class ApiController extends Controller
                 'dip_angle_warning' => (int) $input['dip_angle_warning'],
             ];
             Log::error('towerCrane',$request->all());
-            $tower_crane = new SiteElevatorLogs;
-            $warning = [];
-            foreach($data as $k => $v){
-                $tower_crane->$k = $v;
-//                if(is_int($v) && $v == 1){
-//                    $warning[] = [
-//
-//                    ];
-//                }
-            }
             try{
+                $warning = [];
+                $tower_crane = new SiteElevatorLogs;
+                $warning_type = SiteElevatorLogs::WARNING_TYPES;
+                $device = SiteDevices::where(['number' => $data['number'], 'type' => 'tower', 'construction_id' => 1])->first();
+                if(!$device){
+                    $return['code'] = 1000;
+                    return response()->json($return);
+                }
+                foreach($data as $k => $v){
+                    $tower_crane->$k = $v;
+                    if(is_int($v) && $v == 1){
+                        $warning_k = str_replace('_warning','',$k);
+                        $warning[] = [
+                            'event_level' => 3,
+                            'event_name' => $device->name.$warning_type[$k].'达到'.$data[$warning_k],
+                            'event_type' => 'tower',
+                            'ext_info' => serialize([$warning_k => $data[$warning_k]])
+                        ];
+                    }
+                }
                 $tower_crane->save();
+                if($warning){
+                    $created_at = date('Y-m-d H:i:s', time());
+                    foreach($warning as $key => $val){
+                        $warning[$key]['event_log_id'] = $tower_crane->id;
+                        $warning[$key]['created_at'] = $created_at;
+                    }
+                    SiteErrorReport::insert($warning);
+                }
             }catch (\Exception $e){
                 $return['code'] = 1000;
             }
@@ -119,7 +139,7 @@ class ApiController extends Controller
                 return response()->json($return);
             }
             $data = [
-                'device_id' => $input['device_id'],
+                'number' => $input['device_id'],
                 'type' => 2,
                 'height' => $input['height'],
                 'height_warning' => (int) $input['height_warning'],
@@ -130,13 +150,36 @@ class ApiController extends Controller
                 'wind_speed' => $input['wind_speed'],
                 'wind_speed_warning' => (int) $input['wind_speed_warning']
             ];
-            Log::error('elevator',$request->all());
-            $elevator = new SiteElevatorLogs;
-            foreach($data as $k => $v){
-                $elevator->$k = $v;
-            }
             try{
+                $warning = [];
+                $elevator = new SiteElevatorLogs;
+                $warning_type = SiteElevatorLogs::WARNING_TYPES;
+                $device = SiteDevices::where(['number' => $data['number'], 'type' => 'elevator', 'construction_id' => 1])->first();
+                if(!$device){
+                    $return['code'] = 1000;
+                    return response()->json($return);
+                }
+                foreach($data as $k => $v){
+                    $elevator->$k = $v;
+                    if(is_int($v) && $v == 1){
+                        $warning_k = str_replace('_warning','',$k);
+                        $warning[] = [
+                            'event_level' => 3,
+                            'event_name' => $device->name.$warning_type[$k].'达到'.$data[$warning_k],
+                            'event_type' => 'elevator',
+                            'ext_info' => serialize([$warning_k => $data[$warning_k]])
+                        ];
+                    }
+                }
                 $elevator->save();
+                if($warning){
+                    $created_at = date('Y-m-d H:i:s', time());
+                    foreach($warning as $key => $val){
+                        $warning[$key]['event_log_id'] = $elevator->id;
+                        $warning[$key]['created_at'] = $created_at;
+                    }
+                    SiteErrorReport::insert($warning);
+                }
             }catch (\Exception $e){
                 $return['code'] = 1000;
             }
@@ -172,19 +215,38 @@ class ApiController extends Controller
                 return response()->json($return);
             }
             $data = [
-                'device_id' => $input['device_id'],
-                'device_type' => 2,
+                'number' => $input['device_id'],
+                'type' => $input['device_type'],
             ];
-            Log::error('teOffline',$request->all());
-//            $elevator = new SiteElevatorLogs;
-//            foreach($data as $k => $v){
-//                $elevator->$k = $v;
-//            }
-//            try{
-//                $elevator->save();
-//            }catch (\Exception $e){
-//                $return['code'] = 1000;
-//            }
+            try{
+
+                if($data['type'] == 1){
+                    $type = 'tower';
+                }else{
+                    $type = 'elevator';
+                }
+                $device = SiteDevices::where(['number' => $data['number'], 'type' => $type, 'construction_id' => 1])->first();
+                if(!$device){
+                    $return['code'] = 1000;
+                    return response()->json($return);
+                }
+                $obj = new SiteElevatorLogs;
+                $obj->number = $data['number'];
+                $obj->type = $data['type'];
+                $obj->save();
+                $warning = [
+                    'event_level' => 3,
+                    'event_name' => $device->name.'设备离线',
+                    'event_type' => $type,
+                    'ext_info' => serialize([$data['number'] => 'offline']),
+                    'event_log_id' => $obj->id,
+                    'created_at' => date('Y-m-d H:i:s', time())
+                ];
+                SiteErrorReport::insert($warning);
+            }catch (\Exception $e){
+                var_dump($e->getMessage(),$e->getLine());
+                $return['code'] = 1000;
+            }
         }else{
             $return['code'] = 1002;
         }
