@@ -52,7 +52,7 @@ class DB{
         $link = $this->_db;
         if(!$link)return false;
         $sql = "SELECT * FROM {$table}";
-        $data = mysqli_fetch_all($this->execute($sql));
+        $data = mysqli_fetch_all($this->execute($sql), MYSQLI_ASSOC);
         return $data;
     }
  
@@ -78,7 +78,7 @@ class DB{
             $fieldsStr = $fields;
         }
         $sql = "SELECT {$fields} FROM {$this->_table} {$this->_where} {$this->_order} {$this->_limit}";
-        $data = mysqli_fetch_all($this->execute($sql));
+        $data = mysqli_fetch_all($this->execute($sql), MYSQLI_ASSOC);
         return $data;
     }
  

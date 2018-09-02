@@ -116,7 +116,7 @@ class Events
 					$return['data']['report_msg'] = ''; 
 					if ($report) {
 						$return['data']['report'] = 1; //发生视频报警事件
-						$return['data']['report_msg'] = trim($report[0][1], ':'); //报警事件描述
+						$return['data']['report_msg'] = trim($report[0]['event_name'], ':'); //报警事件描述
 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
@@ -136,9 +136,9 @@ class Events
 						$return['data']['report_sum'] = count($report); //发生视频报警事件总数
 						foreach ($report as $key => $value) {
 						    //报警事件描述
-						    $temp['name'] =  trim($value[1], ':');
+						    $temp['name'] =  trim($value['event_name'], ':');
 						    //报警图片
-						    $extInfo = unserialize($value[2]);
+						    $extInfo = unserialize($value['ext_info']);
 						    if ($extInfo['ext_info']) { //解析XML
 						        $xmlString = $extInfo['ext_info'];
 						        $parser = xml_parser_create();
@@ -185,7 +185,7 @@ class Events
 		               $return['data']['report_sum'] = count($report); //发生报警事件总数
 		               foreach ($report as $key => $value) {
 		                   //报警事件描述
-		                   $temp['name'] = $eventName[$value[2]].'：'.$value[1];
+		                   $temp['name'] = $eventName[$value['event_type']].'：'.$value['event_name'];
 		                   $return['data']['report_list'][$key] = $temp;
 		               }
 		           }
