@@ -7,6 +7,7 @@ return [
     'setting'               => '设置',
     'name'                  => '名称',
     'username'              => '用户名',
+    'mobile_phone'          => '手机号',
     'password'              => '密码',
     'password_confirmation' => '确认密码',
     'remember_me'           => '记住我',
