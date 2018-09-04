@@ -210,7 +210,7 @@ class Events
 
 
            } elseif ($messageDecode['type'] == 'elevator_second') { //@路超，塔吊&升降机二级。
-               $where = 'number = '.$messageDecode['number'].' and type ='.$messageDecode['type'];
+               $where = 'number = '.$messageDecode['number'].' and type ='.$messageDecode['device_type'];
                Timer::add(5, function($client_id, $where) {
                    $return['state'] = 'success';
                    //查询
@@ -218,6 +218,8 @@ class Events
                    $data = $db->table('site_elevator_logs')->where($where)->order('id desc')->limit(1)->select();
                    if ($data) {
                        $return['data'] = $data[0];
+                   }else{
+                       $return['state'] = 'error';
                    }
                    // 向某客户端发送
                    Gateway::sendToClient($client_id, json_encode($return));

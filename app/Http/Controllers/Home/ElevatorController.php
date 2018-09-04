@@ -38,7 +38,8 @@ class ElevatorController extends HomeController
             if(!$id){
                 $id = $devices[0]->id;
             }
-            $data = SiteElevatorLogs::where(['number' => $number_arr[$id], 'type' =>$type])->first();
+            $map = ['number' => $number_arr[$id], 'type' =>$type];
+            $data = SiteElevatorLogs::where($map)->first();
             if(!$data){
                 $data = new \stdClass();
                 $data->weight = 0;
@@ -50,7 +51,7 @@ class ElevatorController extends HomeController
                 $data->dip_angle = 0;
                 $data->online = 2;
             }
-            return view(self::HOME_VIEW_PREFIX . '/elevator/index', ['devices' => $devices, 'data' => $data]);
+            return view(self::HOME_VIEW_PREFIX . '/elevator/index', ['ws' => $map, 'devices' => $devices, 'data' => $data]);
         }
     }
 

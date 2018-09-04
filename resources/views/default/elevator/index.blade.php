@@ -17,7 +17,7 @@
 					<h3>高度m（Height）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->height}}</p>
+					<p id="elevator_height">{{$data->height}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -25,7 +25,7 @@
 					<h3>幅度m（Range）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->range}}</p>
+					<p id="elevator_range">{{$data->range}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -33,7 +33,7 @@
 					<h3>力矩%（Moment）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->moment}}</p>
+					<p id="elevator_moment">{{$data->moment}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -41,7 +41,7 @@
 					<h3>承重量t（Weight）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->weight}}</p>
+					<p id="elevator_weight">{{$data->weight}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -49,7 +49,7 @@
 					<h3>风速m/s（Wind）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->wind_speed}}</p>
+					<p id="elevator_wind_speed">{{$data->wind_speed}}</p>
 				</div>
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 				</div>
 				<div class="cell-body">
 					<img src="{{ URL::asset('src/static/img/rotation.png') }}" alt="" class="roll-img">
-					<p class="roll-text">{{$data->angle}}</p>
+					<p class="roll-text" id="elevator_angle">{{$data->angle}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -79,7 +79,7 @@
 					<h3>倾角 °（Dip）</h3>
 				</div>
 				<div class="cell-body">
-					<p>{{$data->dip_angle}}</p>
+					<p id="elevator_dip_angle">{{$data->dip_angle}}</p>
 				</div>
 			</div>
 			<div class="list-item">
@@ -87,7 +87,7 @@
 					<h3>是否在线（Online or not ）</h3>
 				</div>
 				<div class="cell-body">
-					<p @if($data->online == 2) class="red" @endif>{{$data->online == 1 ? '在线' : '离线'}}</p>
+					<p id="elevator_online" @if($data->online == 2) class="red" @endif>{{$data->online == 1 ? '在线' : '离线'}}</p>
 				</div>
 			</div>
 		</div>
@@ -121,6 +121,39 @@
             $('.slideItem-text').click(function(){
                 window.location.href = $(this).data('url');
             });
+            var ws_env = new WebSocket('ws://118.190.137.205:8282');
+            ws_env.onopen = function (evt) {
+                //初始连接要传的参数
+                var msg = {"type": "elevator_second", "number": "{{$ws['number']}}", "device_type": "{{$ws['type']}}"};
+                ws_env.send(JSON.stringify(msg));
+            };
+            ws_env.onmessage = function (evt) {
+                var res = eval("(" + evt.data + ")");
+                if(res.state == 'success'){
+                    var obj = $('.cell-body').find('p');
+                    obj.each(function(){
+                        var field = this.id.substr(9);
+                        if(field == 'online'){
+                            if(res.data.online == 1){
+                                $(this).html('在线').removeClass('red');
+                            }else{
+                                $(this).html('离线').addClass('red');
+                            }
+                        }else{
+                            var field_w = field+'_warning';
+                            $(this).html(res.data[field]);
+                            console.log(res.data[field_w]);
+                            if(res.data[field_w] == 1){
+                                $(this).addClass('red');
+                            }else{
+                                $(this).removeClass('red');
+                            }
+                        }
+                    });
+                }
+            };
+            ws_env.onclose = function (evt) {
+            };
 		})
 	</script>
 </body>
