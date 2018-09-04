@@ -142,7 +142,6 @@
                         }else{
                             var field_w = field+'_warning';
                             $(this).html(res.data[field]);
-                            console.log(res.data[field_w]);
                             if(res.data[field_w] == 1){
                                 $(this).addClass('red');
                             }else{
