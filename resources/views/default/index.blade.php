@@ -106,7 +106,7 @@
 			<div class="towerElevator-monitor--content">
 				<div class="vertical-line vertical-line-middle" style="height: 265px;"></div>
 				<div class="tower-monitor">
-					<a href="/tower_crane">
+					<a href="/elevator?type=1">
 						<div class="img-model">
 							<span class="arrow-sign">塔吊</span>
 							<img src="./src/static/img/tower.png" alt="">
@@ -122,7 +122,7 @@
 					</a>
 				</div>
 				<div class="elevator-monitor">
-					<a href="/elevator">
+					<a href="/elevator?type=2">
 						<div class="img-model">
 							<span class="arrow-sign">升降机</span>
 							<img src="./src/static/img/elevator.png" alt="">
