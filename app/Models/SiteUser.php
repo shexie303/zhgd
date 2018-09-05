@@ -36,7 +36,7 @@ class SiteUser extends Model implements AuthenticatableContract
     }
     
     /**
-     * A role belongs to many users.
+     * A constructions belongs to many users.
      *
      * @return BelongsToMany
      */
@@ -47,6 +47,20 @@ class SiteUser extends Model implements AuthenticatableContract
         $relatedModel = config('admin.database.site_constructions_model');
     
         return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'construction_id');
+    }
+    
+    /**
+     * A report_groups belongs to many users.
+     *
+     * @return BelongsToMany
+     */
+    public function error_report_groups() : BelongsToMany
+    {
+        $pivotTable = 'site_user_report_groups';
+    
+        $relatedModel = \App\Models\SiteErrorReportGroups::class;
+    
+        return $this->belongsToMany($relatedModel, $pivotTable, 'user_id', 'group_id');
     }
 
     /**

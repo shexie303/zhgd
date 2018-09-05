@@ -13,6 +13,8 @@ return [
     'remember_me'           => '记住我',
     'user_setting'          => '用户设置',
     'avatar'                => '头像',
+    'constructions'         => '施工场地',
+    'report_groups'         => '报警组',
 
     'list'         => '列表',
     'new'          => '新增',
