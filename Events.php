@@ -27,7 +27,7 @@ use Workerman\Lib\Timer;
  *路径，需要根据各自本地情况，重新设置。如果GatewayWorker和zhgd文件夹在同一级，则不需要设置。
  *数据库，连接的具体配置需要，在Db.php根据各自情况配置，同zhgd/config/database.php一致
  */
-require_once __DIR__.'/../../../zxgd/Db.php';
+require_once __DIR__.'/../../../jinfang/Db.php';
 /**
  * 主逻辑
  * 主要是处理 onConnect onMessage onClose 三个方法
