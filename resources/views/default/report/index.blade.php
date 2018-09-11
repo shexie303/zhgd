@@ -74,39 +74,45 @@
 						</tr>
 						</thead>
 						<tbody>
+						    @foreach ($list as $value)
 							<tr>
 								<td>报警信息</td>
-								<td>电力监控</td>
-								<td>电压超过3000V</td>
-								<td>2018-08-27 13:30:00</td>
-								<td>未处理</td>
-								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
-									<button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
-								</td>
+								<td>{{$value['event_name']}}</td>
+								<td>{{$value['event_msg']}}</td>
+								<td>{{$value['created_at']}}</td>
+								@if ($value['event_state'] == '1')
+								    <td>未处理</td>
+								    <td>
+								        <button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									    <button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
+								    </td>
+								@elseif ($value['event_state'] == '2')
+								    <td>处理中</td>
+								    <td>
+								        <button type="button" class="ant-btn ant-btn-handle"><span>完成</span></button>
+									    <button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
+								    </td>
+								@elseif ($value['event_state'] == '3')
+								    <td>已完成</td>
+								    <td>
+								        <button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									    <button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
+								    </td>
+								@elseif ($value['event_state'] == '4')
+								    <td>已忽略</td>
+								    <td>
+								        <button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									    <button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
+								    </td>
+								@else
+								    <td>未定义</td>
+								    <td>
+								        <button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									    <button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
+								    </td>
+								@endif
 							</tr>
-							<tr>
-								<td>报警信息</td>
-								<td>电力监控</td>
-								<td>电压超过3000V</td>
-								<td>2018-08-27 13:30:00</td>
-								<td>未处理</td>
-								<td>
-									<button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
-									<button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
-								</td>
-							</tr>
-							<tr>
-								<td>报警信息</td>
-								<td>电力监控</td>
-								<td>电压超过3000V</td>
-								<td>2018-08-27 13:30:00</td>
-								<td>未处理</td>
-								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>完成</span></button>
-									<button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
-								</td>
-							</tr>
+						    @endforeach
 						</tbody>
 					</table>
 				</div>
