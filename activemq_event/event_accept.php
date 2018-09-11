@@ -17,30 +17,32 @@ try {
   $stomp = new Stomp($url, 'admin', '1234567');
   $stomp->subscribe('/topic/openapi.vss.topic'); //视频监控-消息队列
   //$stomp->subscribe('/topic/openapi.ias.topic'); //入侵报警-消息队列
-  //$start = now();
+  
   $count = 0;
   echo "Waiting for messages...\n";
   while (true) {
       $hasFrame = $stomp->hasFrame();
-      //var_dump($hasFrame);
       if ($hasFrame) {
           $frame = $stomp->readFrame();
           if ($frame) {
               if ($frame->command == "MESSAGE") {
-                  echo ++$count." yes reviced message.\n";
+                  //记录-接收事件数
+                  $successLog = $count++."ok received.";
+                  log_success($successLog);
+                  
                   //解析事件内容
                   decode_pd_msg($frame->body);
                   
                   //$stomp->ack($frame);
               } else {
-                  var_dump($frame);
-                  echo "Unexpected frame.\n";
+                  //记录-事件接收失败数
+                  $errorLog = "Unexpected frame.";
+                  log_error($errorLog);
               }
           }
       } else {
-          //echo $count." no reviced;\n";
+          //echo $count." no reviced;";
       }
-      //$count++;
   }
 
 } catch (StompException $e) {
@@ -91,9 +93,11 @@ function decode_pd_msg($body) {
         } else {
             //保存
             save_to_database($log);
-        }        
+        }
     } else {
-        //其他处理操作...
+        //记录-解析事件有误
+        $errorLog = "decode_pd_msg error.";
+        log_error($errorLog);
     }
 }
 
@@ -101,7 +105,7 @@ function decode_pd_msg($body) {
 function save_to_database($data = null) {
     if ($data) {
         $insertData['event_level'] = 1; //报警级别
-        $insertData['event_msg'] = $data['event_type_name'];
+        $insertData['event_name'] = $data['event_type_name'];
         $insertData['event_type'] = 'video'; //视频事件
         $insertData['event_state'] = 1; //默认未处理
         $insertData['event_log_id'] = $data['log_id'];
@@ -115,8 +119,26 @@ function save_to_database($data = null) {
     }
 }
 
-//当前时间
-function now() {
-    list($usec,$sec) = explode(' ', microtime());
-    return ((float)$usec + (float)$sec);
+//成功
+function log_success($log) {
+    write($log, './success_received.log');
+}
+//失败
+function log_error($log) {
+    write($log, './error_received.log');
+}
+//写入日志
+function write($log, $destination = '') {
+
+    // 自动创建日志目录
+    $log_dir = dirname($destination);
+    if (!is_dir($log_dir)) {
+        mkdir($log_dir, 0755, true);
+    }
+    //检测日志文件大小，超过配置大小(10MB)则备份日志文件重新生成
+    if(is_file($destination) && floor(10485760) <= filesize($destination) ) {
+        rename($destination, dirname($destination).'/'.date('YmdHis').'-'.basename($destination));
+    }
+    $now = date(' c ');
+    error_log("[{$now}]{$log}\r\n", 3, $destination);
 }
