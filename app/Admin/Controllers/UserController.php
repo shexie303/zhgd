@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Construction;
 use App\Models\SiteUser;
+use App\Models\SiteErrorReportGroups;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
@@ -74,6 +75,7 @@ class UserController extends Controller
             $grid->name(trans('admin.name'));
             $grid->mobile_phone(trans('admin.mobile_phone'));
             $grid->roles(trans('admin.roles'))->pluck('name')->label();
+            $grid->error_report_groups(trans('admin.report_groups'))->pluck('name')->label();
             $grid->created_at(trans('admin.created_at'));
             $grid->updated_at(trans('admin.updated_at'));
 
@@ -115,7 +117,8 @@ class UserController extends Controller
 
             $form->multipleSelect('roles', trans('admin.roles'))->options(Role::all()->pluck('name', 'id'));
             $form->multipleSelect('permissions', trans('admin.permissions'))->options(Permission::all()->pluck('name', 'id'));
-            $form->multipleSelect('constructions', '施工场地')->options(Construction::all()->pluck('name', 'id'));
+            $form->multipleSelect('constructions', trans('admin.constructions'))->options(Construction::all()->pluck('name', 'id'));
+            $form->multipleSelect('error_report_groups', trans('admin.report_groups'))->options(SiteErrorReportGroups::all()->pluck('name', 'id'));
 
             $form->display('created_at', trans('admin.created_at'));
             $form->display('updated_at', trans('admin.updated_at'));

@@ -1,3 +1,6 @@
+<script type="text/javascript">
+    var ws_domain = 'ws://60.28.24.227:8282';
+</script>
 <div class="main-header--box">
 	<div class="main-header">
 		<div class="sn-home-link"></div>

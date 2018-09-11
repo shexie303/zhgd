@@ -27,7 +27,7 @@ use Workerman\Lib\Timer;
  *路径，需要根据各自本地情况，重新设置。如果GatewayWorker和zhgd文件夹在同一级，则不需要设置。
  *数据库，连接的具体配置需要，在Db.php根据各自情况配置，同zhgd/config/database.php一致
  */
-require_once __DIR__.'/../../../zxgd/Db.php';
+require_once __DIR__.'/../../../jinfang/Db.php';
 /**
  * 主逻辑
  * 主要是处理 onConnect onMessage onClose 三个方法
@@ -178,19 +178,31 @@ class Events
 		           //查询
 		           $db = new \DB();
 		           $where = "event_state = 1";
-		           $report = $db->table('site_error_report')->where($where)->order('id desc')->limit('100')->select('id, event_name, event_type');
+		           //获取上一次查询点
+		           $sessData = Gateway::getSession($client_id);
+		           if (is_array($sessData) && count($sessData) > 0) {
+		               $where .= ' and id > '.$sessData['report_last_id'];
+		           }
+		           $report = $db->table('site_error_report')->where($where)->order('id desc')->limit('10')->select('id, event_name, event_type');
 		           $return['data']['report_sum'] = 0; //没有报警事件
 		           $return['data']['report_list'] = array();
 		           if ($report) {
-		               $return['data']['report_sum'] = count($report); //发生报警事件总数
+		               $return['data']['report_sum'] = count($report); //返回报警事件数
+		               $lastId = 0;
 		               foreach ($report as $key => $value) {
+		                   $lastId = $value['id'] > $lastId ? $value['id'] : $lastId;
 		                   //报警事件描述
 		                   $temp['name'] = $eventName[$value['event_type']].'：'.$value['event_name'];
 		                   $return['data']['report_list'][$key] = $temp;
 		               }
+		               
+		               //记录最新查询点
+		               Gateway::setSession($client_id, array('report_last_id' => $lastId));
+		               
+		               // 向某客户端发送
+		               Gateway::sendToClient($client_id, json_encode($return));
 		           }
-		           // 向某客户端发送
-		           Gateway::sendToClient($client_id, json_encode($return));
+		           		           
 		       }, [$client_id], true);
 			   
 		   } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，人员定位。

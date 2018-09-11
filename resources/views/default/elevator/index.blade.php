@@ -121,7 +121,7 @@
             $('.slideItem-text').click(function(){
                 window.location.href = $(this).data('url');
             });
-            var ws_env = new WebSocket('ws://118.190.137.205:8282');
+            var ws_env = new WebSocket(ws_domain);
             ws_env.onopen = function (evt) {
                 //初始连接要传的参数
                 var msg = {"type": "elevator_second", "number": "{{$ws['number']}}", "device_type": "{{$ws['type']}}"};

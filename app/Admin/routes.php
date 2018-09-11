@@ -15,5 +15,6 @@ Route::group([
     $router->resource('siteAuth/permissions', 'PermissionController');
     $router->resource('siteAuth/roles', 'RoleController');
     $router->resource('siteAuth/constructions', 'ConstructionController');
+    $router->resource('siteAuth/reports', 'ReportController');
 
 });

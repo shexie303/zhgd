@@ -53,7 +53,7 @@
 	<script src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
 	<script>
 		if ("WebSocket" in window) {
-			var ws_video = new WebSocket('ws://118.190.137.205:8282');
+			var ws_video = new WebSocket(ws_domain);
 			ws_video.onopen = function () {
 				var data = {'type': 'video_list'};
 				ws_video.send(JSON.stringify(data));

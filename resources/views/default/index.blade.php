@@ -11,27 +11,7 @@
 </head>
 <body>
 <div id="page">
-	<div class="main-header--box">
-		<div class="main-header">
-			<div class="sn-home-link"></div>
-			<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
-			<ul class="sn-quick-menu">
-				<li class="sn-bell"></li>
-				<li class="sn-profile">
-					<div class="sn-menu">
-						<div class="menu-hd"></div>
-						<div class="menu-bd">
-							<div class="menu-bd-panel">
-								<a href="javascript:void(0);">syh156254</a>
-								<a href="/auth/logout">退出</a>
-							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</div>
-
+    @include('default/common/header')
 	<div class="electric-monitor--box">
 		<a href="/electric">
 			<div class="monitor--title">电力监控</div>
@@ -106,7 +86,7 @@
 			<div class="towerElevator-monitor--content">
 				<div class="vertical-line vertical-line-middle" style="height: 265px;"></div>
 				<div class="tower-monitor">
-					<a href="/tower_crane">
+					<a href="/elevator?type=1">
 						<div class="img-model">
 							<span class="arrow-sign">塔吊</span>
 							<img src="./src/static/img/tower.png" alt="">
@@ -122,7 +102,7 @@
 					</a>
 				</div>
 				<div class="elevator-monitor">
-					<a href="/elevator">
+					<a href="/elevator?type=2">
 						<div class="img-model">
 							<span class="arrow-sign">升降机</span>
 							<img src="./src/static/img/elevator.png" alt="">
@@ -290,7 +270,7 @@
 <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
 <script type="text/javascript">
 	if ("WebSocket" in window) {
-		var ws_video = new WebSocket('ws://118.190.137.205:8282');
+		var ws_video = new WebSocket(ws_domain);
 		ws_video.onopen = function (evt) {
 			//初始连接要传的参数
 			var msg = {"type": "video"};
@@ -312,7 +292,7 @@
 		ws_video.onclose = function (evt) {
 		};
 
-		var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+		var ws_electric = new WebSocket(ws_domain);
 		ws_electric.onopen = function (evt) {
 			//初始连接要传的参数
 			var msg = {"type": "electric"};
@@ -328,7 +308,7 @@
 		ws_electric.onclose = function (evt) {
 		};
 
-		var ws_user_info = new WebSocket('ws://118.190.137.205:8282');
+		var ws_user_info = new WebSocket(ws_domain);
 		ws_user_info.onopen = function (evt) {
 			//初始连接要传的参数
 			var msg = {"type": "user_info"};
@@ -345,7 +325,7 @@
 		ws_user_info.onclose = function (evt) {
 		};
 
-//		var ws_env = new WebSocket('ws://118.190.137.205:8282');
+//		var ws_env = new WebSocket(ws_domain);
 //		ws_env.onopen = function (evt) {
 //			//初始连接要传的参数
 //			var msg = {"type": "env"};

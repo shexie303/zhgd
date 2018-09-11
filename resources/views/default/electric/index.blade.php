@@ -77,7 +77,7 @@
 	<script type="text/javascript">
 		var unit = ['','V','A','W','W'];
 		if ("WebSocket" in window) {
-			var ws_electric = new WebSocket('ws://118.190.137.205:8282');
+			var ws_electric = new WebSocket(ws_domain);
 			ws_electric.onopen = function (evt) {
 				//初始连接要传的参数
 				var msg = {"type": "electric_second"};
