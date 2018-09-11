@@ -81,7 +81,7 @@
 								<td>2018-08-27 13:30:00</td>
 								<td>未处理</td>
 								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									<button type="button" class="ant-btn ant-btn-handle" data-toggle="modal" data-target="#sendMessageModal" data-whatever="report-id"><span>处理</span></button>
 									<button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							</tr>
@@ -113,17 +113,81 @@
 			</div>
 		</div>
 	</div>
+	<div id="sendMessageModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">请选择发送短信组（可多选）</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<input type="hidden" id="reportId">
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck1">
+						<label class="custom-control-label" for="customCheck1">消防安全组</label>
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck2">
+						<label class="custom-control-label" for="customCheck2">消防安全组</label>
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck3">
+						<label class="custom-control-label" for="customCheck3">消防安全组</label>
+					</div>
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" class="custom-control-input" id="customCheck4">
+						<label class="custom-control-label" for="customCheck4">消防安全组</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="J_SendMessage" class="btn btn-primary">
+						发送短信
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
 <script src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
+<script src="{{ URL::asset('src/static/js/bootstrap.js') }}"></script>
 <script>
 	$(function () {
-		function getMessageList() {
+		// function getMessageList() {
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		dataType: "json",
+		// 		async: false,
+		// 		url: 'http://118.190.137.205'
+		// 	})
+		// }
+		$('#sendMessageModal').on('show.bs.modal', function(e) {
+			var button = $(e.relatedTarget);
+			var recipient = button.data('whatever');
+			var modal = $(this);
+
+			modal.find('.modal-body input#reportId').val(recipient)
+		});
+
+		$('#J_SendMessage').on('click', function (e) {
+			var $reportId = $('#reportId').val();
+			var roleArr = [];
+			var $roleGroupsValue = $('.custom-control-input:checked');
+			$.each($roleGroupsValue, function (k, v) {
+				roleArr.push(v.id);
+			});
 			$.ajax({
-				type: "POST",
-				dataType: "json",
-				async: false,
-				url: 'http://118.190.137.205'
+				type: 'POST',
+				url: '',
+				data: {
+					reportId: $reportId,
+					roleArr: roleArr
+				},
+				success: function (data) {
+					console.log('发送成功');
+				}
 			})
-		}
+		})
 	})
 </script>
 </body>
