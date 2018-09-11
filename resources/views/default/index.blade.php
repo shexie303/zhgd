@@ -10,8 +10,9 @@
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/index.css') }}">
 </head>
 <body>
-<div id="page">
-    @include('default/common/header')
+<div id="page" class="main-home-bg">
+	@include('default/common/header')
+
 	<div class="electric-monitor--box">
 		<a href="/electric">
 			<div class="monitor--title">电力监控</div>
@@ -70,13 +71,13 @@
 		</a>
 	</div>
 	<div class="message-box">
-		<div class="message-list">
-			<div class="message-item bell">
-				<div class="decorate-line"></div>
-				<span class="tria-tl"></span>
-				<span class="tria-tr"></span>
-				<span class="tria-br"></span>
-				<span class="tria-bl"></span>
+		<div class="message-main bell">
+			<div class="decorate-line"></div>
+			<span class="tria-tl"></span>
+			<span class="tria-tr"></span>
+			<span class="tria-br"></span>
+			<span class="tria-bl"></span>
+			<div class="message-list">
 			</div>
 		</div>
 	</div>
@@ -270,20 +271,16 @@
 <script type="text/javascript" src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
 <script type="text/javascript">
 	if ("WebSocket" in window) {
+		// 视频监控
 		var ws_video = new WebSocket(ws_domain);
 		ws_video.onopen = function (evt) {
 			//初始连接要传的参数
-			var msg = {"type": "video"};
+			var msg = {type: 'video'};
 			ws_video.send(JSON.stringify(msg));
 		};
 		ws_video.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
-			if (res.data.report == 1) {
-				// if (res.data.report_msg) {
-					var messageInfo = '<p>' + res.data.report_msg + '</p>';
-					$('.message-box .message-item').append(messageInfo);
-					$('.message-box').show();
-				// }
+			if(res.data.report == 1){
 				$('.monitor-item:eq(2)').addClass('monitor-item-bell');
 			} else {
 				$('.monitor-item:eq(2)').removeClass('monitor-item-bell');
@@ -292,10 +289,30 @@
 		ws_video.onclose = function (evt) {
 		};
 
+		// 消息列表
+		var ws_message = new WebSocket(ws_domain);
+		ws_message.onopen = function (evt) {
+			var msg = {type: 'report_all'};
+			ws_message.send(JSON.stringify(msg));
+		}
+		ws_message.onmessage = function (evt) {
+			var res = eval('(' + evt.data + ')');
+
+			var report_list = res.data.report_list;
+			var $messageList = $('.message-list');
+
+			$messageList.empty();
+			$.each(report_list, function (k, v) {
+				$messageList.append('<p>' + v.name + '</p>')
+			})
+			$('.message-box').show();
+		}
+
+		// 电力监控
 		var ws_electric = new WebSocket(ws_domain);
 		ws_electric.onopen = function (evt) {
 			//初始连接要传的参数
-			var msg = {"type": "electric"};
+			var msg = {type: 'electric'};
 			ws_electric.send(JSON.stringify(msg));
 		};
 		ws_electric.onmessage = function (evt) {
@@ -308,10 +325,11 @@
 		ws_electric.onclose = function (evt) {
 		};
 
+		// 人员信息
 		var ws_user_info = new WebSocket(ws_domain);
 		ws_user_info.onopen = function (evt) {
 			//初始连接要传的参数
-			var msg = {"type": "user_info"};
+			var msg = {type: 'user_info'};
 			ws_user_info.send(JSON.stringify(msg));
 		};
 		ws_user_info.onmessage = function (evt) {
@@ -348,8 +366,8 @@
 	var meshes = [], mixers = [], hemisphereLight, pointLight, camera, scene, renderer, controls;
 	var clock = new THREE.Clock;
 
-	init();
-	animate();
+	// init();
+	// animate();
 
 	function init() {
 		container = document.getElementById('building__canvas--box');
