@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Home;
 use App\Models\SiteDevices;
 use App\Models\SiteElevatorLogs;
 use App\Models\SiteErrorReport;
+use App\Models\SiteErrorReportGroups;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
@@ -252,6 +253,53 @@ class ApiController extends Controller
             $return['code'] = 1002;
         }
         return response()->json($return);
+    }
+    
+    /**
+     * 消息中心--根据事件id，返回对应的报警短信组
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getReportGroups(Request $request) {
+        if ($request->method() == 'GET') {
+            $return = [
+                'state' => 'fail',
+                'data' => [],
+                'message' => ''
+            ];
+            $validator = Validator::make($request->all(),[
+                'event_id' => 'integer|required'
+            ]);
+            if($validator->fails()){
+                $errors = $validator->errors()->all();
+                $return['message'] = $errors[0];
+                return response()->json($return);
+            }
+            $input = $request->all();
+            $event = SiteErrorReport::find($input['event_id']);
+            if ($event) {
+                if ($event['event_state'] == 1 || $event['event_state'] == 2) { //处理
+                    $_group = SiteErrorReportGroups::where(['type' => $event['event_state'], 'module' => $event['event_type']])->get();
+                    if ($_group) {
+                        foreach ($_group as $key => $value) {
+                            $group[$value['id']] = $value['name'];
+                        }
+                        $return['state'] = 'success';
+                        $return['data'] = $group;
+                        return response()->json($return);
+                    } else {
+                        $return['message'] = '未找到处理人信息。';
+                        return response()->json($return);
+                    }
+                } else {
+                    $return['message'] = '当前信息不需要发短信。';
+                    return response()->json($return);
+                }
+            } else {
+                $return['message'] = '事件信息不存在。';
+                return response()->json($return);
+            }
+        }
     }
 
     protected function checkSignature($params)

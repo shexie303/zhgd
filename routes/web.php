@@ -44,5 +44,6 @@ Route::group(['namespace' => 'Home'], function () {
     Route::post('/api/te_offline', 'ApiController@teOffline');
     //消息中心
     Route::get('/report', 'ReportController@index');
+    Route::get('/api/get_report_groups', 'ApiController@getReportGroups'); //根据事件 id，获取报警短信组
 });
 
