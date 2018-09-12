@@ -277,10 +277,10 @@ class ApiController extends Controller
             }
             $input = $request->all();
             $event = SiteErrorReport::find($input['event_id']);
-            if ($event) {
+            if (!empty($event)) {
                 if ($event['event_state'] == 1 || $event['event_state'] == 2) { //处理
                     $_group = SiteErrorReportGroups::where(['type' => $event['event_state'], 'module' => $event['event_type']])->get();
-                    if ($_group) {
+                    if (count($_group) > 0) {
                         foreach ($_group as $key => $value) {
                             $group[$value['id']] = $value['name'];
                         }
