@@ -173,12 +173,16 @@
 			$.ajax({
 				type: 'GET',
 				url: 'http://60.28.24.227/api/get_report_groups',
-				dataType: 'jsonp',
+				dataType: 'json',
 				data: {
 					event_id: recipient
 				},
 				success: function (data) {
-					console.log(data)
+					var html = '<div class="custom-control custom-checkbox"></div>';
+					$.each(data, function (k, v) {
+						html.append('<input type="checkbox" class="custom-control-input" id="customCheck' + k + '">' +
+							'<label class="custom-control-label" for="customCheck' + k + '">v</label>');
+					})
 				},
 				error: function (data) {
 					
