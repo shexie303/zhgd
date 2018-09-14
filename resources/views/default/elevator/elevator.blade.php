@@ -30,6 +30,14 @@
 			</div>
 			<div class="list-item">
 				<div class="cell-header">
+					<h3>速度m/s（Speed）</h3>
+				</div>
+				<div class="cell-body">
+					<p>0.3</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
 					<h3>风速m/s（Wind）</h3>
 				</div>
 				<div class="cell-body">
