@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>天津市津房置业有限公司宝坻项目群管理平台 -- 消息中心</title>
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/common.css') }}">
@@ -92,7 +93,7 @@
 							@elseif ($value['event_state'] == '2')
 								<td>处理中</td>
 								<td>
-									<button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									<button type="button" class="ant-btn ant-btn-handle" data-toggle="modal" data-target="#sendMessageModal" data-whatever="{{$value['id']}}"><span>完成</span></button>
 									<button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							@elseif ($value['event_state'] == '3')
@@ -192,6 +193,7 @@
 			$.each($roleGroupsValue, function (k, v) {
 				roleArr.push(v.id);
 			});
+			$.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 			$.ajax({
 				type: 'POST',
 				url: '',
