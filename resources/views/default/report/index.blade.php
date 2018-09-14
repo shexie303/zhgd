@@ -86,19 +86,19 @@
 							@if ($value['event_state'] == '1')
 								<td>未处理</td>
 								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									<button type="button" class="ant-btn ant-btn-handle" data-toggle="modal" data-target="#sendMessageModal" data-whatever="{{$value['id']}}"><span>处理</span></button>
 									<button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							@elseif ($value['event_state'] == '2')
 								<td>处理中</td>
 								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>完成</span></button>
+									<button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
 									<button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							@elseif ($value['event_state'] == '3')
 								<td>已完成</td>
 								<td>
-									<button disabled type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									<button disabled type="button" class="ant-btn ant-btn-handle"><span>完成</span></button>
 									<button disabled type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							@elseif ($value['event_state'] == '4')
@@ -110,7 +110,7 @@
 							@else
 								<td>未定义</td>
 								<td>
-									<button type="button" class="ant-btn ant-btn-handle"><span>处理</span></button>
+									<button type="button" class="ant-btn ant-btn-handle" data-toggle="modal" data-target="#sendMessageModal" data-whatever="{{$value['id']}}"><span>处理</span></button>
 									<button type="button" class="ant-btn ant-btn-ignore"><span>忽略</span></button>
 								</td>
 							@endif
@@ -168,7 +168,21 @@
 			var recipient = button.data('whatever');
 			var modal = $(this);
 
-			modal.find('.modal-body input#reportId').val(recipient)
+			modal.find('.modal-body input#reportId').val(recipient);
+			$.ajax({
+				type: 'GET',
+				url: 'http://60.28.24.227/api/get_report_groups',
+				dataType: 'jsonp',
+				data: {
+					event_id: recipient
+				},
+				success: function (data) {
+					console.log(data)
+				},
+				error: function (data) {
+					
+				}
+			})
 		});
 
 		$('#J_SendMessage').on('click', function (e) {

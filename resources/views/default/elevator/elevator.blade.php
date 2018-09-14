@@ -22,23 +22,7 @@
 			</div>
 			<div class="list-item">
 				<div class="cell-header">
-					<h3>幅度m（Range）</h3>
-				</div>
-				<div class="cell-body">
-					<p>28</p>
-				</div>
-			</div>
-			<div class="list-item">
-				<div class="cell-header">
-					<h3>力矩%（Moment）</h3>
-				</div>
-				<div class="cell-body">
-					<p>0.0</p>
-				</div>
-			</div>
-			<div class="list-item">
-				<div class="cell-header">
-					<h3>承重量t（Weight）</h3>
+					<h3>重量t（Weight）</h3>
 				</div>
 				<div class="cell-body">
 					<p>0.0</p>
@@ -50,6 +34,14 @@
 				</div>
 				<div class="cell-body">
 					<p>0.3</p>
+				</div>
+			</div>
+			<div class="list-item">
+				<div class="cell-header">
+					<h3>是否在线（Online or not ）</h3>
+				</div>
+				<div class="cell-body">
+					<p>在线</p>
 				</div>
 			</div>
 		</div>
@@ -65,31 +57,6 @@
 			</div>
 		</div>
 		<div class="aside-content right-side">
-			<div class="list-item">
-				<div class="cell-header">
-					<h3>回转角度 °（Rotation）</h3>
-				</div>
-				<div class="cell-body">
-					<img src="{{ URL::asset('src/static/img/rotation.png') }}" alt="" class="roll-img">
-					<p class="roll-text">347.4</p>
-				</div>
-			</div>
-			<div class="list-item">
-				<div class="cell-header">
-					<h3>倾角 °（Dip）</h3>
-				</div>
-				<div class="cell-body">
-					<p>77.6</p>
-				</div>
-			</div>
-			<div class="list-item">
-				<div class="cell-header">
-					<h3>是否在线（Online or not ）</h3>
-				</div>
-				<div class="cell-body">
-					<p>在线</p>
-				</div>
-			</div>
 		</div>
 		<div class="slide-content">
 			<div class="slide-controls left-controls"></div>

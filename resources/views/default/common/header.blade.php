@@ -7,7 +7,7 @@
 		<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
 		<ul class="sn-quick-menu">
 			<li class="menu-item sn-bell">
-				<a href="javascript:void(0);">5</a>
+				<a href="/report">5</a>
 			</li>
 			<li class="menu-item sn-profile">
 				<div class="sn-menu">
