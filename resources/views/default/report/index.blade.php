@@ -196,8 +196,12 @@
 					roleArr: roleArr
 				},
 				success: function (data) {
+					if (data.state == 'success') {
+						window.location.href = '/report';
+					} else {
+						alert(data.message);
+					}
 					console.log('发送成功');
-					window.location.href = '/report';
 				}
 			})
 		})

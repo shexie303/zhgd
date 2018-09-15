@@ -49,7 +49,15 @@ class ReportController extends HomeController
                             $flag = false;
                             foreach ($_userData as $key => $value) {
                                 //发送短信
-                                $response = $aliSms->sendSms($value->mobile_phone, 'SMS_144147914', ['area'=> '']);
+                                if ($event['event_type'] == 'video') { //视频
+                                    if ($event['event_state'] == 1) { //处理中
+                                        $response = $aliSms->sendSms($value->mobile_phone, 'SMS_144147914', ['area'=> '']);
+                                    } elseif ($event['event_state'] == 2) { //处理完毕
+                                        $response = $aliSms->sendSms($value->mobile_phone, 'SMS_144370021', ['area'=> '']);
+                                    }
+                                } elseif ($event['event_type'] == 'tower') { //塔吊
+                                    
+                                }
                                 if ($response->Code == 'OK') {
                                     $flag = true;
                                 }
