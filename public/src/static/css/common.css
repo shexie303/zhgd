@@ -127,12 +127,10 @@ ul, li {
 	display: block;
 	font-size: 1.625rem;
 	border-bottom: 2px solid #033843;
+	color: #02b3bb;
 }
 .menu-bd-panel a:last-child{
 	border-bottom: none;
-}
-.menu-bd-panel a:link{
-	color: #02b3bb;
 }
 .menu-bd-panel a:hover, .menu-bd-panel a:active{
 	color: #76dfe4;
