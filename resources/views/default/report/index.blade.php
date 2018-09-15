@@ -156,7 +156,7 @@
 			modal.find('.modal-body input#reportId').val(recipient);
 			$.ajax({
 				type: 'GET',
-				url: 'http://www.bim.com/api/get_report_groups',
+				url: 'http://60.28.24.227/api/get_report_groups',
 				dataType: 'json',
 				data: {
 					event_id: recipient
