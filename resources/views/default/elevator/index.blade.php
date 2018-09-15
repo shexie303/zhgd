@@ -121,13 +121,13 @@
             $('.slideItem-text').click(function(){
                 window.location.href = $(this).data('url');
             });
-            var ws_env = new WebSocket(ws_domain);
-            ws_env.onopen = function (evt) {
+            var ws_tower = new WebSocket(ws_domain);
+            ws_tower.onopen = function (evt) {
                 //初始连接要传的参数
                 var msg = {"type": "elevator_second", "number": "{{$ws['number']}}", "device_type": "{{$ws['type']}}"};
-                ws_env.send(JSON.stringify(msg));
+                ws_tower.send(JSON.stringify(msg));
             };
-            ws_env.onmessage = function (evt) {
+            ws_tower.onmessage = function (evt) {
                 var res = eval("(" + evt.data + ")");
                 if(res.state == 'success'){
                     var obj = $('.cell-body').find('p');
@@ -151,7 +151,7 @@
                     });
                 }
             };
-            ws_env.onclose = function (evt) {
+            ws_tower.onclose = function (evt) {
             };
 		})
 	</script>
