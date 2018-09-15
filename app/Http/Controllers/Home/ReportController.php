@@ -46,13 +46,26 @@ class ReportController extends HomeController
                             $_userData = DB::table('site_users')->whereIn('id', $user)->get();
 
                             $aliSms = new AliSms();
+                            $flag = false;
                             foreach ($_userData as $key => $value) {
                                 //发送短信
                                 $response = $aliSms->sendSms($value->mobile_phone, 'SMS_144147914', ['area'=> '']);
+                                if ($response->Code == 'OK') {
+                                    $flag = true;
+                                }
                             }
-                            $return['state'] = 'success';
-                            $return['message'] = '发送完成。';
-                            return response()->json($return);
+                            if ($flag == true) {
+                                //更新进度
+                                DB::table('site_error_report')->where('id', $input['reportId'])->update(['event_state' => $event['event_state'] + 1]);
+                                
+                                $return['state'] = 'success';
+                                $return['message'] = '发送完成。';
+                                return response()->json($return);
+                            } else {
+                                $return['state'] = 'fail';
+                                $return['message'] = '发送失败。';
+                                return response()->json($return);
+                            }                            
                         } else {
                             $return['message'] = '未找到处理人信息。';
                             return response()->json($return);

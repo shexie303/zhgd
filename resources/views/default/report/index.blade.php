@@ -133,24 +133,8 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body report-group">
 				<input type="hidden" id="reportId">
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input" id="customCheck1">
-					<label class="custom-control-label" for="customCheck1">消防安全组</label>
-				</div>
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input" id="customCheck2">
-					<label class="custom-control-label" for="customCheck2">消防安全组</label>
-				</div>
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input" id="customCheck3">
-					<label class="custom-control-label" for="customCheck3">消防安全组</label>
-				</div>
-				<div class="custom-control custom-checkbox">
-					<input type="checkbox" class="custom-control-input" id="customCheck4">
-					<label class="custom-control-label" for="customCheck4">消防安全组</label>
-				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="J_SendMessage" class="btn btn-primary">
@@ -172,17 +156,23 @@
 			modal.find('.modal-body input#reportId').val(recipient);
 			$.ajax({
 				type: 'GET',
-				url: 'http://60.28.24.227/api/get_report_groups',
+				url: 'http://www.bim.com/api/get_report_groups',
 				dataType: 'json',
 				data: {
 					event_id: recipient
 				},
 				success: function (data) {
-					var html = '<div class="custom-control custom-checkbox"></div>';
-					$.each(data, function (k, v) {
-						html.append('<input type="checkbox" class="custom-control-input" id="customCheck' + k + '">' +
-							'<label class="custom-control-label" for="customCheck' + k + '">v</label>');
-					})
+					$('.report-group div.custom-control').remove();
+					$('.modal-footer button').attr('disabled', false);
+					if(data.state == 'success') {
+    					$.each(data.data, function (k, v) {
+    						$('.report-group').append('<div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="customCheck' + k + '">' +
+    							'<label class="custom-control-label" for="customCheck' + k + '">' + v + '</label></div>');
+    					})
+					} else {
+						$('.modal-footer button').attr('disabled', true);
+						$('.report-group').append('<div class="custom-control custom-checkbox">' + '<label class="custom-control-label" for="customCheck0">' + data.message + '</label></div>');
+					}
 				},
 				error: function (data) {
 					
@@ -207,6 +197,7 @@
 				},
 				success: function (data) {
 					console.log('发送成功');
+					window.location.href = '/report';
 				}
 			})
 		})
