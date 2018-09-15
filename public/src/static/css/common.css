@@ -64,6 +64,8 @@ ul, li {
 	height: 29px;
 	left: 22px;
 	top: 30px;
+	overflow: hidden;
+	text-indent: -99em;
 }
 .sn-quick-menu{
 	position: absolute;

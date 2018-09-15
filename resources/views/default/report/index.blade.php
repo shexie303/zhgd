@@ -33,7 +33,7 @@
 			position: relative;
 		}
 
-		.ant-btn-handle {
+		.ant-btn-handle, .ant-btn-ignore {
 			-webkit-box-shadow: 0 0 1px rgba(41, 223, 233, 0.75), 0 1px 3px rgba(2, 46, 49, .75), 0 0 6px rgba(5, 192, 202, .75) inset;
 			box-shadow: 0 0 1px rgba(41, 223, 233, 0.75), 0 1px 3px rgba(2, 46, 49, .75), 0 0 6px rgba(5, 192, 202, .75) inset;
 			color: #3ed8e0;
@@ -44,6 +44,15 @@
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
 			/*-webkit-box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);*/
 			/*box-shadow: 0 2px 0 rgba(0, 0, 0, 0.035);*/
+		}
+
+		.ant-btn-primary {
+			-webkit-box-shadow: 0 0 1px rgba(41, 223, 233, 0.75), 0 1px 3px rgba(2, 46, 49, .75), 0 0 6px rgba(5, 192, 202, .75) inset;
+			box-shadow: 0 0 1px rgba(41, 223, 233, 0.75), 0 1px 3px rgba(2, 46, 49, .75), 0 0 6px rgba(5, 192, 202, .75) inset;
+			color: #3ed8e0;
+			background: linear-gradient(#166975, #092a34);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+			height: 50px;
 		}
 
 		.ant-btn-handle:hover {
@@ -57,6 +66,61 @@
 			background: linear-gradient(#3a4b4d, #182326);
 			-webkit-box-shadow: 0 0 1px rgba(127, 171, 171, 0.75), 0 0 6px rgba(84, 116, 118, .75) inset;
 			box-shadow: 0 0 1px rgba(127, 171, 171, 0.75), 0 0 6px rgba(84, 116, 118, .75) inset;
+		}
+
+		.modal-header{
+			border-bottom: 0 none;
+			padding: 0;
+		}
+		.modal-header .close{
+			right: 10px;
+			position: relative;
+			top: 5px;
+			color: #25a0a7;
+			text-shadow: none;
+		}
+		.modal-title{
+			color: #97ebf0;
+			text-align: center;
+		}
+		.modal-content{
+			background-color: #08232b;
+			border: 2px solid #08858f
+		}
+		.modal-footer{
+			justify-content: center;
+			border-top: 2px solid #08858f;
+		}
+		.user-group{
+			margin-top: 35px;
+			overflow: hidden;
+		}
+		.user-group p{
+			color: #25a0a7;
+			font-size: 1.5rem;
+			text-align: center;
+			margin-bottom: 35px;
+		}
+		.custom-control{
+			width: 50%;
+			float: left;
+			color: #25a0a7;
+			padding-left: 75px;
+			margin-bottom: 15px;
+			font-size: 1.5rem;
+		}
+		.custom-control:nth-child(2n){
+			justify-content: flex-end;
+		}
+		.custom-control:nth-child(2n+1){
+			justify-content: flex-start;
+		}
+		.custom-control-label::before{
+			background-color: transparent;
+			border: 1px solid #25a0a7
+		}
+		.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
+			background-color: transparent;
 		}
 	</style>
 </head>
@@ -128,16 +192,18 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel">请选择发送短信组（可多选）</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body report-group">
+			<div class="modal-body">
+				<h4 class="modal-title" id="myModalLabel">请选择发送短信组（可多选）</h4>
 				<input type="hidden" id="reportId">
+				<div class="user-group">
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="J_SendMessage" class="btn btn-primary">
+				<button type="button" id="J_SendMessage" class="ant-btn ant-btn-primary">
 					发送短信
 				</button>
 			</div>
@@ -162,20 +228,22 @@
 					event_id: recipient
 				},
 				success: function (data) {
-					$('.report-group div.custom-control').remove();
-					$('.modal-footer button').attr('disabled', false);
+					$('.user-group div.custom-control').remove();
+					$('.modal-footer button').prop('disabled', false);
 					if(data.state == 'success') {
     					$.each(data.data, function (k, v) {
-    						$('.report-group').append('<div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="customCheck' + k + '">' +
+    						$('.user-group').append('<div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input" id="customCheck' + k + '">' +
     							'<label class="custom-control-label" for="customCheck' + k + '">' + v + '</label></div>');
     					})
 					} else {
-						$('.modal-footer button').attr('disabled', true);
-						$('.report-group').append('<div class="custom-control custom-checkbox">' + '<label class="custom-control-label" for="customCheck0">' + data.message + '</label></div>');
+						$('.modal-footer button').prop('disabled', true);
+						$('.user-group').append('<div class="custom-control custom-checkbox">' + '<label class="custom-control-label" for="customCheck0">' + data.message + '</label></div>');
 					}
 				},
 				error: function (data) {
-					
+					$('.user-group').empty();
+					$('.user-group').append('<p>暂无可以发送的用户组</p>');
+					$('.modal-footer button').prop('disabled', true);
 				}
 			})
 		});

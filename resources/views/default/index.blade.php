@@ -366,8 +366,8 @@
 	var meshes = [], mixers = [], hemisphereLight, pointLight, camera, scene, renderer, controls;
 	var clock = new THREE.Clock;
 
-	// init();
-	// animate();
+	init();
+	animate();
 
 	function init() {
 		container = document.getElementById('building__canvas--box');
