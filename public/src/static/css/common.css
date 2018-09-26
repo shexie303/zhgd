@@ -30,7 +30,7 @@ ul, li {
 	position: absolute;
 	width: 1130px;
 	height: 770px;
-	background: url("../img/elevator_main.gif") no-repeat 50% 50%;
+	/*background: url("../img/elevator_main.gif") no-repeat 50% 50%;*/
 	left: 50%;
 	top: 125px;
 	transform: translateX(-50%);
@@ -466,6 +466,7 @@ ul, li {
 	bottom: 45px;
 	left: 50%;
 	transform: translate(-50%, 0);
+	z-index: 999;
 }
 .slide-panel{
 	height: 54px;

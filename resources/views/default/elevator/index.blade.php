@@ -146,5 +146,134 @@
 			};
 		})
 	</script>
+	<script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('src/static/js/OrbitControls.js') }}"></script>
+	<script type="text/javascript" src="{{ URL::asset('src/static/js/JDLoader.min.js') }}"></script>
+	<script type="text/javascript">
+		var meshes = [], mixers = [], hemisphereLight, pointLight, camera, scene, renderer, controls;
+		var clock = new THREE.Clock;
+
+		init();
+		animate();
+
+		function init() {
+			container = document.getElementById('building__canvas--elevator');
+			document.getElementById('page').appendChild(container);
+			scene = new THREE.Scene();
+
+			renderer = new THREE.WebGLRenderer({
+				// 在 css 中设置背景色透明显示渐变色
+				alpha: true,
+				// 开启抗锯齿，但这样会降低性能。
+				// 不过，由于我们的项目基于低多边形的，那还好 :)
+				// antialias: true
+			});
+			renderer.setPixelRatio(window.devicePixelRatio);
+			//renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.setSize(container.offsetWidth, container.offsetHeight);
+
+			container.appendChild(renderer.domElement);
+
+			window.addEventListener('resize', onWindowResize, false);
+
+			var loader = new THREE.JDLoader();
+			loader.load("./src/static/td.JD",
+				function (data) {
+					//循环得到加载文件的所有模型，并针对每个模型进行处理
+					for (var i = 0; i < data.objects.length; ++i) {
+						//alert(data.objects[i].type);
+						if (data.objects[i].type == "Mesh" || data.objects[i].type == "SkinnedMesh") {
+							var mesh = null;
+							var matArray = createWfjMaterials(data);
+							if (data.objects[i].type == "SkinnedMesh") {
+								mesh = new THREE.SkinnedMesh(data.objects[i].geometry, matArray);
+							} else {    // Mesh
+								mesh = new THREE.Mesh(data.objects[i].geometry, matArray);
+							}
+							scene.add(mesh);
+							edges = new THREE.EdgesHelper(mesh, 0x4ee4f2);//设置边框，可以旋转
+							scene.add(edges);
+							if (mesh && mesh.geometry.animations) {
+								var mixer = new THREE.AnimationMixer(mesh);
+								mixers.push(mixer);
+								var action = mixer.clipAction(mesh.geometry.animations[0]);
+								action.play();
+							}
+						} else if (data.objects[i].type == "Line") {
+							var jd_color = data.objects[i].jd_object.color;
+							var color1 = new THREE.Color(jd_color[0] / 255, jd_color[1] / 255, jd_color[2] / 255);
+							var material = new THREE.LineBasicMaterial({color: color1}); //{ color: new THREE.Color( 0xff0000 ) }
+							var line = new THREE.Line(data.objects[i].geometry, material);
+							scene.add(line);
+
+							if (line.geometry.animations) {
+								var mixer = new THREE.AnimationMixer(line);
+								mixers.push(mixer);
+								var action = mixer.clipAction(line.geometry.animations[0]);
+								action.play();
+							}
+						}
+					}
+
+					var near = 1, far = 10 * data.boundingSphere.radius;
+					camera = new THREE.PerspectiveCamera(11, container.offsetWidth / container.offsetHeight, near, far);
+					camera.position.x = data.boundingSphere.center.x + 5 * data.boundingSphere.radius;
+					camera.position.y = data.boundingSphere.center.y + 1 * data.boundingSphere.radius;
+					camera.position.z = data.boundingSphere.center.z + 5 * data.boundingSphere.radius;
+					camera.lookAt(data.boundingSphere.center);
+					camera.add(new THREE.DirectionalLight(0xFFFFFF, 1));
+					scene.add(camera);
+
+					if (!controls)
+						controls = new THREE.OrbitControls(camera, renderer.domElement);
+					controls.target.copy(data.boundingSphere.center);
+				}
+			);
+		}
+
+		function createMaterials(data) {
+			var matArray = [];
+			for (var j = 0; j < data.materials.length; ++j) {
+				var mat = new THREE.MeshPhongMaterial({});
+				mat.copy(data.materials[j]);
+				matArray.push(mat);
+			}
+			return matArray;
+		}
+
+		function createWfjMaterials(data) {
+			var matArray = [];
+			var mat = new THREE.MeshBasicMaterial({
+				color: 0x33ccff,
+				wireframe: true, //以网格显示
+				opacity: 0.35,
+				transparent: true, //透明
+			});
+			for (var j = 0; j < data.materials.length; ++j) {
+				matArray.push(mat);
+			}
+			return matArray;
+		}
+
+		function animate() {
+			var delta = clock.getDelta();
+			for (var i = 0; i < mixers.length; ++i)
+				mixers[i].update(delta);
+
+			if (controls) controls.update();
+			if (camera) renderer.render(scene, camera);
+
+			requestAnimationFrame(animate);
+		}
+
+		function onWindowResize() {
+			if (camera) {
+				camera.aspect = container.offsetWidth / container.offsetHeight;
+				camera.updateProjectionMatrix();
+			}
+			//renderer.setSize(window.innerWidth, window.innerHeight);
+			renderer.setSize(container.offsetWidth, container.offsetHeight);
+		}
+	</script>
 </body>
 </html>
