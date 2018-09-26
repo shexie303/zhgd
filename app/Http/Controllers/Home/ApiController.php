@@ -67,7 +67,6 @@ class ApiController extends Controller
                 'dip_angle' => $input['dip_angle'],
                 'dip_angle_warning' => (int) $input['dip_angle_warning'],
             ];
-            Log::error('towerCrane',$request->all());
             try{
                 $warning = [];
                 $tower_crane = new SiteElevatorLogs;
