@@ -103,6 +103,7 @@
 				@endforeach
 			</div>
 		</div>
+		<didv id="building__canvas--elevator"></didv>
 	</div>
 	<script src="{{ URL::asset('src/static/js/jquery.js') }}"></script>
 	<script src="{{ URL::asset('src/static/js/bootstrap.js') }}"></script>
