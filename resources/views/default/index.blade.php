@@ -382,7 +382,8 @@
 			// antialias: true
 		});
 		renderer.setPixelRatio(window.devicePixelRatio);
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		//renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(container.offsetWidth, container.offsetHeight);
 
 		container.appendChild(renderer.domElement);
 
@@ -428,7 +429,7 @@
 				}
 
 				var near = 1, far = 10 * data.boundingSphere.radius;
-				camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, near, far);
+				camera = new THREE.PerspectiveCamera(11, container.offsetWidth / container.offsetHeight, near, far);
 				camera.position.x = data.boundingSphere.center.x + 5 * data.boundingSphere.radius;
 				camera.position.y = data.boundingSphere.center.y + 1 * data.boundingSphere.radius;
 				camera.position.z = data.boundingSphere.center.z + 5 * data.boundingSphere.radius;
@@ -480,10 +481,11 @@
 
 	function onWindowResize() {
 		if (camera) {
-			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.aspect = container.offsetWidth / container.offsetHeight;
 			camera.updateProjectionMatrix();
 		}
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		//renderer.setSize(window.innerWidth, window.innerHeight);
+		renderer.setSize(container.offsetWidth, container.offsetHeight);
 	}
 </script>
 {{--@include('default/common/header')--}}
