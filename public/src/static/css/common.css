@@ -252,6 +252,9 @@ ul, li {
 .bell .message-list p{
 	color: #f92801;
 }
+.bell .message-list p a{
+	color: #f92801;
+}
 .bell .message-list p::before{
 	background-color: #f92801;
 }

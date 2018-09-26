@@ -136,6 +136,7 @@ class Events
 						$return['data']['report_sum'] = count($report); //发生视频报警事件总数
 						foreach ($report as $key => $value) {
 						    //报警事件描述
+						    $temp['id'] = $value['id'];
 						    $temp['name'] =  trim($value['event_name'], ':');
 						    //报警图片
 						    $extInfo = unserialize($value['ext_info']);
@@ -192,6 +193,7 @@ class Events
 		               foreach ($report as $key => $value) {
 		                   $lastId = $value['id'] > $lastId ? $value['id'] : $lastId;
 		                   //报警事件描述
+		                   $temp['id'] = $value['id'];
 		                   $temp['name'] = $eventName[$value['event_type']].'：'.$value['event_name'];
 		                   $return['data']['report_list'][$key] = $temp;
 		               }

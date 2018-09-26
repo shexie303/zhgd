@@ -15,7 +15,7 @@
 	@include('default/common/header')
 	<div class="monitor-con">
 		<div class="monitor-inner-con">
-			<div class="monitor-border">
+			<div id="report-list" class="monitor-border">
 				<table class="monitor-info-table">
 					<thead>
 					<tr>
@@ -30,7 +30,7 @@
 					<tbody>
 					@foreach ($list as $value)
 						<tr>
-							<td>报警信息</td>
+							<td id="id-{{$value['id']}}">报警信息</td>
 							<td>{{$value['event_name']}}</td>
 							<td>{{$value['event_msg']}}</td>
 							<td>{{$value['created_at']}}</td>
@@ -158,7 +158,11 @@
 					console.log('发送成功');
 				}
 			})
-		})
+		});
+
+		//锚点定位
+		var anchors = "#id-"+{{$anchors}};
+		$("#report-list").animate({scrollTop: $(anchors).offset().top - 260}, 1000);
 	})
 </script>
 </body>
