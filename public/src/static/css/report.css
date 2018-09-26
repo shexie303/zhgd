@@ -95,6 +95,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	padding-left: 2.125rem;
 }
 .custom-control:nth-child(2n){
 	justify-content: flex-end;
@@ -105,7 +106,17 @@
 .custom-control-label::before{
 	background-color: transparent;
 	border: 1px solid #25a0a7;
-	top: 0.7rem;
+	top: 0.4rem;
+	width: 1.625rem;
+	height: 1.625rem;
+	left: -2rem;
+}
+.custom-control-label::after{
+	top: 0.4rem;
+	width: 1.625rem;
+	height: 1.625rem;
+	left: -2rem;
+	background-size: 60% 60%;
 }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
 	background-color: transparent;
