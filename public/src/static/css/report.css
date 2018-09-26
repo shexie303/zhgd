@@ -107,6 +107,9 @@
 	border: 1px solid #25a0a7;
 	top: 0.7rem;
 }
+.custom-control-label::after{
+	top: 0.7rem;
+}
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before{
 	background-color: transparent;
 }
