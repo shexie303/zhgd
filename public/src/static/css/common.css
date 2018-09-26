@@ -26,6 +26,17 @@ ul, li {
 	/*background: linear-gradient( #000101,#0c222b, #091c23, #000101);*/
 	z-index: 1;
 }
+#building__canvas--elevator{
+	position: absolute;
+	width: 1130px;
+	height: 770px;
+	background: url("../img/elevator_main.gif") no-repeat 50% 50%;
+	left: 50%;
+	top: 125px;
+	transform: translateX(-50%);
+	overflow: hidden;
+	z-index: 1;
+}
 .main-header--box {
 	position: relative;
 	width: 1920px;
