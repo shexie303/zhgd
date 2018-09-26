@@ -303,7 +303,7 @@
 
 			$messageList.empty();
 			$.each(report_list, function (k, v) {
-				$messageList.append('<p>' + v.name + '</p>')
+				$messageList.append('<p><a href="/report?anchors=' + v.id + '">' + v.name + '</a></p>')
 			})
 			$('.message-box').show();
 		}

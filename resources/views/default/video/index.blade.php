@@ -68,7 +68,7 @@
 					$('.area-monitor-list').find('.red').text($video_num);
 					$.each($video_list, function (k, v) {
 						$html = '<div class="video-item">'
-											+ '<img src="' + v["pic_url"] + '" alt="">'
+											+ '<a href="/report?anchors='+ v['id'] +'"><img src="' + v["pic_url"] + '" alt=""></a>'
 											+ '<div class="video-item-title">' + v["name"] + '</div>'
 							'</div>'
 						$('.main-video-list').append($html);
