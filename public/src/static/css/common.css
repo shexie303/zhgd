@@ -513,3 +513,108 @@ ul, li {
 	background-image: url("../img/tb_red.png");
 	color: #f92801;
 }
+
+
+
+.scan-content{
+	width: 630px;
+	height: 630px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+}
+.circle-bg{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	background: url("../img/scan_circle.png") no-repeat 50% 50%;
+	z-index: 999;
+}
+.blink-dot{
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background-color: #01cce2;
+	box-shadow: 0 0 10px rgba(1, 204, 226, .75);
+	border-radius: 50%;
+}
+.blink-dot.dot-1{
+	left: 150px;
+	top: 180px;
+}
+.blink-dot.dot-2{
+	left: 250px;
+	top: 185px;
+}
+.blink-dot.dot-3{
+	left: 410px;
+	top: 115px;
+}
+.blink-dot.dot-4{
+	left: 220px;
+	top: 350px;
+}
+.blink-dot.dot-5{
+	left: 275px;
+	top: 505px;
+}
+.blink-dot.dot-6{
+	left: 445px;
+	top: 410px;
+}
+.dync-fan{
+	width: 500px;
+	height: 500px;
+	position:absolute;
+	overflow: hidden;
+	animation: run 10s infinite linear;
+	top: 64px;
+	left: 64px;
+}
+.fan-insed{
+	width: 500px;
+	height: 500px;
+	border-radius: 50%;
+	background: url("../img/scan_fan.png") no-repeat;
+}
+.animated{
+	-webkit-animation: flash 3s infinite ease-in-out;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both
+}
+@-webkit-keyframes run{
+	0%{
+		transform:rotate(0deg);
+	}
+	100%{
+		transform:rotate(360deg);
+	}
+}
+@keyframes run{
+	0%{
+		transform:rotate(0deg);
+	}
+	100%{
+		transform:rotate(360deg);
+	}
+}
+@-webkit-keyframes flash {
+	0%, 100%, 50% {
+		opacity: 1
+	}
+
+	25%, 75% {
+		opacity: 0
+	}
+}
+@keyframes flash {
+	0%, 100%, 50% {
+		opacity: 1
+	}
+
+	25%, 75% {
+		opacity: 0
+	}
+}
