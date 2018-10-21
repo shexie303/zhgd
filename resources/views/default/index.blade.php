@@ -204,19 +204,19 @@
 					<div class="door-info-panel"></div>
 					<div class="door-item manager">
 						<div class="t">管理人员</div>
-						<div class="num">2875人</div>
+						<div class="num">32人</div>
 					</div>
 					<div class="door-item supervisor">
 						<div class="t">监理人员</div>
-						<div class="num">2875人</div>
+						<div class="num">15人</div>
 					</div>
 					<div class="door-item incoming">
 						<div class="t">进场人数</div>
-						<div class="num">2875人</div>
+						<div class="num">268人</div>
 					</div>
 					<div class="door-item constructors">
 						<div class="t">施工人员</div>
-						<div class="num">2875人</div>
+						<div class="num">221人</div>
 					</div>
 				</div>
 			</a>
