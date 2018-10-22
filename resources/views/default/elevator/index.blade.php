@@ -170,7 +170,7 @@
 			setInterval(function () {
 				var randomX = Math.ceil(Math.random() * 630);
 				var randomY = Math.ceil(Math.random() * 630);
-				var random = Math.ceil(Math.random() * 6)
+				var random = Math.ceil(Math.random() * 6);
 				// $('.blink-dot').removeClass('animated');
 				// $('.circle-bg').find('.dot-' + random).addClass('animated');
 				// var a = 310, b = 303, r = 250, random = Math.ceil(Math.random() * 360)
@@ -181,7 +181,7 @@
 					left: randomX,
 					top: randomY
 				});
-			}, 5000)
+			}, 1000 * 60 * 3)
 		})
 	</script>
 	{{--<script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>--}}
