@@ -181,7 +181,7 @@
 					left: randomX,
 					top: randomY
 				});
-			}, 1000 * 60 * 3)
+			}, 1000 * 30);
 		})
 	</script>
 	{{--<script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>--}}

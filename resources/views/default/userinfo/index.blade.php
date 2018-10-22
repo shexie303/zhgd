@@ -35,7 +35,7 @@
 					left: randomX,
 					top: randomY
 				})
-			}, 1000 * 60  * 3)
+			}, 1000 * 30)
 		})
 	</script>
 </body>
