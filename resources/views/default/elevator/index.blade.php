@@ -70,7 +70,7 @@
 					<h3>回转角度 °（Rotation）</h3>
 				</div>
 				<div class="cell-body">
-					<img src="{{ URL::asset('src/static/img/roll_img.png') }}" alt="" class="roll-img">
+					<img src="{{ URL::asset('src/static/img/roll_img.png') }}" alt="" class="roll-img" style="transform: rotate({{$data->angle}}deg)">
 					<p class="roll-text" id="elevator_angle">{{$data->angle}}</p>
 				</div>
 			</div>
@@ -167,11 +167,19 @@
 			ws_tower.onclose = function (evt) {
 			};
 
-			setInterval(function () {
-				var random = Math.ceil(Math.random() * 6)
-				$('.blink-dot').removeClass('animated');
-				$('.circle-bg').find('.dot-' + random).addClass('animated');
-			}, 5000)
+			// setInterval(function () {
+			// 	// var random = Math.ceil(Math.random() * 6)
+			// 	// $('.blink-dot').removeClass('animated');
+			// 	// $('.circle-bg').find('.dot-' + random).addClass('animated');
+			// 	var a = 310, b = 303, r = 250, random = Math.ceil(Math.random() * 360)
+			// 	var X = a + Math.sin(2 * Math.PI / random) * r
+			// 	var Y = b + Math.cos(2 * Math.PI / random) * r
+			// 	var rand = Math.ceil(Math.random() * 6)
+			// 	$('.circle-bg').find('.dot-' + rand).css({
+			// 		left: X + 60,
+			// 		top: Y + 65
+			// 	});
+			// }, 5000)
 		})
 	</script>
 	{{--<script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>--}}
