@@ -4,7 +4,7 @@
 <div class="main-header--box">
 	<div class="main-header">
 		<a href="/" class="sn-home-link" title="首页">首页</a>
-		<div class="logo">宝坻欣鼎智慧工地物联网综合管理平台（金玉六园）</div>
+		<div class="logo">智慧工地物联网安全管理平台</div>
 		<ul class="sn-quick-menu">
 			<li class="menu-item sn-bell">
 				<a href="/report" title="消息中心">5</a>

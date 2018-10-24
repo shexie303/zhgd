@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>天津市津房置业有限公司宝坻项目群管理平台 -- 菜单</title>
+	<title>智慧工地物联网安全管理平台 -- 菜单</title>
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/common.css') }}">
 	<link rel="stylesheet" href="{{ URL::asset('src/static/css/menu.css') }}">
