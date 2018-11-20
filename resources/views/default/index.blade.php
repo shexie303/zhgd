@@ -228,7 +228,7 @@
 					<div class="vertical-line vertical-line-small"></div>
 					<div class="env-item" data-key="pm10">
 						<div class="env-info env-info-lg">
-							<span class="num">126</span>
+							<span class="num">{{$env->pm10}}</span>
 							<span class="unit">μg/m³</span>
 						</div>
 						<div class="env-type">
@@ -237,7 +237,7 @@
 					</div>
 					<div class="env-item" data-key="wind_sc">
 						<div class="env-info">
-							<span class="num">50</span>
+							<span class="num">{{$env->wind_sc}}</span>
 							<span class="unit">级</span>
 						</div>
 						<div class="env-type">
@@ -246,7 +246,7 @@
 					</div>
 					<div class="env-item" data-key="tmp">
 						<div class="env-info">
-							<span class="num">30</span>
+							<span class="num">{{$env->tmp}}</span>
 							<span class="unit">℃</span>
 						</div>
 						<div class="env-type">
@@ -255,7 +255,7 @@
 					</div>
 					<div class="env-item" data-key="hum">
 						<div class="env-info">
-							<span class="num">60</span>
+							<span class="num">{{$env->hum}}</span>
 							<span class="unit">%</span>
 						</div>
 						<div class="env-type">
