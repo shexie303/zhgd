@@ -87,8 +87,8 @@
 					<h3>危险预警（Danger warning）</h3>
 				</div>
 				<div class="cell-body">
-					<p style="font-size: 1.5rem;line-height: 48px;">倒塌危险区域内有<span class="red">6</span>人</p>
-					<p style="font-size: 1.5rem;line-height: 48px;">吊臂危险区域内有<span class="red">2</span>人</p>
+					<p style="font-size: 1.5rem;line-height: 48px;">倒塌危险区域内有<span class="red">0</span>人</p>
+					<p style="font-size: 1.5rem;line-height: 48px;">吊臂危险区域内有<span class="red">1</span>人</p>
 				</div>
 			</div>
 			<div class="list-item">
