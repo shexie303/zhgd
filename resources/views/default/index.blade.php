@@ -343,20 +343,20 @@
 		ws_user_info.onclose = function (evt) {
 		};
 
-//		var ws_env = new WebSocket(ws_domain);
-//		ws_env.onopen = function (evt) {
-//			//初始连接要传的参数
-//			var msg = {"type": "env"};
-//			ws_env.send(JSON.stringify(msg));
-//		};
-//		ws_env.onmessage = function (evt) {
-//			var res = eval("(" + evt.data + ")");
-//			$('.env-item').each(function (index) {
-//				$(this).find('.num').html(res.data[index]);
-//			})
-//		};
-//		ws_env.onclose = function (evt) {
-//		};
+		var ws_env = new WebSocket(ws_domain);
+		ws_env.onopen = function (evt) {
+			//初始连接要传的参数
+			var msg = {"type": "env"};
+			ws_env.send(JSON.stringify(msg));
+		};
+		ws_env.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			$('.env-item').each(function (index) {
+				$(this).find('.num').html(res.data[index]);
+			})
+		};
+		ws_env.onclose = function (evt) {
+		};
 	}
 </script>
 <script type="text/javascript" src="{{ URL::asset('src/static/js/three.min.js') }}"></script>

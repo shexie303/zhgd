@@ -85,11 +85,11 @@ class Events
                Timer::add(30, function($client_id) {
                    $return['state'] = 'success';
                    $return['data'] = [
-                       ['工作区设备1',mt_rand(399,415)+ mt_rand(0,9)/10,0,0,0],
+                       ['工作区设备1',0,0,0,0],
                        ['工作区设备2',0,0,0,0],
-                       ['工作区设备3',mt_rand(399,415)+ mt_rand(0,9)/10,0,0,0],
+                       ['工作区设备3',0,0,0,0],
                        ['工作区设备4',0,0,0,0],
-                       ['生活区设备1',0,0,0,0]
+                       ['生活区设备1',mt_rand(399,415)+ mt_rand(0,9)/10,0,0,0]
                    ];
                    Gateway::sendToClient($client_id,json_encode($return));
                },[$client_id],true);
