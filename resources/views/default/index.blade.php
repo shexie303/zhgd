@@ -126,14 +126,14 @@
 				<div class="personnel-monitor--content">
 					<div class="vertical-line vertical-line-middle"></div>
 					<div class="curr-police">
-						<h3><span class="red" id="user_info_sum">12</span></h3>
+						<h3><span class="red" id="user_info_sum">0</span></h3>
 						<span>当前报警</span>
 					</div>
 					<div class="police-details">
-						<p>越界报警：<span class="red" id="user_info_yuejie">5</span>人</p>
-						<p>掉线提示：<span class="red" id="user_info_diaoxian">4</span>人</p>
-						<p>低电提示：<span class="red" id="user_info_didian">1</span>人</p>
-						<p>长时间静止：<span class="red" id="user_info_stop">2</span>人</p>
+						<p>越界报警：<span class="red" id="user_info_yuejie">0</span>人</p>
+						<p>掉线提示：<span class="red" id="user_info_diaoxian">0</span>人</p>
+						<p>低电提示：<span class="red" id="user_info_didian">0</span>人</p>
+						<p>长时间静止：<span class="red" id="user_info_stop">0</span>人</p>
 					</div>
 					<div class="personnel-item staff">
 						<div class="t">上岗人员</div>
