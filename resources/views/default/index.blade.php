@@ -281,9 +281,9 @@
 		ws_video.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
 			if(res.data.report == 1){
-				$('.monitor-item:eq(2)').addClass('monitor-item-bell');
+				$('.monitor-item:eq(3)').addClass('monitor-item-bell');
 			} else {
-				$('.monitor-item:eq(2)').removeClass('monitor-item-bell');
+				$('.monitor-item:eq(3)').removeClass('monitor-item-bell');
 			}
 		};
 		ws_video.onclose = function (evt) {
