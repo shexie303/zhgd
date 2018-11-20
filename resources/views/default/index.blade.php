@@ -226,7 +226,7 @@
 				<div class="monitor--title">环境监控</div>
 				<div class="env-monitor--content">
 					<div class="vertical-line vertical-line-small"></div>
-					<div class="env-item">
+					<div class="env-item" data-key="pm10">
 						<div class="env-info env-info-lg">
 							<span class="num">126</span>
 							<span class="unit">μg/m³</span>
@@ -235,7 +235,7 @@
 							<span class="">PM10</span>
 						</div>
 					</div>
-					<div class="env-item">
+					<div class="env-item" data-key="wind_sc">
 						<div class="env-info">
 							<span class="num">50</span>
 							<span class="unit">级</span>
@@ -244,7 +244,7 @@
 							<span class="">风力</span>
 						</div>
 					</div>
-					<div class="env-item">
+					<div class="env-item" data-key="tmp">
 						<div class="env-info">
 							<span class="num">30</span>
 							<span class="unit">℃</span>
@@ -253,7 +253,7 @@
 							<span class="">温度</span>
 						</div>
 					</div>
-					<div class="env-item">
+					<div class="env-item" data-key="hum">
 						<div class="env-info">
 							<span class="num">60</span>
 							<span class="unit">%</span>
@@ -352,7 +352,7 @@
 		ws_env.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
 			$('.env-item').each(function (index) {
-				$(this).find('.num').html(res.data[index]);
+				$(this).find('.num').html(res.data[$(this).data('key')]);
 			})
 		};
 		ws_env.onclose = function (evt) {
