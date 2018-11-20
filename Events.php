@@ -211,10 +211,10 @@ class Events
 				$return['state'] = 'success';
 			   // 向某客户端发送
 			   Timer::add(15, function($client_id) {
-				   $return['data']['yuejie'] = mt_rand(2,5); //越界
-				   $return['data']['diaoxian'] = mt_rand(1,4); //掉线
-				   $return['data']['didian'] = mt_rand(2,9); //低电
-				   $return['data']['stop'] = mt_rand(1,7); //长时间静止
+				   $return['data']['yuejie'] = mt_rand(0,1); //越界
+				   $return['data']['diaoxian'] = 0; //掉线
+				   $return['data']['didian'] = 0; //低电
+				   $return['data']['stop'] = mt_rand(0,1); //长时间静止
 				   
 				   $return['data']['sum'] = $return['data']['yuejie']+$return['data']['diaoxian']+$return['data']['didian']+$return['data']['stop']; //汇总
 				   Gateway::sendToClient($client_id, json_encode($return));

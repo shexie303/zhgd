@@ -138,7 +138,7 @@
 					<div class="personnel-item staff">
 						<div class="t">上岗人员</div>
 						<div class="list">
-							<p class="">1.F001 张三</p>
+							<p class="">1.F001 刘立明</p>
 							<p class="">1.F002 李程林</p>
 							<p class="">1.F003 鹿志勇</p>
 						</div>
