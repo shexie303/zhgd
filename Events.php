@@ -148,8 +148,9 @@ class Events
                                 $picUrl = $vals[$keys['PICURL'][0]]['value'];
                                 $picUrlArray = explode(';', $picUrl);
                                 if (is_array($picUrlArray)) {
-                                    foreach ($picUrlArray as $k => $v) {
-                                        $temp['pic_url'] = 'http://120.27.31.232:6025'.$v; //只取一张
+                                    foreach ($picUrlArray as $k => $v) { //只取一张
+                                        $temp['pic_url'] = 'http://120.27.31.232:6025'.$v;
+                                        break;
                                     }
                                 }
 						    } else {
@@ -179,17 +180,15 @@ class Events
 		           //查询
 		           $db = new \DB();
 		           $where = "event_state = 1";
-		           //获取上一次查询点
-		           $sessData = Gateway::getSession($client_id);
-		           if (is_array($sessData) && count($sessData) > 0) {
-		               $where .= ' and id > '.$sessData['report_last_id'];
-		           }
 		           $report = $db->table('site_error_report')->where($where)->order('id desc')->limit('10')->select('id, event_name, event_type');
 		           $return['data']['report_sum'] = 0; //没有报警事件
 		           $return['data']['report_list'] = array();
 		           if ($report) {
-		               $return['data']['report_sum'] = count($report); //返回报警事件数
-		               $lastId = 0;
+		               //获取上一次查询点
+		               $sessData = Gateway::getSession($client_id);
+		               $lastId = is_array($sessData) && count($sessData) > 0 ? $sessData['report_last_id'] : 0;
+		               $baseFlag = $lastId;
+		               
 		               foreach ($report as $key => $value) {
 		                   $lastId = $value['id'] > $lastId ? $value['id'] : $lastId;
 		                   //报警事件描述
@@ -197,31 +196,120 @@ class Events
 		                   $temp['name'] = $eventName[$value['event_type']].'：'.$value['event_name'];
 		                   $return['data']['report_list'][$key] = $temp;
 		               }
-		               
+		               if ($lastId > $baseFlag) {
+		                   $return['data']['report_sum'] = count($report); //返回报警事件数
+		               }
 		               //记录最新查询点
 		               Gateway::setSession($client_id, array('report_last_id' => $lastId));
-		               
-		               // 向某客户端发送
-		               Gateway::sendToClient($client_id, json_encode($return));
 		           }
-		           		           
+		           // 向某客户端发送
+		           Gateway::sendToClient($client_id, json_encode($return));
+		           
 		       }, [$client_id], true);
 			   
 		   } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，人员定位。
-				$return['state'] = 'success';
-			   // 向某客户端发送
-			   Timer::add(15, function($client_id) {
-				   $return['data']['yuejie'] = mt_rand(0,1); //越界
-				   $return['data']['diaoxian'] = 0; //掉线
-				   $return['data']['didian'] = 0; //低电
-				   $return['data']['stop'] = mt_rand(0,1); //长时间静止
+                                
+                Timer::add(15, function($client_id) {
+                    $return['state'] = 'success';
+                    $return['data']['yuejie'] = mt_rand(0,1); //越界
+                    $return['data']['diaoxian'] = 0; //掉线
+                    $return['data']['didian'] = 0; //低电
+                    $return['data']['stop'] = mt_rand(0,1); //长时间静止
+                    $return['data']['sum'] = $return['data']['yuejie']+$return['data']['diaoxian']+$return['data']['didian']+$return['data']['stop']; //汇总
+                    
+                    // 向某客户端发送
+                    Gateway::sendToClient($client_id, json_encode($return));
 				   
-				   $return['data']['sum'] = $return['data']['yuejie']+$return['data']['diaoxian']+$return['data']['didian']+$return['data']['stop']; //汇总
-				   Gateway::sendToClient($client_id, json_encode($return));
-			   }, [$client_id], true);
+                }, [$client_id], true);
+                
+//                 Timer::add(15, function($client_id) {
+//                     $return['state'] = 'success';
+//                     //查询
+//                     $db = new \DB();
+//                     $where = "event_state = 1 and event_type = 'userinfo' and created_at > '".date('Y-m-d 00:00:00')."'";
+//                     $report = $db->table('site_error_report')->where($where)->order('id desc')->select('id, event_name, ext_info');
+//                     $return['data']['sum']       = 0; //总报警事件数
+//                     $return['data']['yuejie']    = 0; //越界报警事件数
+//                     $return['data']['diaoxian']  = 0; //掉线报警事件数
+//                     $return['data']['didian']    = 0; //低电报警事件数
+//                     $return['data']['stop']   = 0; //长时间静止报警事件数
+//                     if ($report) {
+                        
+//                         foreach ($report as $key => $value) {
+//                             $extInfo = unserialize($value['ext_info']);
+//                             if (is_array($extInfo['data'])) {
+//                                 foreach ($extInfo['data'] as $key => $value) {
+//                                     if ($value['warningType'] == 1) { //越界报警
+//                                         $return['data']['yuejie'] += 1;
+                                        
+//                                     } elseif($value['warningType'] == 2) { //掉线提示
+//                                         $return['data']['diaoxian'] += 1;
+                                        
+//                                     } elseif($value['warningType'] == 3) { //低电提示
+//                                         $return['data']['didian'] += 1;
+                                        
+//                                     } elseif($value['warningType'] == 4) { //长时间静止
+//                                         $return['data']['stop'] += 1;
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                         //发生报警事件总数
+//                         $return['data']['sum'] += $return['data']['yuejie'];
+//                         $return['data']['sum'] += $return['data']['diaoxian'];
+//                         $return['data']['sum'] += $return['data']['didian'];
+//                         $return['data']['sum'] += $return['data']['stop'];
+//                     }
+//                     // 向某客户端发送
+//                     Gateway::sendToClient($client_id, json_encode($return));
+                    
+//                 }, [$client_id], true);
 			   
-		   } elseif ($messageDecode['type'] == 'user_info_second') { //@陈振华，人员定位二级。
-
+		   } elseif ($messageDecode['type'] == 'door') { //@陈振华，门禁|上岗职工|访客
+		       
+		       Timer::add(10, function($client_id) {
+		           $return['state'] = 'success';
+		           //门禁
+		           $return['data']['door_sum']        = 0;
+		           $return['data']['door_guanli']     = 0;
+		           $return['data']['door_jianli']     = 0;
+		           $return['data']['door_shigong']    = 0;
+		           //上岗
+		           $return['data']['person_zhigong']  = array();
+		           $return['data']['person_fangke']   = array();
+		           //查询
+		           $db = new \DB();
+		           $personData = $db->table('site_person_position_logs')->order('id desc')->limit('1')->select('id,data');
+		           if ($personData) {
+		               foreach ($personData as $key => $value) {
+		                   $data = json_decode($value['data'], true);
+		                   //门禁
+        		           $return['data']['door_sum']        = $data['door']['sum'];
+        		           $return['data']['door_guanli']     = $data['door']['guanli'];
+        		           $return['data']['door_jianli']     = $data['door']['jianli'];
+        		           $return['data']['door_shigong']    = $data['door']['shigong'];
+        		           //上岗 - 职工
+        		           if (!empty($data['person']['zhigong'])) {
+        		               foreach ($data['person']['zhigong'] as $key => $value) {
+        		                   $temp['number'] = $value['empno'];
+        		                   $temp['name'] = $value['empname'];
+        		                   $return['data']['person_zhigong'][] = $temp;
+        		               }
+        		           }
+        		           //上岗 - 访客
+        		           if (!empty($data['person']['fangke'])) {
+        		               foreach ($data['person']['fangke'] as $key => $value) {
+        		                   $temp['number'] = $value['empno'];
+        		                   $temp['name'] = $value['empname'];
+        		                   $return['data']['person_fangke'][] = $temp;
+        		               }
+        		           }
+		               }
+		           }
+		           // 向某客户端发送
+		           Gateway::sendToClient($client_id, json_encode($return));
+		           
+		       }, [$client_id], true);
 
            } elseif ($messageDecode['type'] == 'elevator_second') { //@路超，塔吊&升降机二级。
                $where = 'number = '.$messageDecode['number'].' and type ='.$messageDecode['device_type'];

@@ -301,10 +301,12 @@
 			var report_list = res.data.report_list;
 			var $messageList = $('.message-list');
 
-			$messageList.empty();
-			$.each(report_list, function (k, v) {
-				$messageList.append('<p><a href="/report?anchors=' + v.id + '">' + v.name + '</a></p>')
-			})
+			if (res.data.report_sum > 0) {
+    			$messageList.empty();
+    			$.each(report_list, function (k, v) {
+    				$messageList.append('<p><a href="/report?anchors=' + v.id + '">' + v.name + '</a></p>')
+    			});
+			}
 			$('.message-box').show();
 		}
 
