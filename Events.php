@@ -114,28 +114,34 @@ class Events
 					//查询
 					$db = new \DB();
 					
-					$return['data']['report_churu']    = 2; //出入区域 没有视频报警事件
-					$return['data']['report_shigong']  = 2; //施工区域
-					$return['data']['report_jiagong']  = 2; //加工区域
-					$return['data']['report_shenghuo'] = 2; //生活区域
+					$report = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->limit('1')->select('id, event_name');
+					$return['data']['report'] = 2; //没有视频报警事件
+					if ($report) {
+					    $return['data']['report'] = 1; //发生视频报警事件
+					}
 					
-					$where = "event_state = 1 and event_type = 'video'";
-					$churu = $db->table('site_error_report')->where($where." and ext_info_2 = 'churu'")->order('id desc')->limit('1')->select('id');
-					if ($churu) {
-						$return['data']['report_churu'] = 1; //有未处理视频报警事件
-					}
-					$shigong = $db->table('site_error_report')->where($where." and ext_info_2 = 'shigong'")->order('id desc')->limit('1')->select('id');
-					if ($shigong) {
-					    $return['data']['report_shigong'] = 1;
-					}
-					$jiagong = $db->table('site_error_report')->where($where." and ext_info_2 = 'jiagong'")->order('id desc')->limit('1')->select('id');
-					if ($jiagong) {
-					    $return['data']['report_jiagong'] = 1;
-					}
-					$shenghuo = $db->table('site_error_report')->where($where." and ext_info_2 = 'shenghuo'")->order('id desc')->limit('1')->select('id');
-					if ($shenghuo) {
-					    $return['data']['report_shenghuo'] = 1;
-					}
+// 					$return['data']['report_churu']    = 2; //出入区域 没有视频报警事件
+// 					$return['data']['report_shigong']  = 2; //施工区域
+// 					$return['data']['report_jiagong']  = 2; //加工区域
+// 					$return['data']['report_shenghuo'] = 2; //生活区域
+					
+// 					$where = "event_state = 1 and event_type = 'video'";
+// 					$churu = $db->table('site_error_report')->where($where." and ext_info_2 = 'churu'")->order('id desc')->limit('1')->select('id');
+// 					if ($churu) {
+// 						$return['data']['report_churu'] = 1; //有未处理视频报警事件
+// 					}
+// 					$shigong = $db->table('site_error_report')->where($where." and ext_info_2 = 'shigong'")->order('id desc')->limit('1')->select('id');
+// 					if ($shigong) {
+// 					    $return['data']['report_shigong'] = 1;
+// 					}
+// 					$jiagong = $db->table('site_error_report')->where($where." and ext_info_2 = 'jiagong'")->order('id desc')->limit('1')->select('id');
+// 					if ($jiagong) {
+// 					    $return['data']['report_jiagong'] = 1;
+// 					}
+// 					$shenghuo = $db->table('site_error_report')->where($where." and ext_info_2 = 'shenghuo'")->order('id desc')->limit('1')->select('id');
+// 					if ($shenghuo) {
+// 					    $return['data']['report_shenghuo'] = 1;
+// 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
 			   }, [$client_id], true);
