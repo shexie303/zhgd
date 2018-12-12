@@ -65,8 +65,8 @@ class Events
 		   Gateway::sendToClient($client_id, json_encode($return));
 	   } else {
 		   $messageDecode = json_decode($message, true);
-		   //先暂定，按type字段，来区分是哪个模块的请求。具体怎么定，先过了明天再定！
-		   if ($messageDecode['type'] == 'electric') { //@路超，电力部分。
+		   //先暂定，按type字段，来区分是哪个模块的请求。
+		   if ($messageDecode['type'] == 'electric') { //@路超，首页电力部分
 			   // 向某客户端发送
 			   Timer::add(5, function($client_id) {
                    $return['state'] = 'success';
@@ -80,7 +80,7 @@ class Events
 				   Gateway::sendToClient($client_id,json_encode($return));
 			   },[$client_id],true);
 			   
-		   } elseif ($messageDecode['type'] == 'electric_second') {
+		   } elseif ($messageDecode['type'] == 'electric_second') { //@路超，电力二级页面部分
                // 向某客户端发送
                Timer::add(30, function($client_id) {
                    $return['state'] = 'success';
@@ -93,7 +93,8 @@ class Events
                    ];
                    Gateway::sendToClient($client_id,json_encode($return));
                },[$client_id],true);
-           } elseif ($messageDecode['type'] == 'env') { //@路超，环境部分
+               
+           } elseif ($messageDecode['type'] == 'env') { //@路超，首页环境部分
                Timer::add(60, function($client_id) {
                    $return['state'] = 'success';
                    //查询
@@ -105,24 +106,41 @@ class Events
                    // 向某客户端发送
                    Gateway::sendToClient($client_id, json_encode($return));
                }, [$client_id], true);
-		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，视频部分，目前是报警事件。
+               
+		   } elseif ($messageDecode['type'] == 'video') { //@陈振华，首页视频监控部分
 				
 				Timer::add(10, function($client_id) {
 					$return['state'] = 'success';
 					//查询
 					$db = new \DB();
-					$report = $db->table('site_error_report')->where("event_state = 1 and event_type = 'video'")->order('id desc')->limit('1')->select('id, event_name');
-					$return['data']['report'] = 2; //没有视频报警事件
-					$return['data']['report_msg'] = ''; 
-					if ($report) {
-						$return['data']['report'] = 1; //发生视频报警事件
-						$return['data']['report_msg'] = trim($report[0]['event_name'], ':'); //报警事件描述
+					
+					$return['data']['report_churu']    = 2; //出入区域 没有视频报警事件
+					$return['data']['report_shigong']  = 2; //施工区域
+					$return['data']['report_jiagong']  = 2; //加工区域
+					$return['data']['report_shenghuo'] = 2; //生活区域
+					
+					$where = "event_state = 1 and event_type = 'video'";
+					$churu = $db->table('site_error_report')->where($where." and ext_info_2 = 'churu'")->order('id desc')->limit('1')->select('id');
+					if ($churu) {
+						$return['data']['report_churu'] = 1; //有未处理视频报警事件
+					}
+					$shigong = $db->table('site_error_report')->where($where." and ext_info_2 = 'shigong'")->order('id desc')->limit('1')->select('id');
+					if ($shigong) {
+					    $return['data']['report_shigong'] = 1;
+					}
+					$jiagong = $db->table('site_error_report')->where($where." and ext_info_2 = 'jiagong'")->order('id desc')->limit('1')->select('id');
+					if ($jiagong) {
+					    $return['data']['report_jiagong'] = 1;
+					}
+					$shenghuo = $db->table('site_error_report')->where($where." and ext_info_2 = 'shenghuo'")->order('id desc')->limit('1')->select('id');
+					if ($shenghuo) {
+					    $return['data']['report_shenghuo'] = 1;
 					}
 					// 向某客户端发送
 					Gateway::sendToClient($client_id, json_encode($return));
 			   }, [$client_id], true);
 			   
-		   } elseif ($messageDecode['type'] == 'video_list') { //@陈振华，视频报警列表页。
+		   } elseif ($messageDecode['type'] == 'video_list') { //@陈振华，视频监控二级列表页。
 				
 				Timer::add(10, function($client_id) {
 					$return['state'] = 'success';
@@ -148,7 +166,7 @@ class Events
                                 $picUrl = $vals[$keys['PICURL'][0]]['value'];
                                 $picUrlArray = explode(';', $picUrl);
                                 if (is_array($picUrlArray)) {
-                                    foreach ($picUrlArray as $k => $v) { //只取一张
+                                    foreach ($picUrlArray as $k => $v) { //只取第一张
                                         $temp['pic_url'] = 'http://120.27.31.232:6025'.$v;
                                         break;
                                     }
@@ -164,7 +182,7 @@ class Events
 					Gateway::sendToClient($client_id, json_encode($return));
 			   }, [$client_id], true);
 			   
-		   } elseif ($messageDecode['type'] == 'report_all') { //@陈振华，获取首页报警信息。
+		   } elseif ($messageDecode['type'] == 'report_all') { //@陈振华，首页动态报警框列表部分
 		       Timer::add(5, function($client_id) {
 		           $return['state'] = 'success';
 		           
@@ -207,7 +225,23 @@ class Events
 		           
 		       }, [$client_id], true);
 			   
-		   } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，人员定位。
+		   } elseif ($messageDecode['type'] == 'report_sum') { //@陈振华，汇总的报警数，用于各页面顶部
+		       
+                Timer::add(5, function($client_id) {
+                    $return['state'] = 'success';
+		            
+                    //查询
+                    $db = new \DB();
+                    $where = "event_state = 1";
+                    $reportAll = $db->table('site_error_report')->where($where)->select('id');
+                    $return['data']['report_sum'] = count($reportAll);
+                    
+                    // 向某客户端发送
+                    Gateway::sendToClient($client_id, json_encode($return));
+		            
+		       }, [$client_id], true);
+               
+           } elseif ($messageDecode['type'] == 'user_info') { //@陈振华，首页人员定位部分
                                 
                 Timer::add(15, function($client_id) {
                     $return['state'] = 'success';
@@ -265,7 +299,7 @@ class Events
                     
 //                 }, [$client_id], true);
 			   
-		   } elseif ($messageDecode['type'] == 'door') { //@陈振华，门禁|上岗职工|访客
+		   } elseif ($messageDecode['type'] == 'door') { //@陈振华，首页，门禁|上岗职工|访客
 		       
 		       Timer::add(10, function($client_id) {
 		           $return['state'] = 'success';
