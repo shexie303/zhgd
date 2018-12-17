@@ -23,3 +23,18 @@
 		</ul>
 	</div>
 </div>
+<script>
+	report_sum
+	var ws_sum = new WebSocket(ws_domain);
+	ws_sum.onopen = function (evt) {
+		//初始连接要传的参数
+		var msg = {type: 'report_sum'};
+		ws_video.send(JSON.stringify(msg));
+	};
+	ws_sum.onmessage = function (evt) {
+		var res = eval("(" + evt.data + ")");
+		$('.sn-bell a').text(res.data.report_sum ? res.data.report_sum : 0)
+	};
+	ws_sum.onclose = function (evt) {
+	};
+</script>

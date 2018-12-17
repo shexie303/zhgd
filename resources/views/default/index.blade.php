@@ -280,11 +280,16 @@
 		};
 		ws_video.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
-			if(res.data.report == 1){
-				$('.monitor-item:eq(3)').addClass('monitor-item-bell');
-			} else {
-				$('.monitor-item:eq(3)').removeClass('monitor-item-bell');
-			}
+			// if(res.data.report == 1){
+			// 	$('.monitor-item:eq(3)').addClass('monitor-item-bell');
+			// } else {
+			// 	$('.monitor-item:eq(3)').removeClass('monitor-item-bell');
+			// }
+
+			res.data.report_churu == 1 ? $('.monitor-item:eq(0)').addClass('monitor-item-bell') : $('.monitor-item:eq(0)').removeClass('monitor-item-bell');
+			res.data.report_shigong == 1 ? $('.monitor-item:eq(1)').addClass('monitor-item-bell') : $('.monitor-item:eq(1)').removeClass('monitor-item-bell');
+			res.data.report_jiagong == 1 ? $('.monitor-item:eq(2)').addClass('monitor-item-bell') : $('.monitor-item:eq(2)').removeClass('monitor-item-bell');
+			res.data.report_shenghuo == 1 ? $('.monitor-item:eq(3)').addClass('monitor-item-bell') : $('.monitor-item:eq(3)').removeClass('monitor-item-bell');
 		};
 		ws_video.onclose = function (evt) {
 		};
@@ -358,6 +363,21 @@
 			})
 		};
 		ws_env.onclose = function (evt) {
+		};
+
+		// 门禁管控
+		var ws_door = new WebSocket(ws_domain);
+		ws_door.onopen = function (evt) {
+			var msg = {"type": "door"};
+			ws_door.send(JSON.stringify(msg));
+		};
+		ws_door.onmessage = function (evt) {
+			var res = eval("(" + evt.data + ")");
+			$('.env-item').each(function (index) {
+				$(this).find('.num').html(res.data[$(this).data('key')]);
+			})
+		};
+		ws_door.onclose = function (evt) {
 		};
 	}
 </script>
