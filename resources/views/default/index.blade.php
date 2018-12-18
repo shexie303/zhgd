@@ -373,9 +373,21 @@
 		};
 		ws_door.onmessage = function (evt) {
 			var res = eval("(" + evt.data + ")");
-			$('.env-item').each(function (index) {
-				$(this).find('.num').html(res.data[$(this).data('key')]);
-			})
+			$('.door-item.manager .num').html((res.data.door_guanli || 0) + '人')
+			$('.door-item.supervisor .num').html((res.data.door_jianli || 0) + '人')
+			$('.door-item.incoming .num').html((res.data.door_sum || 0) + '人')
+			$('.door-item.constructors .num').html((res.data.door_shigong || 0) + '人')
+
+			var staffList = '', temporaryList = '';
+			$.each(res.data.person_zhigong, function (k, v) {
+				staffList += (k + 1) + '.' + v.number + v.name
+			});
+			$('.personnel-item.staff').find('.list').empty().append(staffList);
+
+			$.each(res.data.person_fangke, function (k, v) {
+				temporaryList += (k + 1) + '.' + v.number + v.name
+			});
+			$('.personnel-item.temporary').find('.list').empty().append(temporaryList);
 		};
 		ws_door.onclose = function (evt) {
 		};
